@@ -1,0 +1,46 @@
+<app-header></app-header>
+
+<h2 mat-card class="dashboard">DASHBOARD</h2>
+
+<div class="row" >
+
+  <mat-card class="col-md-3" *ngIf="cardData"  (click)="billable(cardData.id)">
+    <mat-card-title>Billable</mat-card-title>
+    <mat-card-content>
+      <p>{{ cardData.Billable }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableDeploy(cardData.id)" >
+    <mat-card-title>Non-Billable Deploy</mat-card-title>
+    <mat-card-content>
+      <p>{{ cardData.NonBillableDeploy }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableA(cardData.id)">
+    <mat-card-title>Non-Billable A</mat-card-title>
+    <mat-card-content>
+      <p>{{ cardData.NonBillableA }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableDeployA(cardData.id)">
+    <mat-card-title>Non-Billable Deploy A</mat-card-title>
+    <mat-card-content>
+      <p>{{ cardData.NonBillableDeployA }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="nonbillableNonUtilize(cardData.id)">
+    <mat-card-title>Non-Billable Non-Utilize</mat-card-title>
+    <mat-card-content>
+      <p>{{ cardData.NonBillableNonUtilize }}</p>
+    </mat-card-content>
+  </mat-card>
+
+
+ 
+
+</div>
+

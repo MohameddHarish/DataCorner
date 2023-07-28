@@ -1,0 +1,45 @@
+
+
+<mat-toolbar >
+    <mat-toolbar-row>
+      <div class="main-menu">
+        <button mat-button class="home">HRMS</button>
+        
+      </div>
+    
+      
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+
+      <div class="container-image">
+        <img src="../../../assets/logingif2.gif" alt="GIF Image">
+      </div> 
+      
+      <div class="card">
+      
+
+        <div class="container">
+          <h2>Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="login()" class="container">
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" required>
+              <mat-icon matSuffix>person</mat-icon>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password" required>
+              <mat-icon matSuffix (click)="togglePasswordVisibility()">
+                {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+              </mat-icon>
+            </mat-form-field>
+        
+            <button mat-raised-button color="primary" type="submit">Login</button>
+          </form>
+        </div>
+        
+            
+                
+          

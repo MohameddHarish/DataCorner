@@ -1,0 +1,95 @@
+<app-header></app-header>
+<mat-card>
+  <mat-card-content>
+    <div class="search-box">
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder (keyup)="applyFilter($event)" #input />
+        <mat-icon matSuffix></mat-icon>
+      </mat-form-field>
+
+      <ng-container *ngIf="userRole === 'admin'">
+        <button class="Btn" mat-raised-button color="primary" >
+          <!-- (click)="addForm()" add this in that add button-->
+          <div class="text">Add</div>
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="mat-elevation-z4">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Serial Number Column -->
+        <ng-container matColumnDef="serialNumber">
+          <th mat-header-cell *matHeaderCellDef>No</th>
+          <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
+        </ng-container>
+
+        <!-- EmployeeId Column -->
+        <ng-container matColumnDef="EmployeeId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>EmployeeId</th>
+          <td mat-cell *matCellDef="let user">{{ user.Emp_Id }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let user">{{ user.Name }}</td>
+        </ng-container>
+
+        <!-- MailId Column -->
+        <ng-container matColumnDef="MailId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>MailId</th>
+          <td mat-cell *matCellDef="let user">{{ user.MailId }}</td>
+        </ng-container>
+
+        <!-- Mobile Column -->
+        <ng-container matColumnDef="Mobile">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+          <td mat-cell *matCellDef="let user">{{ user.Contact }}</td>
+        </ng-container>
+
+        <!-- SkillSet Column -->
+        <ng-container matColumnDef="SkillSet">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>SkillSet</th>
+          <td mat-cell *matCellDef="let user">{{ user.skill_set }}</td>
+        </ng-container>
+
+        <!-- Months_in_SS Column -->
+        <ng-container matColumnDef="Months_in_SS">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Months_in_SS</th>
+          <td mat-cell *matCellDef="let user">{{ user.Months_inSS }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+          <td mat-cell *matCellDef="let user" (click)="openEditForm(user.id)">
+            <button mat-icon-button color="primary" >
+              <mat-icon class="material-symbols-outlined">
+                visibility
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+
+
+
+        <!-- Define the column order, including the 'serialNumber' column -->
+        <tr mat-header-row *matHeaderRowDef="['serialNumber', 'EmployeeId', 'Name', 'MailId', 'Mobile', 'SkillSet', 'Months_in_SS','actions']"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: ['serialNumber', 'EmployeeId', 'Name', 'MailId', 'Mobile', 'SkillSet', 'Months_in_SS','actions']; let even = even; let odd = odd"
+          [class.even-row]="even"
+          [class.odd-row]="odd"
+        ></tr>
+
+        <!-- No data row -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="7">No data matching the filter "{{ input.value }}"</td>
+        </tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </mat-card-content>
+</mat-card>
