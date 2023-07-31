@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import * as XLSX from 'xlsx';
+import { WorkBook, utils, write } from 'xlsx';
 
 @Component({
   selector: 'app-employeetable',
@@ -86,8 +86,60 @@ export class EmployeetableComponent implements OnInit {
     }
   }
 
-  exportToExcel() {
-    this.getDataForDashboard(this.category)
+  // exportToExcel() {
+  //   this.getDataForDashboard(this.category)
 
-  }
+  // }
+
+  // Method to convert API response to Excel worksheet
+private formatDataToWorksheet(data: any[]): any[] {
+  // Assuming data is an array of objects with key-value pairs
+  const worksheet: any[] = [];
+
+  // Add header row
+  const headers = Object.keys(data[0]);
+  worksheet.push(headers);
+
+  // Add data rows
+  data.forEach((item) => {
+    const row: any[] = [];
+    headers.forEach((header) => {
+      row.push(item[header]);
+    });
+    worksheet.push(row);
+  });
+
+  return worksheet;
+}
+
+// Method to download the API response as Excel workbook
+
+  downloadExcel() {
+    const category = this.route.snapshot.params['category'];
+  const apiURL = `https://localhost:7247/api/Trainee?category=${category}&search=""`;
+
+  this.http.get<any[]>(apiURL).subscribe(
+    (data: any[]) => {
+      const worksheet = this.formatDataToWorksheet(data);
+      var currentdate = new Date(); 
+      var curentmonth 
+      const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth()+1}-${currentdate.getFullYear()}`;
+      this.downloadExce(worksheet, filename);
+    },
+    (error) => {
+      console.error('Error fetching API data:', error);
+    }
+  );
+}
+private downloadExce(worksheet: any[], filename: string): void {
+  const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };
+  const excelBuffer: any = write(workbook, { bookType: 'xlsx', type: 'array' });
+  const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const url = window.URL.createObjectURL(data);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename + '.xlsx';
+  a.click();
+  window.URL.revokeObjectURL(url);
+}
 }
