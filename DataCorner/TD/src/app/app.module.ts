@@ -23,16 +23,16 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { EmployeeService } from './service/employee.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { EmployeetableComponent } from './component/employeetable/employeetable.component';
 import { SearchComponent } from './component/search/search.component';
 import { LoginComponent } from './component/login/login.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
-import { AddFormComponent } from './component/add-form/add-form.component';
+
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ViewFormComponent } from './component/view-form/view-form.component';
 
 
 
@@ -45,13 +45,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-   
     EmployeetableComponent,
     SearchComponent,
     LoginComponent,
     DashboardComponent,
     HeaderComponent,
-    AddFormComponent,
+    ViewFormComponent,
   ],
   imports: [
   
@@ -78,7 +77,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSortModule,
     
   ],
-  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

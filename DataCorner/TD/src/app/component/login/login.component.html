@@ -1,6 +1,6 @@
 
 
-<mat-toolbar >
+<!--<mat-toolbar >
     <mat-toolbar-row>
       <div class="main-menu">
         <button mat-button class="home">HRMS</button>
@@ -38,7 +38,42 @@
         
             <button mat-raised-button color="primary" type="submit">Login</button>
           </form>
+        </div>-->
+        <div class="container p-5 my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../../../assets/logingif2.gif" class="img-fluid float-start" alt="GIF Image">
         </div>
+        <div class="col-md-2">
+            
+        </div>
+        <div class="col-md-4 my-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title"><h1>Login</h1></div>
+                    <div class="card-text">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()" class="container">
+                            <div class="row">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Username</mat-label>
+                              <input matInput formControlName="username" required>
+                              <mat-icon matSuffix>person</mat-icon>
+                            </mat-form-field>
+                            </div>
+                            <div class="row">
+                            <mat-form-field appearance="outline">
+                              <mat-label>Password</mat-label>
+                              <input matInput type="password" formControlName="password" required>
+                            </mat-form-field>
+                        </div>
+                            <button mat-raised-button color="primary" type="submit">Login</button>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
         
             
                 

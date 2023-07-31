@@ -4,6 +4,6 @@ namespace DataCorner.DataAccess.interfaces
 {
     public interface IDashboardDataAccess
     {
-        Task<DashboardDto> GetDashboardCountAsync(int flag);
+        Task<DashboardDto> GetDashboardCountAsync();
     }
 }

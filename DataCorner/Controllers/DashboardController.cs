@@ -16,9 +16,9 @@ namespace DataCorner.Controllers
         }
 
         [HttpGet("GetDashboardCount/{flag}")]
-        public async Task<IActionResult> GetDashboardCount(int flag)
+        public async Task<IActionResult> GetDashboardCount()
         {
-            var dashboardCounts = await _dashboardService.GetDashboardCountAsync(flag);
+            var dashboardCounts = await _dashboardService.GetDashboardCountAsync();
             if (dashboardCounts == null)
             {
                 return NotFound();

@@ -2,45 +2,41 @@
 
 <h2 mat-card class="dashboard">DASHBOARD</h2>
 
-<div class="row" >
+<div class="row">
 
-  <mat-card class="col-md-3" *ngIf="cardData"  (click)="billable(cardData.id)">
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('BL')">
     <mat-card-title>Billable</mat-card-title>
     <mat-card-content>
-      <p>{{ cardData.Billable }}</p>
+      <p>{{ cardData.billable }}</p>
     </mat-card-content>
   </mat-card>
-
-  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableDeploy(cardData.id)" >
-    <mat-card-title>Non-Billable Deploy</mat-card-title>
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBD')">
+    <mat-card-title>Non-BillableDeploy</mat-card-title>
     <mat-card-content>
-      <p>{{ cardData.NonBillableDeploy }}</p>
+      <p>{{ cardData.nonBillableA }}</p>
     </mat-card-content>
   </mat-card>
+  
 
-  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableA(cardData.id)">
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBA')">
     <mat-card-title>Non-Billable A</mat-card-title>
     <mat-card-content>
-      <p>{{ cardData.NonBillableA }}</p>
+      <p>{{ cardData.nonBillableA }}</p>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="col-md-3" *ngIf="cardData"  (click)="nonbillableDeployA(cardData.id)">
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBDA')">
     <mat-card-title>Non-Billable Deploy A</mat-card-title>
     <mat-card-content>
-      <p>{{ cardData.NonBillableDeployA }}</p>
+      <p>{{ cardData.nonBillableDeployA }}</p>
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="col-md-3" *ngIf="cardData" (click)="nonbillableNonUtilize(cardData.id)">
+  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBNU')">
     <mat-card-title>Non-Billable Non-Utilize</mat-card-title>
     <mat-card-content>
-      <p>{{ cardData.NonBillableNonUtilize }}</p>
+      <p>{{ cardData.nonBillableNonUtilize }}</p>
     </mat-card-content>
   </mat-card>
 
-
- 
-
 </div>
-

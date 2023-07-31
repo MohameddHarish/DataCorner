@@ -18,7 +18,7 @@ namespace DataCorner.DataAccess
             _connectionString = configuration.GetConnectionString("ttdconnection");
         }
 
-        public async Task<DashboardDto> GetDashboardCountAsync(int flag)
+        public async Task<DashboardDto> GetDashboardCountAsync()
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -27,7 +27,7 @@ namespace DataCorner.DataAccess
                 using (var command = new MySqlCommand("GetDashboardCount", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Flag", flag);
+                    command.Parameters.AddWithValue("@Flag", 1);
 
                     using (var reader = await command.ExecuteReaderAsync())
                     {

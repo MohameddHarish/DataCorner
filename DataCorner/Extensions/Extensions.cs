@@ -2,6 +2,8 @@
 using DataCorner.DataAccess;
 using DataCorner.Services.interfaces;
 using DataCorner.Services;
+using DataCorner.DataAccess.Interfaces;
+using DataCorner.Services.Interfaces;
 
 namespace DataCorner.Extensions
 {
@@ -12,6 +14,12 @@ namespace DataCorner.Extensions
   
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<IDashboardDataAccess, DashboardDataAccess>();
+            services.AddScoped<ITraineeDataAccess, TraineeDataAccess>();
+            services.AddScoped<ITraineeservice, TraineeService>();
+            services.AddScoped<ITraineeDetailsDataAccess, TraineeDetailsDataAccess>();
+            services.AddScoped<ITraineeDetailsService, TraineeDetailsService>();   
+            services.AddScoped<IAddTraineeDataAccess,AddTraineeDataAccess>();
+            services.AddScoped<IAddTraineeService, AddTraineeService>();
         }
 
     }

@@ -1,6 +1,5 @@
 using DataCorner.Extensions;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMyServices();
@@ -17,15 +16,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
 var configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("ttdconnection");
 
 builder.Services.AddControllers();
+app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+// Enable CORS
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapControllerRoute(
     name: "default",

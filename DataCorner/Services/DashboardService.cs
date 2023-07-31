@@ -14,9 +14,9 @@ namespace DataCorner.Services
             _dashboardDataAccess = dashboardDataAccess;
         }
 
-        public Task<DashboardDto> GetDashboardCountAsync(int flag)
+        public Task<DashboardDto> GetDashboardCountAsync()
         {
-            return _dashboardDataAccess.GetDashboardCountAsync(flag);
+            return _dashboardDataAccess.GetDashboardCountAsync();
         }
     }
 }

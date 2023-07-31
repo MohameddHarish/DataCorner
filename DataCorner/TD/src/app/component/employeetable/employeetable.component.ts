@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { EmployeeService, UserData } from 'src/app/service/employee.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employeetable',
@@ -16,12 +16,13 @@ export class EmployeetableComponent implements OnInit {
   userPosts: any[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  dataSource: MatTableDataSource<UserData> = new MatTableDataSource<UserData>([]);
-  displayedColumns: any[] = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  displayedColumns: any[] = ['serialNumber', 'EmployeeId', 'Name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
   userRole: string = '';
+  dashboardData: { [category: string]: any[] } = {}; 
 
   constructor(
-    private employeeService: EmployeeService,
+    private http: HttpClient,
     public router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService
@@ -31,16 +32,8 @@ export class EmployeetableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-      // Get the user role from the AuthenticationService
-
-      // Set the id value based on your logic or route params
-      // Example: If you want BillableData (ID 1), set this.id = 1;
-      // If you want NonBillableDeploy (ID 2), set this.id = 2;
-      // If you want NonBillableA (ID 3), set this.id = 3;
-      // If you want NonBillableDeployA (ID 4), set this.id = 4;
-      // If you want NonBillableDeployNonUtilize (ID 5), set this.id = 5;
-      const id = 1; // Replace 1 with the appropriate ID
-      this.getTable(id);
+      const category = params['category'];
+      this.getDataForDashboard(category);
     });
   }
 
@@ -49,50 +42,35 @@ export class EmployeetableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  getTable(id: number) {
-    switch (id) {
-      case 1:
-        this.employeeService.getBillableData().subscribe((response: any) => {
-          console.log(response);
-          this.dataSource.data = response;
-        });
-        break;
-      case 2:
-        this.employeeService.getNonBillableDeploy().subscribe((response: any) => {
-          console.log(response);
-          this.dataSource.data = response;
-        });
-        break;
-      case 3:
-        this.employeeService.getNonBillableA().subscribe((response: any) => {
-          console.log(response);
-          this.dataSource.data = response;
-        });
-        break;
-      case 4:
-        this.employeeService.getNonBillableDeployA().subscribe((response: any) => {
-          console.log(response);
-          this.dataSource.data = response;
-        });
-        break;
-      case 5:
-        this.employeeService.getNonBillableDeployNonUtilize().subscribe((response: any) => {
-          console.log(response);
-          this.dataSource.data = response;
-        });
-        break;
-      default:
-        console.log("Invalid id");
-        break;
-    }
+  getDataFromAPI(category: string) {
+    const apiURL = `https://localhost:7247/api/Trainee?category=${category}&search=""`;
+
+    return this.http.get(apiURL);
   }
 
-  openEditForm(data: UserData) {
-    this.router.navigateByUrl(`add-form/${data.id}`);
+  getDataForDashboard(category: string) {
+    this.getDataFromAPI(category).subscribe(
+      (data: any) => {
+        this.dashboardData[category] = data; 
+        this.dataSource.data = this.dashboardData[category]; 
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+  onCardClicked(category: string) {
+    this.getDataForDashboard(category);
+  }
+
+  openEditForm(data: any) {
+   
+    this.router.navigateByUrl(`view-form/${data.emp_Id}`);
   }
 
   addForm() {
-    this.router.navigateByUrl('add-form');
+    this.router.navigateByUrl('view-form');
   }
 
   applyFilter(event: Event) {

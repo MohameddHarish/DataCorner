@@ -8,7 +8,6 @@ export class AuthenticationService {
   private credentials: { username: string; password: string; roleId: number }[] = [
     { username: 'Admin', password: 'Admin@123', roleId: 1 },
     { username: 'User', password: 'User@123', roleId: 2 },
-    { username: 'Ganesh', password: 'Ganesh@123', roleId: 2 }
   ];
   private currentUser: { username: string; roleId: number } | null = null;
 
