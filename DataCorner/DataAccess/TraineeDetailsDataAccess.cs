@@ -38,16 +38,17 @@ namespace DataCorner.DataAccess
 
                 traineeDetails.Add(new TraineeDetailsDto
                 {
-                    Emp_Id = Convert.ToInt32(reader["Emp_Id"]),
+                    emp_Id = Convert.ToInt32(reader["Emp_Id"]),
                     Name = reader["Name"].ToString(),
                     DOJ = reader["DOJ"].ToString(),
-                    Project_Id = reader["Project_Id"].ToString(),
-                    Project_Name = reader["Project_Name"].ToString(),
+                    project_Id = reader["Project_Id"].ToString(),
+                    project_Name = reader["Project_Name"].ToString(),
                     Category = reader["Category"].ToString(),
                     PCD = reader["PCD"].ToString(),
                     Prospects = reader["Prospects"].ToString(),
-                    Skill_Set = reader["Skill_Set"].ToString(),
+                    skill_Set = reader["Skill_Set"].ToString(),
                     ReportingTo = reader["ReportingTo"].ToString(),
+                    Division_id= Convert.ToInt32(reader["Division_Id"]),
                     Division = reader["Division"].ToString(),
                     Sub_Div = reader["Sub_Div"].ToString(),
                     Skill_Catagories = reader["Skill_Catagories"].ToString(),

@@ -28,17 +28,6 @@ namespace DataCorner.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateTraineeDetails(AddTraineesDto traineeDetails)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var result = await _addTraineeService.UpdateTraineeDetails(traineeDetails);
-            return Ok(result);
-        }
     }
 
 }
