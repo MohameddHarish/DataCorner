@@ -72,3 +72,11 @@ mat-paginator {
 .odd-row {
   background-color: #f5f5f5; /* Set the background color for odd rows */
 }
+.search-box {
+  display: flex;
+  align-items: center;
+}
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust this value to set the space between buttons */
+}

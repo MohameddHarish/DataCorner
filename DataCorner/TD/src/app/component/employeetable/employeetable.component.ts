@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employeetable',
@@ -13,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EmployeetableComponent implements OnInit {
   userId!: number;
+  category:any;
   userPosts: any[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,8 +35,8 @@ export class EmployeetableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-      const category = params['category'];
-      this.getDataForDashboard(category);
+      this.category = params['category'];
+      this.getDataForDashboard(this.category);
     });
   }
 
@@ -53,6 +56,7 @@ export class EmployeetableComponent implements OnInit {
       (data: any) => {
         this.dashboardData[category] = data; 
         this.dataSource.data = this.dashboardData[category]; 
+        console.log(data);
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -80,5 +84,10 @@ export class EmployeetableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  exportToExcel() {
+    this.getDataForDashboard(this.category)
+
   }
 }
