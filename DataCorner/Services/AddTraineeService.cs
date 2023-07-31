@@ -20,11 +20,6 @@ namespace DataCorner.Services
             return await _dataAccess.InsertTraineeDetails(traineeDetails);
         }
 
-        public async Task<bool> UpdateTraineeDetails(AddTraineesDto traineeDetails)
-        {
-            
-            return await _dataAccess.UpdateTraineeDetails(traineeDetails);
-        }
     }
 }
   

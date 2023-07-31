@@ -70,7 +70,7 @@ export class EmployeetableComponent implements OnInit {
 
   openEditForm(data: any) {
    
-    this.router.navigateByUrl(`view-form/${data.emp_Id}`);
+    this.router.navigateByUrl(`view-form/${data.empId}`);
   }
 
   addForm() {

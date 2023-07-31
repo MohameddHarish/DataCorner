@@ -17,8 +17,8 @@
             <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Emp Id</mat-label>
-                    <input matInput placeholder="Emp Id" formControlName="empId">
-                    <mat-error *ngIf="myForm.get('empId')?.invalid && myForm.get('empId')?.touched">
+                    <input matInput placeholder="Emp Id" formControlName="emp_Id">
+                    <mat-error *ngIf="myForm.get('emp_Id')?.invalid && myForm.get('emp_Id')?.touched">
                         Emp Id is required.
                     </mat-error>
                 </mat-form-field>
@@ -54,7 +54,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Project Name</mat-label>
                     <input matInput placeholder="Project Name" formControlName="project_Name">
@@ -62,7 +62,7 @@
                         Project Name is required.
                     </mat-error>
                 </mat-form-field>
-            </div>
+            </div> -->
 
             <div class="col-md-3">
                 <mat-form-field appearance="outline">
@@ -125,8 +125,16 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
             <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                    <mat-label>Division ID</mat-label>  
+                    <input matInput placeholder="Division Id" formControlName="division_id">
+                    <mat-error *ngIf="myForm.get('division_id')?.invalid && myForm.get('division_id')?.touched">
+                        Division is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Division</mat-label>
                     <input matInput placeholder="Division" formControlName="division">
@@ -135,7 +143,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
             <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Sub Div</mat-label>
@@ -164,7 +171,8 @@
                         Skill Clusters is required.
                     </mat-error>
                 </mat-form-field>
-            </div>
+            </div>  -->
+
 
             <div class="col-md-3">
                 <mat-form-field appearance="outline">
@@ -230,7 +238,7 @@
             <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Timeline of the</mat-label>
-                    <input matInput placeholder="Timeline of the" formControlName="top">
+                    <input matInput placeholder="Timeline of the Project/Released" formControlName="top">
                     <mat-error *ngIf="myForm.get('top')?.invalid && myForm.get('top')?.touched">
                         Timeline of the is required.
                     </mat-error>
@@ -244,16 +252,6 @@
                     <mat-error
                         *ngIf="myForm.get('tcd')?.invalid && myForm.get('tcd')?.touched">
                         Training Completion Date is required.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-
-            <div class="col-md-3">
-                <mat-form-field appearance="outline">
-                    <mat-label>Project/Released</mat-label>
-                    <input matInput placeholder="Project/Released" formControlName="projectReleased">
-                    <mat-error *ngIf="myForm.get('projectReleased')?.invalid && myForm.get('projectReleased')?.touched">
-                        Project/Released is required.
                     </mat-error>
                 </mat-form-field>
             </div>
