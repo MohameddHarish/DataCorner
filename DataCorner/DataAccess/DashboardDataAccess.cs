@@ -39,7 +39,8 @@ namespace DataCorner.DataAccess
                                 NonBillableDeploy = Convert.ToInt32(reader["NonBillableDeploy"]),
                                 NonBillableA = Convert.ToInt32(reader["NonBillableA"]),
                                 NonBillableDeployA = Convert.ToInt32(reader["NonBillableDeployA"]),
-                                NonBillableNonUtilize = Convert.ToInt32(reader["NonBillableNonUtilize"])
+                                NonBillableNonUtilize = Convert.ToInt32(reader["NonBillableNonUtilize"]),
+                                AllTrainees = Convert.ToInt32(reader["AllTrainees"])
                             };
                         }
                     }
