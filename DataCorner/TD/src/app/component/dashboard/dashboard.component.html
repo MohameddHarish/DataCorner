@@ -1,48 +1,115 @@
 <app-header></app-header>
 
-<h2 mat-card class="dashboard">DASHBOARD</h2>
 
 <div class="row">
+  <h2>DASHBOARD</h2>
+</div>
 
- 
-    <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('BL')">
-      <mat-card-title>Billable</mat-card-title>
-      <mat-card-content>
-        <p>{{ cardData.billable }}</p>
-      </mat-card-content>
-      <!-- <button class="overlay-button">Click Me</button> -->
-    </mat-card>
-    
+<div class="">
+  <div class="row p-3">
+
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('BL')">
+            <mat-card-title>BL</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.billable }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('BL')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('NBD')">
+            <mat-card-title>NBD</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.nonBillableDeploy }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('NBD')" >
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
   
 
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('NBA')">
+            <mat-card-title>NBA</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.nonBillableA }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('NBA')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBD')">
-    <mat-card-title>Non-BillableDeploy</mat-card-title>
-    <mat-card-content>
-      <p>{{ cardData.nonBillableA }}</p>
-    </mat-card-content>
-  </mat-card>
+
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('NBDA')">
+            <mat-card-title>NBDA</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.nonBillableDeployA }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('NBDA')" >
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+   
 
 
-  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBA')">
-    <mat-card-title>Non-Billable A</mat-card-title>
-    <mat-card-content>
-      <p>{{ cardData.nonBillableA }}</p>
-    </mat-card-content>
-  </mat-card>
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('NBNU')">
+            <mat-card-title>NBNU</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.nonBillableNonUtilize }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('NBNU')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBDA')">
-    <mat-card-title>Non-Billable Deploy A</mat-card-title>
-    <mat-card-content>
-      <p>{{ cardData.nonBillableDeployA }}</p>
-    </mat-card-content>
-  </mat-card>
 
-  <mat-card class="col-md-3" *ngIf="cardData" (click)="onCardClicked('NBNU')">
-    <mat-card-title>Non-Billable Non-Utilize</mat-card-title>
-    <mat-card-content>
-      <p>{{ cardData.nonBillableNonUtilize }}</p>
-    </mat-card-content>
-  </mat-card>
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <mat-card *ngIf="cardData" (click)="onCardClicked('All')">
+            <mat-card-title>All</mat-card-title>
+            <mat-card-content>
+              <b>{{ cardData.allTrainees }}</b>
+            </mat-card-content>
+          </mat-card>
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('All')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
 
+  </div>
 </div>

@@ -7,5 +7,6 @@
         public int NonBillableA { get; set; }
         public int NonBillableDeployA { get; set; }
         public int NonBillableNonUtilize { get; set; }
+        public int AllTrainees { get; set; }
     }
 }

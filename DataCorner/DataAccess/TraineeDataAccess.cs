@@ -29,7 +29,10 @@ namespace DataCorner.DataAccess
 
             using MySqlCommand command = new MySqlCommand("GetTraineeList2", connection);
             command.CommandType = CommandType.StoredProcedure;
-
+            if(category!="All")
+                command.Parameters.AddWithValue("@Flag", 1);
+            else
+                command.Parameters.AddWithValue("@Flag", 2);
             command.Parameters.AddWithValue("@Category", category);
             command.Parameters.AddWithValue("@Search", search);
 
