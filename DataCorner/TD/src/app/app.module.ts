@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -60,7 +60,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; /
 
     MatNativeDateModule,
     MatDatepickerModule,
-  
+    MatSelectModule,
     BrowserModule,
     MatToolbarModule,
     MatCardModule,

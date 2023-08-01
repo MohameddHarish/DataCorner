@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DataCorner.DataAccess.Interfaces;
+using DataCorner.Models;
 using DataCorner.Models.Dto;
 using DataCorner.Services.Interfaces;
 
@@ -18,6 +19,10 @@ namespace DataCorner.Services
         {
             
             return await _dataAccess.InsertTraineeDetails(traineeDetails);
+        }
+        public async Task<List<IDropdownOption>> GetDropdownValuesAsync(int flag)
+        {
+            return await _dataAccess.GetDropdownValuesAsync(flag);
         }
 
     }
