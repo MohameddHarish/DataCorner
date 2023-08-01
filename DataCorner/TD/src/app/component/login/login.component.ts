@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../service/authentication.service';
 export class LoginComponent implements OnInit {
   passwordVisible: boolean = false;
   loginForm: FormGroup;
+  showSpinner: boolean = false; // Step 1: Add the showSpinner property
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +32,12 @@ export class LoginComponent implements OnInit {
       const enteredUsername = this.loginForm.value.username;
       const enteredPassword = this.loginForm.value.password;
 
+      this.showSpinner = true; // Step 3: Show the spinner when the login button is clicked
+
+      setTimeout(() => { // Simulate an asynchronous login process (you should use your actual login process)
+
       const roleId = this.authService.validateCredentials(enteredUsername, enteredPassword);
+
 
       if (roleId !== null) {
         this.authService.setCurrentUser({ username: enteredUsername, roleId: roleId });
@@ -40,6 +46,8 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('Invalid username or password.');
       }
+      this.showSpinner = false;
+    }, 2000); // Simulating a 2-second delay for the login process
     }
   }
 

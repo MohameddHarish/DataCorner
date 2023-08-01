@@ -33,6 +33,8 @@ import { HeaderComponent } from './component/header/header.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ViewFormComponent } from './component/view-form/view-form.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the material module
+
 
 
 
@@ -58,7 +60,7 @@ import { ViewFormComponent } from './component/view-form/view-form.component';
 
     MatNativeDateModule,
     MatDatepickerModule,
-
+  
     BrowserModule,
     MatToolbarModule,
     MatCardModule,
@@ -75,6 +77,7 @@ import { ViewFormComponent } from './component/view-form/view-form.component';
     HttpClientModule,
     AppRoutingModule,
     MatSortModule,
+    MatProgressSpinnerModule 
     
   ],
   bootstrap: [AppComponent]
