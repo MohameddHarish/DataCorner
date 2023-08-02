@@ -114,6 +114,12 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
                             skill_Set.skill_Set = reader["Skill_Set"].ToString();
                             option = skill_Set;
                         }
+                        else if(flag == 6)
+                        {
+                            ProjectIDDropdown projectid = new ProjectIDDropdown();
+                            projectid.Project_id = reader["Project_Id"].ToString();
+                            option = projectid;
+                        }
                         else
                         {
                             // If the flag is not recognized, continue to the next row.

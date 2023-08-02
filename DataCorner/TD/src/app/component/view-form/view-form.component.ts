@@ -11,6 +11,7 @@ interface ComponentProperties {
   locationOptions: string[];
   skillSetOptions: string[];
   educationOptions: string[];
+  projectidOptions: string[];
 }
 
 @Component({
@@ -28,13 +29,14 @@ export class ViewFormComponent implements OnInit {
   locationOptions: string[] = [];
   skillSetOptions: string[] = [];
   educationOptions: string[] = [];
-
+  projectidOptions: string[] = [];
   dropdownMapping: { [key: number]: keyof ComponentProperties } = {
     1: 'educationOptions',
     2: 'categoryOptions',
     3: 'locationOptions',
     4: 'batchOptions',
     5: 'skillSetOptions',
+    6:'projectidOptions'
   };
 
   constructor(private fb: FormBuilder,private router: Router, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService) {}
@@ -63,6 +65,7 @@ export class ViewFormComponent implements OnInit {
     this.getDropdownData(3);
     this.getDropdownData(4);
     this.getDropdownData(5);
+    this.getDropdownData(6);
   }
   private createForm(): void {
     this.myForm = this.fb.group({

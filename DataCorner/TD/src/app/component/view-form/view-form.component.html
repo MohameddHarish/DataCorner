@@ -44,7 +44,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
                 <mat-form-field appearance="outline">
                     <mat-label>Project ID</mat-label>
                     <input matInput placeholder="Project ID" formControlName="project_Id">
@@ -52,7 +52,18 @@
                         Project ID is required.
                     </mat-error>
                 </mat-form-field>
-            </div>
+            </div> -->
+            <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Project ID</mat-label>
+                  <mat-select formControlName="project_Id">
+                    <mat-option *ngFor="let projectidOption of projectidOptions" [value]="projectidOption">{{ projectidOption }}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="myForm.get('project_Id')?.invalid && myForm.get('project_Id')?.touched">
+                    Project ID is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
             <!-- <div class="col-md-3">
                 <mat-form-field appearance="outline">
