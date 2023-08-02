@@ -1,11 +1,12 @@
 ﻿using DataCorner.DataAccess.Interfaces;
+using DataCorner.Models;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Threading.Tasks;
 
-public class AddTraineeDataAccess : IAddTraineeDataAccess
+public class AddTraineeDataAccess : IAddTraineeDataAccess 
 {
     private readonly string _connectionString;
 
@@ -20,7 +21,7 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                await connection.OpenAsync();
+               await connection.OpenAsync();
 
                 var cmd = new MySqlCommand("InsertTraineeDetails2", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -62,5 +63,73 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
         {
             return false;
         }
+
     }
+    public async Task<List<IDropdownOption>> GetDropdownValuesAsync(int flag)
+    {
+        List<IDropdownOption> dropdownOptions = new List<IDropdownOption>();
+
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
+        {
+            await connection.OpenAsync();
+
+            using (MySqlCommand command = new MySqlCommand("GetDropdownValues", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Flag", flag);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        IDropdownOption option;
+
+                        if (flag == 1)
+                        {
+                            EducationDropdown education = new EducationDropdown();
+                            education.Education = reader["education"].ToString();
+                            option = education;
+                        }
+                        else if (flag == 2)
+                        {
+                            CategoryDropDown category = new CategoryDropDown();
+                            category.Category = reader["Category"].ToString();
+                            option = category;
+                        }
+                        else if (flag == 3)
+                        {
+                            LocationDropDown loc = new LocationDropDown();
+                            loc.Location = reader["location"].ToString();
+                            option = loc;
+                        }
+                        else if (flag == 4)
+                        {
+                            BatchDropDown batch = new BatchDropDown();
+                            batch.Batch = reader["batch"].ToString();
+                            option = batch;
+                        }
+                        else if (flag == 5)
+                        {
+                            SkillSetDropDown skill_Set = new SkillSetDropDown();
+                            skill_Set.skill_Set = reader["Skill_Set"].ToString();
+                            option = skill_Set;
+                        }
+                        else
+                        {
+                            // If the flag is not recognized, continue to the next row.
+                            continue;
+                        }
+
+                        dropdownOptions.Add(option);
+                    }
+                }
+            }
+        }
+
+        return dropdownOptions;
+    }
+
 }
+
+
+

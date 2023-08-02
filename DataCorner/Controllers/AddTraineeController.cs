@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DataCorner.Models;
 using DataCorner.Models.Dto;
 using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,12 @@ namespace DataCorner.Controllers
 
             var result = await _addTraineeService.InsertTraineeDetails(traineeDetails);
             return Ok(result);
+        }
+        [HttpGet("{flag}")]
+        public async Task<IActionResult> GetDropdownValues(int flag)
+        {
+            List<IDropdownOption> dropdownOptions = await _addTraineeService.GetDropdownValuesAsync(flag);
+            return Ok(dropdownOptions);
         }
 
     }

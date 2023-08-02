@@ -17,6 +17,7 @@ export class EmployeetableComponent implements OnInit {
   userId!: number;
   category:any;
   userPosts: any[] = [];
+  isUpdateMode: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
@@ -74,7 +75,9 @@ export class EmployeetableComponent implements OnInit {
   }
 
   addForm() {
-    this.router.navigateByUrl('view-form');
+    this.isUpdateMode = false;
+  this.router.navigateByUrl('view-form/add');
+    // this.router.navigateByUrl('view-form');
   }
 
   applyFilter(event: Event) {

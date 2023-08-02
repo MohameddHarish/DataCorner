@@ -3,28 +3,67 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication.service';
+interface ComponentProperties {
+  batchOptions: string[];
+  categoryOptions: string[];
+  locationOptions: string[];
+  skillSetOptions: string[];
+  educationOptions: string[];
+}
+
 @Component({
   selector: 'app-view-form',
   templateUrl: './view-form.component.html',
   styleUrls: ['./view-form.component.scss']
 })
+
 export class ViewFormComponent implements OnInit {
   myForm!: FormGroup; 
   userRole: string = ''; 
+  isUpdateMode: boolean = false;
+  batchOptions: string[] = [];
+  categoryOptions: string[] = [];
+  locationOptions: string[] = [];
+  skillSetOptions: string[] = [];
+  educationOptions: string[] = [];
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService) {}
+  dropdownMapping: { [key: number]: keyof ComponentProperties } = {
+    1: 'educationOptions',
+    2: 'categoryOptions',
+    3: 'locationOptions',
+    4: 'batchOptions',
+    5: 'skillSetOptions',
+  };
 
+  constructor(private fb: FormBuilder,private router: Router, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService) {}
+  
   ngOnInit(): void {
-    this.createForm();
-
-   
+    this.getDropdownOptions();
     this.route.params.subscribe(params => {
-      const employeeId = +params['id'];
-      this.getEmployeeData(employeeId);
+      const employeeIdParam = params['id'];
+  
+      if (employeeIdParam === 'add') {
+        // It is the "add" case, so create a new form for adding data
+        this.createForm();
+      } else {
+        // It is an actual employee ID, so create the form for updating data and fetch the employee data
+        this.isUpdateMode = true;
+        this.createForm();
+        const employeeId = +employeeIdParam;
+        this.getEmployeeData(employeeId);
+      }
     });
   }
-
+  
+ private getDropdownOptions(): void {
+    this.getDropdownData(1);
+    this.getDropdownData(2);
+    this.getDropdownData(3);
+    this.getDropdownData(4);
+    this.getDropdownData(5);
+  }
   private createForm(): void {
     this.myForm = this.fb.group({
       emp_Id: ['', Validators.required],
@@ -70,7 +109,8 @@ export class ViewFormComponent implements OnInit {
             name: employeeData.name,
             doj: employeeData.doj,
             project_Id: employeeData.project_Id,
-            project_Name: employeeData.project_Name,
+            // project_Id:`${employeeData.project_Id} - ${employeeData.project_Name}`,
+            // project_Name: employeeData.project_Name,
             category: employeeData.category,
             pcd: employeeData.pcd,
             prospects: employeeData.prospects,
@@ -104,19 +144,56 @@ export class ViewFormComponent implements OnInit {
       }
     );
   }
+  // onSubmit(): void {
+  //   if (this.myForm.valid) {
+  //     const formData = this.myForm.value;
+  //     const apiURL = 'https://localhost:7247/api/trainee';
+  //     this.http.post(apiURL, formData).subscribe(
+  //       (response) => {
+  //         console.log('Form data submitted successfully:', response);
+  //       },
+  //       (error) => {
+  //         console.error('Error submitting form data:', error);
+  //       }
+  //     );
+  //   } else {
+  //   }
+  // }
   onSubmit(): void {
+    
     if (this.myForm.valid) {
       const formData = this.myForm.value;
       const apiURL = 'https://localhost:7247/api/trainee';
+      // console.log(formData);
       this.http.post(apiURL, formData).subscribe(
         (response) => {
           console.log('Form data submitted successfully:', response);
+          const category = formData.category; // Assuming your form has a 'category' field
+          this.router.navigateByUrl('employee/' + category); // Navigate to the desired URL after successful form submission
         },
         (error) => {
           console.error('Error submitting form data:', error);
         }
       );
     } else {
+      // Handle the case when the form is not valid, if needed
     }
+  }
+  private getDropdownData(flag: number): void {
+    const apiURL = `https://localhost:7247/api/trainee/${flag}`;
+
+    this.http.get<any[]>(apiURL).subscribe(
+      (data: any[]) => {
+        if (data && data.length > 0) {
+          const targetProperty = this.dropdownMapping[flag];
+          this[targetProperty] = data.map((item: any) => item[Object.keys(item)[0]]);
+        } else {
+          console.error(`No dropdown data found for flag: ${flag}`);
+        }
+      },
+      (error) => {
+        console.error(`Error fetching dropdown data for flag: ${flag}`, error);
+      }
+    );
   }
 }
