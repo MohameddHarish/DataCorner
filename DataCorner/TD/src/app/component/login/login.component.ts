@@ -47,7 +47,12 @@ export class LoginComponent implements OnInit {
         console.log('Invalid username or password.');
       }
       this.showSpinner = false;
+      console.log("test1");
+
     }, 2000); // Simulating a 2-second delay for the login process
+
+    console.log("test2");
+
     }
   }
 

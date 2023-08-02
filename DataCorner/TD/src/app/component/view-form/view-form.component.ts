@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication.service';
+import { environment } from 'src/environments/environment.development';
 interface ComponentProperties {
   batchOptions: string[];
   categoryOptions: string[];
@@ -101,7 +102,7 @@ export class ViewFormComponent implements OnInit {
   }
 
   private getEmployeeData(employeeId: number): void {
-    const apiURL = `https://localhost:7247/api/TraineeDetails/${employeeId}`;
+    const apiURL = environment.baseUrl+`api/TraineeDetails/${employeeId}`;
 
     this.http.get<any[]>(apiURL).subscribe(
       (data: any[]) => {
@@ -166,7 +167,7 @@ export class ViewFormComponent implements OnInit {
     
     if (this.myForm.valid) {
       const formData = this.myForm.value;
-      const apiURL = 'https://localhost:7247/api/trainee';
+      const apiURL = environment.baseUrl+'api/trainee';
       // console.log(formData);
       this.http.post(apiURL, formData).subscribe(
         (response) => {
@@ -183,7 +184,7 @@ export class ViewFormComponent implements OnInit {
     }
   }
   private getDropdownData(flag: number): void {
-    const apiURL = `https://localhost:7247/api/trainee/${flag}`;
+    const apiURL = environment.baseUrl+`api/trainee/${flag}`;
 
     this.http.get<any[]>(apiURL).subscribe(
       (data: any[]) => {
