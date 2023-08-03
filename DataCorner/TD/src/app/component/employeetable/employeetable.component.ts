@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { WorkBook, utils, write } from 'xlsx';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-employeetable',
@@ -47,7 +48,7 @@ export class EmployeetableComponent implements OnInit {
   }
 
   getDataFromAPI(category: string) {
-    const apiURL = `https://localhost:7247/api/Trainee?category=${category}&search=""`;
+    const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
 
     return this.http.get(apiURL);
   }
@@ -119,7 +120,7 @@ private formatDataToWorksheet(data: any[]): any[] {
 
   downloadExcel() {
     const category = this.route.snapshot.params['category'];
-  const apiURL = `https://localhost:7247/api/Trainee?category=${category}&search=""`;
+  const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
 
   this.http.get<any[]>(apiURL).subscribe(
     (data: any[]) => {

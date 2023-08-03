@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { utils, WorkBook, write } from 'xlsx';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +11,7 @@ import { utils, WorkBook, write } from 'xlsx';
 })
 export class DashboardComponent implements OnInit {
   cardData: any;
+  
 
   constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute,) {}
 
@@ -18,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getDataFromAPI() {
-    const apiURL = 'https://localhost:7247/api/Dashboard/GetDashboardCount/1';
+    const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';
 
     this.http.get(apiURL).subscribe(
       (data: any) => {
@@ -60,7 +62,7 @@ export class DashboardComponent implements OnInit {
   // Method to download the API response as Excel workbook
 
   downloadExcel(category: string) {
-    const apiURL = `https://localhost:7247/api/Trainee?category=${category}&search=""`;
+    const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
 
     this.http.get<any[]>(apiURL).subscribe(
       (data: any[]) => {
