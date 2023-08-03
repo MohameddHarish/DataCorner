@@ -375,14 +375,10 @@
         </div>
 
     </div>
-    <div class="action">
-        <button mat-raised-button color="primary" type="submit">{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+    <div class="action" *ngIf="userRole === 'admin'">
+        <button mat-raised-button color="primary" type="submit" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
         <button mat-raised-button color="warn" type="button">Cancel</button>
-        <!-- Use ng-container to conditionally display the submit button for 'admin' user role -->
-        <!-- <ng-container *ngIf="userRole === 'admin'"> -->
-            
-        <!-- </ng-container> -->
-    </div>
+      </div>      
 </form>
 
 <!-- <div class="action">

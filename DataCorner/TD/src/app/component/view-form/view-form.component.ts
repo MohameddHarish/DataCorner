@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/authentication.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
 interface ComponentProperties {
   batchOptions: string[];
@@ -45,9 +45,9 @@ export class ViewFormComponent implements OnInit {
   ngOnInit(): void {
     this.getDropdownOptions();
     this.route.params.subscribe(params => {
+
       const employeeIdParam = params['id'];
-  
-      if (employeeIdParam === 'add') {
+        if (employeeIdParam === 'add') {
         // It is the "add" case, so create a new form for adding data
         this.createForm();
       } else {
@@ -58,6 +58,7 @@ export class ViewFormComponent implements OnInit {
         this.getEmployeeData(employeeId);
       }
     });
+    this.userRole = this.authenticationService.getUserRole();
   }
   
  private getDropdownOptions(): void {
