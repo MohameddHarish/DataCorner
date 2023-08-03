@@ -5,6 +5,7 @@ using DataCorner.Services;
 using DataCorner.DataAccess.Interfaces;
 using DataCorner.Services.Interfaces;
 
+
 namespace DataCorner.Extensions
 {
     public static class Extensions
@@ -20,6 +21,8 @@ namespace DataCorner.Extensions
             services.AddScoped<ITraineeDetailsService, TraineeDetailsService>();   
             services.AddScoped<IAddTraineeDataAccess,AddTraineeDataAccess>();
             services.AddScoped<IAddTraineeService, AddTraineeService>();
+            services.AddScoped<IAccountDataAccess, AccountDataAccess>();
+            services.AddScoped<IAccountService, AccountService>();
         }
 
     }
