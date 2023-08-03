@@ -26,8 +26,8 @@ namespace DataCorner.Controllers
             {
                 if (!string.IsNullOrEmpty(result.IsAdmin) && result.IsAdmin == "1")
                 {
-                    // Return a specific value for IsAdmin when it's equal to "1"
-                    result.IsAdmin = "Admin"; // Change this to the desired value
+                    
+                    result.IsAdmin = "Admin"; 
                 }
 
                 return new ObjectResult(new { success = true, data = result, msg = "Login successful." });
