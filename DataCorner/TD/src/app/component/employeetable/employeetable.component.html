@@ -1,5 +1,12 @@
 <app-header></app-header>
 
+<div class="example-button-container">
+  <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBackToDashboard()">
+    <span class="material-icons">arrow_back</span>
+  </button>
+  <h2>Trainee List</h2>
+</div>
+
 <mat-card>
   <mat-card-content>
     <div class="search-box">
@@ -71,19 +78,18 @@
             <button mat-icon-button color="primary">
               <mat-icon class="material-symbols-outlined">visibility</mat-icon>
             </button>
-          </td>          
+          </td>
         </ng-container>
 
         <!-- Define the column order, including the 'serialNumber' column -->
-        <tr mat-header-row *matHeaderRowDef="['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions']"></tr>
-        <tr
-          mat-row
+        <tr mat-header-row
+          *matHeaderRowDef="['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions']">
+        </tr>
+        <tr mat-row
           *matRowDef="let row; columns: ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions']; let even = even; let odd = odd"
-          [class.even-row]="even"
-          [class.odd-row]="odd"
-        ></tr>
+          [class.even-row]="even" [class.odd-row]="odd"></tr>
 
-        No data row 
+        No data row
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="8">No data matching the filter "{{ input.value }}"</td>
         </tr>
@@ -91,4 +97,4 @@
     </div>
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </mat-card-content>
-</mat-card> 
+</mat-card>

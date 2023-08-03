@@ -59,12 +59,6 @@ mat-paginator {
 }
 
 
-
-// .mat-elevation-z8
-// {
-// background-color: var(--bgColor-muted, var(--color-canvas-subtle)) !important;
-// }
-
 .even-row {
   background-color: #ffffff; /* Set the background color for even rows */
 }
@@ -79,4 +73,16 @@ mat-paginator {
 .button-container {
   display: flex;
   gap: 10px; /* Adjust this value to set the space between buttons */
+}
+.example-button-container{
+  display: flex;
+  margin-left: 18px;
+  margin-top: 10px;
+}
+.backButton{
+  width: 35px;
+  height:35px
+}
+h2{
+  padding-left: 12px;
 }

@@ -5,13 +5,10 @@
   mat-toolbar{
     background-color: white;
   }
-
-
-
-  .logo {
-    display: flex;
-    align-items: center;
-  }
+  // .logo {
+  //   display: flex;
+  //   align-items: center;
+  // }
   
   .logo-image {
     width: 100px;
@@ -19,4 +16,7 @@
     object-fit: contain;
     margin-right: 10px;
   }
-  
+  .headerLogo{
+    width: 200px;
+    height: 40px;
+  }

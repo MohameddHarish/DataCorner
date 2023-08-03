@@ -6,28 +6,21 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
-  constructor(public router:Router)
-  {
+  constructor(public router: Router) { }
+
+
+  ngOnInit() {
 
   }
 
-
-
- 
-  ngOnInit(){
-  
-  }
-
-  logout()
-  {
+  logout() {
     this.router.navigate(['login']);
   }
 
-  Home()
-  {
+  Home() {
     this.router.navigate(['dashboard']);
   }
- 
+
 }
