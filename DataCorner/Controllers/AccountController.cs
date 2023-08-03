@@ -1,5 +1,6 @@
 ﻿using DataCorner.Models;
 using DataCorner.Services.interfaces;
+using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -23,10 +24,18 @@ namespace DataCorner.Controllers
 
             if (result != null)
             {
-                return Ok(result);
-            }
+                if (!string.IsNullOrEmpty(result.IsAdmin) && result.IsAdmin == "1")
+                {
+                    // Return a specific value for IsAdmin when it's equal to "1"
+                    result.IsAdmin = "Admin"; // Change this to the desired value
+                }
 
-            return Unauthorized();
+                return new ObjectResult(new { success = true, data = result, msg = "Login successful." });
+            }
+            else
+            {
+                return new ObjectResult(new { success = false, data = result, msg = "Invalid username or password." });
+            }
         }
     }
 }
