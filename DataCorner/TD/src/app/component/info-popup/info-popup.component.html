@@ -1,0 +1,38 @@
+
+<mat-dialog-content>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Division ID Column -->
+    <ng-container matColumnDef="division_id">
+      <mat-header-cell *matHeaderCellDef> Division ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.division_id }} </mat-cell>
+    </ng-container>
+
+    <!-- Division Column -->
+    <ng-container matColumnDef="division">
+      <mat-header-cell *matHeaderCellDef> Division </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.division }} </mat-cell>
+    </ng-container>
+
+    <!-- Sub Division Column -->
+    <ng-container matColumnDef="sub_div">
+      <mat-header-cell *matHeaderCellDef> Sub Division </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.sub_div }} </mat-cell>
+    </ng-container>
+
+    <!-- Skill Categories Column -->
+    <ng-container matColumnDef="skill_categories">
+      <mat-header-cell *matHeaderCellDef> Skill Categories </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.skill_categories }} </mat-cell>
+    </ng-container>
+
+    <!-- Skill Clusters Column -->
+    <ng-container matColumnDef="skill_clusters">
+      <mat-header-cell *matHeaderCellDef> Skill Clusters </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.skill_clusters }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+

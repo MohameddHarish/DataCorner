@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoPopupComponent } from '../info-popup/info-popup.component';
+import { DialogData } from 'src/model/info';
 interface ComponentProperties {
   batchOptions: string[];
   categoryOptions: string[];
@@ -40,7 +43,7 @@ export class ViewFormComponent implements OnInit {
     6:'projectidOptions'
   };
 
-  constructor(private fb: FormBuilder,private router: Router, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService) {}
+  constructor(private fb: FormBuilder,private router: Router, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService,private dialog:MatDialog) {}
   
   ngOnInit(): void {
     this.getDropdownOptions();
@@ -201,4 +204,18 @@ export class ViewFormComponent implements OnInit {
       }
     );
   }
+  openInfoPopup(event: Event): void {
+    event.preventDefault(); // Prevent the default behavior (navigation)
+  
+    const dialogData: DialogData[] = [
+
+    ];
+  
+    const dialogRef = this.dialog.open(InfoPopupComponent, {
+      width: '600px', // Adjust the width as needed
+      data: dialogData
+    });
+  }
+  
+  
 }
