@@ -1,13 +1,11 @@
+<app-header></app-header>
+<div class="example-button-container">
+    <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBack()" >
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h2>Trainee Form</h2>
+  </div>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <mat-toolbar color="primary">
-        <mat-icon class="material-symbols-outlined">
-            edit_note
-        </mat-icon>
-        <span>Trainee Details</span>
-        <span class="example-spacer"></span>
-    </mat-toolbar>
-    <br>
-    <br>
     <div class="content">
         <div class="row">
             <div class="col-md-3">

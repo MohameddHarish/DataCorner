@@ -68,6 +68,18 @@
     margin-right: 10px; 
     padding: 10px ; 
   }
+  .example-button-container{
+    display: flex;
+    margin-left: 18px;
+    margin-top: 10px;
+  }
+ .backButton{
+  width: 35px;
+  height:35px;
+} 
+h2{
+  padding-left: 12px;
+}
   .input-with-info {
     position: relative;
   }

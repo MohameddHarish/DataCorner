@@ -152,21 +152,10 @@ export class ViewFormComponent implements OnInit {
       }
     );
   }
-  // onSubmit(): void {
-  //   if (this.myForm.valid) {
-  //     const formData = this.myForm.value;
-  //     const apiURL = 'https://localhost:7247/api/trainee';
-  //     this.http.post(apiURL, formData).subscribe(
-  //       (response) => {
-  //         console.log('Form data submitted successfully:', response);
-  //       },
-  //       (error) => {
-  //         console.error('Error submitting form data:', error);
-  //       }
-  //     );
-  //   } else {
-  //   }
-  // }
+  goBack() {
+    window.history.back();
+  }
+
   onSubmit(): void {
     
     if (this.myForm.valid) {
