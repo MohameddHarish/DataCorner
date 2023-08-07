@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -31,10 +31,10 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
 
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatDialogModule } from '@angular/material/dialog';
 import { ViewFormComponent } from './component/view-form/view-form.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the material module
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { InfoPopupComponent } from './component/info-popup/info-popup.component';
 
 
 
@@ -53,11 +53,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     DashboardComponent,
     HeaderComponent,
     ViewFormComponent,
+    InfoPopupComponent,
   ],
   imports: [
   
   MatDialogModule,
-
     MatNativeDateModule,
     MatDatepickerModule,
     MatSelectModule,

@@ -68,7 +68,20 @@
     margin-right: 10px; 
     padding: 10px ; 
   }
+  .input-with-info {
+    position: relative;
+  }
   
+  .input-with-info input {
+    padding-right: 40px; /* Adjust as needed to create space for the button */
+  }
+  
+  .input-with-info button {
+    position: absolute;
+    top: 50%;
+    right: 5px; /* Adjust as needed for the desired distance from the right edge */
+    transform: translateY(-50%);
+  }
   
 
   

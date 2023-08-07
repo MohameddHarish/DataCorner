@@ -23,6 +23,8 @@ namespace DataCorner.Extensions
             services.AddScoped<IAddTraineeService, AddTraineeService>();
             services.AddScoped<IAccountDataAccess, AccountDataAccess>();
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IDivisionDataAccess,DivisionDataAccess>();
+            services.AddScoped<IDivisionService, DivisionService>();
         }
 
     }
