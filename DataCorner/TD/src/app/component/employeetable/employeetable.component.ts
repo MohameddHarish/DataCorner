@@ -42,9 +42,10 @@ export class EmployeetableComponent implements OnInit {
     });
   }
 
-  goBackToDashboard() {
-    this.router.navigateByUrl('/dashboard');
+  goBack() {
+    window.history.back();
   }
+    
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
