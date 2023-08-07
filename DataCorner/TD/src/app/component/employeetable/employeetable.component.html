@@ -18,14 +18,14 @@
       </mat-form-field>
     </div>
     <div class="col-md-7"></div>
-    <div class="col-md-2" style="padding-left: 4%;">
+    <div class="col-md-2" style="padding-left: 2%;">
       <ng-container *ngIf="userRole === 'admin'">
         <button class="Btn" mat-raised-button color="primary" (click)="addForm()">
           <div class="text">Add</div>
         </button>
 
         <button class="ExprtBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="downloadExcel()">
-          <div class="text">Export</div>
+          <div class="text">Export</div><mat-icon>download</mat-icon>
         </button>
       </ng-container>
     </div>
