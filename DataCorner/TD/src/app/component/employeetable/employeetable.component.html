@@ -11,12 +11,12 @@
   <mat-card-content>
     <div class="row">
       <div class="col-md-3">
-      <mat-form-field appearance="outline">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder (keyup)="applyFilter($event)" #input />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder (keyup)="applyFilter($event)" #input />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>                
     <div class="col-md-7"></div>
     <div class="col-md-2" style="padding-left: 2%;">
       <ng-container *ngIf="userRole === 'admin'">

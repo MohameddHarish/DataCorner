@@ -87,12 +87,31 @@ export class EmployeetableComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
+  
+    // Split the filter value into individual keywords using commas
+    const keywords = filterValue.split(',').map(keyword => keyword.trim().toLowerCase());
+  
+    // Construct the filter object to apply multiple conditions
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const searchData = filter.split(',');
+  
+      return searchData.every(keyword =>
+        Object.entries(data).some(([key, value]) =>
+          (typeof value === 'string' || value instanceof String) &&
+          key !== 'serialNumber' && key !== 'actions' && value.toLowerCase().includes(keyword)
+        )
+      );
+    };
+  
+    // Apply the constructed filter
+    this.dataSource.filter = keywords.join(',');
+  
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
+  
+  
 
   // exportToExcel() {
   //   this.getDataForDashboard(this.category)
