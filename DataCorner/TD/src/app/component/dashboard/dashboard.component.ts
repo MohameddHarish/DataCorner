@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { utils, WorkBook, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
-
+import { AuthenticationService } from 'src/app/service/authentication.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,13 +11,23 @@ import { environment } from 'src/environments/environment.development';
 })
 export class DashboardComponent implements OnInit {
   cardData: any;
-  
+  userRole: string = '';
+  userId!: number;
 
-  constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute,) {}
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthenticationService
+  ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.userId = +params['id'];
+      this.userRole = this.authService.getUserRole();
     this.getDataFromAPI();
-  }
+  });
+}
 
   getDataFromAPI() {
     const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';
