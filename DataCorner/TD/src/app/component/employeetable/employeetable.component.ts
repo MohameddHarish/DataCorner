@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
 import { WorkBook, utils, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-employeetable',
@@ -22,7 +23,7 @@ export class EmployeetableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+  displayedColumns: string[] = ['serialNumber', 'id', 'name','Email','Phone', 'actions'];
   userRole: string = '';
   dashboardData: { [category: string]: any[] } = {};
   showColumns: boolean = false; // For controlling checkbox state
@@ -104,6 +105,15 @@ export class EmployeetableComponent implements OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+  toggleAllColumns(event: MatCheckboxChange) {
+    this.showColumns = event.checked;
+
+    if (this.showColumns) {
+      this.selectedColumns = this.columns;
+    } else {
+      this.selectedColumns = this.displayedColumns;
     }
   }
 

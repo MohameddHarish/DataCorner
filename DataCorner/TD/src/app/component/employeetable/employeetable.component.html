@@ -34,9 +34,16 @@
       <div class="column-selector">
         <!-- <mat-checkbox [(ngModel)]="showColumns">Show Columns</mat-checkbox> -->
         <mat-select [(ngModel)]="selectedColumns" multiple>
+          <mat-checkbox
+          [(ngModel)]="showColumns"
+          (change)="toggleAllColumns($event)"
+        >
+           All
+        </mat-checkbox>
           <mat-option *ngFor="let column of columns" [value]="column">{{ column }}</mat-option>
         </mat-select>
-      </div>
+      </div>      
+      
 
       <table mat-table [dataSource]="dataSource" matSort>
 
