@@ -28,7 +28,7 @@ export class EmployeetableComponent implements OnInit {
   dashboardData: { [category: string]: any[] } = {};
   showColumns: boolean = false; // For controlling checkbox state
   selectedColumns: string[] = this.displayedColumns; // Initially, show selected columns
-  columns: string[] = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+  columns: string[] = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'doj', 'project_Id','project_Name', 'category', 'pcd', 'prospects', 'reportingTo', 'division_id','division','sub_Div', 'yop', 'education', 'prev_Exp', 'leadName', 'location','contact', 'project_Experience', 'top', 'tcd', 'dot', 'batch','skill_Catagories','skill_Clusters', 'actions'];
 
   constructor(
     private http: HttpClient,
