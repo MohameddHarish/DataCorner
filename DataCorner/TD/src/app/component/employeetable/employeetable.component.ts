@@ -16,22 +16,25 @@ import { environment } from 'src/environments/environment.development';
 })
 export class EmployeetableComponent implements OnInit {
   userId!: number;
-  category:any;
+  category: any;
   userPosts: any[] = [];
   isUpdateMode: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: any[] = ['serialNumber', 'EmployeeId', 'Name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+  displayedColumns: string[] = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
   userRole: string = '';
-  dashboardData: { [category: string]: any[] } = {}; 
+  dashboardData: { [category: string]: any[] } = {};
+  showColumns: boolean = false; // For controlling checkbox state
+  selectedColumns: string[] = this.displayedColumns; // Initially, show selected columns
+  columns: string[] = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
 
   constructor(
     private http: HttpClient,
     public router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -45,14 +48,14 @@ export class EmployeetableComponent implements OnInit {
   goBack() {
     window.history.back();
   }
-    
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   getDataFromAPI(category: string) {
-    const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
+    const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
 
     return this.http.get(apiURL);
   }
@@ -60,9 +63,8 @@ export class EmployeetableComponent implements OnInit {
   getDataForDashboard(category: string) {
     this.getDataFromAPI(category).subscribe(
       (data: any) => {
-        this.dashboardData[category] = data; 
-        this.dataSource.data = this.dashboardData[category]; 
-        console.log(data);
+        this.dashboardData[category] = data;
+        this.dataSource.data = this.dashboardData[category];
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -75,26 +77,21 @@ export class EmployeetableComponent implements OnInit {
   }
 
   openEditForm(data: any) {
-   
     this.router.navigateByUrl(`view-form/${data.empId}`);
   }
 
   addForm() {
     this.isUpdateMode = false;
-  this.router.navigateByUrl('view-form/add');
-    // this.router.navigateByUrl('view-form');
+    this.router.navigateByUrl('view-form/add');
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-  
-    // Split the filter value into individual keywords using commas
     const keywords = filterValue.split(',').map(keyword => keyword.trim().toLowerCase());
-  
-    // Construct the filter object to apply multiple conditions
+
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const searchData = filter.split(',');
-  
+
       return searchData.every(keyword =>
         Object.entries(data).some(([key, value]) =>
           (typeof value === 'string' || value instanceof String) &&
@@ -102,71 +99,68 @@ export class EmployeetableComponent implements OnInit {
         )
       );
     };
-  
-    // Apply the constructed filter
+
     this.dataSource.filter = keywords.join(',');
-  
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-  
-  
 
-  // exportToExcel() {
-  //   this.getDataForDashboard(this.category)
+  toggleColumns() {
+    if (this.showColumns) {
+      this.selectedColumns = this.displayedColumns;
+    } else {
+      this.selectedColumns = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+    }
+  }
 
-  // }
-
-  // Method to convert API response to Excel worksheet
-private formatDataToWorksheet(data: any[]): any[] {
-  // Assuming data is an array of objects with key-value pairs
-  const worksheet: any[] = [];
-
-  // Add header row
-  const headers = Object.keys(data[0]);
-  worksheet.push(headers);
-
-  // Add data rows
-  data.forEach((item) => {
-    const row: any[] = [];
-    headers.forEach((header) => {
-      row.push(item[header]);
-    });
-    worksheet.push(row);
-  });
-
-  return worksheet;
-}
-
-// Method to download the API response as Excel workbook
+  isColumnVisible(column: string): boolean {
+    return this.selectedColumns.includes(column);
+  }
 
   downloadExcel() {
     const category = this.route.snapshot.params['category'];
-  const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
+    const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
 
-  this.http.get<any[]>(apiURL).subscribe(
-    (data: any[]) => {
-      const worksheet = this.formatDataToWorksheet(data);
-      var currentdate = new Date(); 
-      var curentmonth 
-      const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth()+1}-${currentdate.getFullYear()}`;
-      this.downloadExce(worksheet, filename);
-    },
-    (error) => {
-      console.error('Error fetching API data:', error);
-    }
-  );
-}
-private downloadExce(worksheet: any[], filename: string): void {
-  const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };
-  const excelBuffer: any = write(workbook, { bookType: 'xlsx', type: 'array' });
-  const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  const url = window.URL.createObjectURL(data);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename + '.xlsx';
-  a.click();
-  window.URL.revokeObjectURL(url);
-}
+    this.http.get<any[]>(apiURL).subscribe(
+      (data: any[]) => {
+        const worksheet = this.formatDataToWorksheet(data);
+        var currentdate = new Date();
+        const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
+        this.downloadExce(worksheet, filename);
+      },
+      (error) => {
+        console.error('Error fetching API data:', error);
+      }
+    );
+  }
+
+  private formatDataToWorksheet(data: any[]): any[] {
+    const worksheet: any[] = [];
+    const headers = Object.keys(data[0]);
+    worksheet.push(headers);
+
+    data.forEach((item) => {
+      const row: any[] = [];
+      headers.forEach((header) => {
+        row.push(item[header]);
+      });
+      worksheet.push(row);
+    });
+
+    return worksheet;
+  }
+
+  private downloadExce(worksheet: any[], filename: string): void {
+    const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };
+    const excelBuffer: any = write(workbook, { bookType: 'xlsx', type: 'array' });
+    const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename + '.xlsx';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
 }

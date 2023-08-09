@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 import { FormsModule } from '@angular/forms';
@@ -78,7 +78,8 @@ import { InfoPopupComponent } from './component/info-popup/info-popup.component'
     AppRoutingModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule
     
   ],
   bootstrap: [AppComponent]
