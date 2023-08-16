@@ -90,24 +90,28 @@ export class EmployeetableComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    const keywords = filterValue.split(',').map(keyword => keyword.trim().toLowerCase());
-
+    const keywords = filterValue
+      .split(',')
+      .map((keyword) => keyword.trim().toLowerCase());
+  
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const searchData = filter.split(',');
-
-      return searchData.every(keyword =>
-        Object.entries(data).some(([key, value]) =>
-          (typeof value === 'string' || value instanceof String) &&
-          key !== 'serialNumber' && key !== 'actions' && value.toLowerCase().includes(keyword)
-        )
+  
+      return searchData.every((keyword) =>
+        Object.values(data).some((value) => {
+          if (typeof value === 'number') {
+            value = value.toString(); // Convert number to string for search
+          }
+  
+          return (
+            (typeof value === 'string' || value instanceof String) &&
+            value.toLowerCase().includes(keyword)
+          );
+        })
       );
     };
-
+  
     this.dataSource.filter = keywords.join(',');
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
   toggleAllColumns(event: MatCheckboxChange) {
     this.showColumns = event.checked;
