@@ -45,6 +45,8 @@ export class EmployeetableComponent implements OnInit {
       this.getDataForDashboard(this.category);
     });
   }
+    
+  
 
   goBack() {
     window.history.back();

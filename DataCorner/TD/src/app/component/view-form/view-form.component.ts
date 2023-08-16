@@ -43,7 +43,12 @@ export class ViewFormComponent implements OnInit {
     6:'projectidOptions'
   };
 
-  constructor(private fb: FormBuilder,private router: Router, private http: HttpClient, private route: ActivatedRoute,private authenticationService: AuthenticationService,private dialog:MatDialog) {}
+  constructor(private fb: FormBuilder,
+    private router: Router, 
+    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private dialog:MatDialog) {}
   
   ngOnInit(): void {
     this.getDropdownOptions();
@@ -62,7 +67,9 @@ export class ViewFormComponent implements OnInit {
       }
     });
     this.userRole = this.authenticationService.getUserRole();
+    
   }
+
   
  private getDropdownOptions(): void {
     this.getDropdownData(1);
@@ -123,13 +130,13 @@ export class ViewFormComponent implements OnInit {
             pcd: employeeData.pcd,
             prospects: employeeData.prospects,
             skill_Set: employeeData.skill_Set,
-            reportingTo: employeeData.reportingTo,
+            reportingTo: employeeData.reportingTo, 
             division_id:employeeData.division_id,
             // division: employeeData.division,
             sub_Div: employeeData.sub_Div,
             skill_Catagories: employeeData.skill_Catagories,
             skill_Clusters: employeeData.skill_Clusters,
-            yop: employeeData.yop,
+            yop: employeeData.yop, 
             education: employeeData.education,
             prev_Exp: employeeData.prev_Exp,
             leadName: employeeData.leadName || '',
