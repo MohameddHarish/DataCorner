@@ -3,7 +3,7 @@
     <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBack()" >
       <span class="material-icons">arrow_back</span>
     </button>
-    <h2>Trainee Form</h2>
+    <h2>Trainee Form - {{ myForm.get('category')?.value }}</h2>
     
   </div>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
