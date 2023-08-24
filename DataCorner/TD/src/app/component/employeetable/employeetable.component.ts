@@ -42,11 +42,14 @@ export class EmployeetableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-      this.category = params['category'];
       this.roleId = this.authService.getRoleId();
+      this.category = params['category'];
       this.getDataForDashboard(this.category);
     });
   }
+    
+  
+
   goBack() {
     window.history.back();
   }
@@ -119,21 +122,21 @@ export class EmployeetableComponent implements OnInit {
   }
   toggleAllColumns(event: MatCheckboxChange) {
     this.showColumns = event.checked;
+
     if (this.showColumns) {
       this.selectedColumns = this.columns;
     } else {
       this.selectedColumns = this.displayedColumns;
     }
   }
-  
+
   toggleColumns() {
     if (this.showColumns) {
-      this.selectedColumns = this.columns;
-    } else {
       this.selectedColumns = this.displayedColumns;
+    } else {
+      this.selectedColumns = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
     }
   }
-  
 
   isColumnVisible(column: string): boolean {
     return this.selectedColumns.includes(column);
