@@ -5,6 +5,7 @@ import { LoginComponent } from './component/login/login.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
 import { ViewFormComponent } from './component/view-form/view-form.component';
+import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 
 const routes: Routes = [
  
@@ -32,7 +33,12 @@ const routes: Routes = [
     path:'view-form',
     component: ViewFormComponent
   },
-  { path: 'view-form/:id', component: ViewFormComponent },
+  { path: 'view-form/:id', 
+  component: ViewFormComponent 
+  },
+  { path: 'manage-permission',
+   component: ManagePermissionComponent 
+  },
  
 ];
 

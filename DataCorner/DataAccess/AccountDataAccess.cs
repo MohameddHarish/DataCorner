@@ -1,7 +1,9 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Threading.Tasks;
 using DataCorner.DataAccess.interfaces;
 using DataCorner.Models;
+using DataCorner.Models.Dto;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
@@ -45,6 +47,35 @@ namespace DataCorner.DataAccess
             }
 
             return null;
+        }
+
+        public async Task<IEnumerable<AccessDto>> GetAccessAsync()
+        {
+            var accesss = new List<AccessDto>();
+
+            using MySqlConnection connection = new MySqlConnection(_connectionString);
+
+            await connection.OpenAsync();
+
+            using MySqlCommand command = new MySqlCommand("GetAccess", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@Flag", 1);
+           
+
+            using var reader = await Task.Run(() => command.ExecuteReader());
+
+            while (await reader.ReadAsync())
+            {
+                accesss.Add(new AccessDto
+                {
+                    roleId = Convert.ToInt32(reader["RoleId"]),
+                    roleName = reader["RoleName"].ToString(),
+                    defaultColumns = reader["DefaultColumns"].ToString(),
+                    
+                });
+            }
+
+            return accesss;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using DataCorner.Models;
+using DataCorner.Models.Dto;
+using DataCorner.Services;
 using DataCorner.Services.interfaces;
 using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -36,6 +38,12 @@ namespace DataCorner.Controllers
             {
                 return new ObjectResult(new { success = false, data = result, msg = "Invalid username or password." });
             }
+        }
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<AccessDto>>> GetAccess()
+        {
+            var access = await _accountService.GetAccessAsync();
+            return Ok(access);
         }
     }
 }

@@ -4,6 +4,7 @@
       <span class="material-icons">arrow_back</span>
     </button>
     <h2>Trainee Form - {{ myForm.get('category')?.value }}</h2>
+    <h2> - {{ myForm.get('name')?.value }}</h2>
     
   </div>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">

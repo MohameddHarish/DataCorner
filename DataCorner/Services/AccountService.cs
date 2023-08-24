@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DataCorner.DataAccess;
 using DataCorner.DataAccess.interfaces;
 using DataCorner.Models;
+using DataCorner.Models.Dto;
 using DataCorner.Services.interfaces;
 
 namespace DataCorner.Services
@@ -18,6 +20,10 @@ namespace DataCorner.Services
         public async Task<Login?> AuthenticateUser(Login login)
         {
             return await _accountDataAccess.AuthenticateUser(login);
+        }
+        public async Task<IEnumerable<AccessDto>> GetAccessAsync()
+        {
+            return await _accountDataAccess.GetAccessAsync();
         }
     }
 }

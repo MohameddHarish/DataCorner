@@ -83,6 +83,11 @@ export class EmployeetableComponent implements OnInit {
     this.router.navigateByUrl(`view-form/${data.empId}`);
   }
 
+  addcolumns() {
+    this.isUpdateMode = false;
+    this.router.navigateByUrl('manage-permission');
+  }
+
   addForm() {
     this.isUpdateMode = false;
     this.router.navigateByUrl('view-form/add');

@@ -35,6 +35,7 @@ import { ViewFormComponent } from './component/view-form/view-form.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // Import the material module
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InfoPopupComponent } from './component/info-popup/info-popup.component';
+import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 
 
 
@@ -54,6 +55,7 @@ import { InfoPopupComponent } from './component/info-popup/info-popup.component'
     HeaderComponent,
     ViewFormComponent,
     InfoPopupComponent,
+    ManagePermissionComponent,
   ],
   imports: [
   
