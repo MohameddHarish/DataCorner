@@ -41,8 +41,12 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (response) => {
             if (response.success) {
-              const roleId = response.data.isAdmin === 'Admin' ? 1 : 0;
-              const msg = roleId === 1 ? 'admin' : 'user';
+              console.log(response);
+              //const roleId = response.data.isAdmin === 'Admin' ? 1 : 0;
+              const roleId = response.data.roleId;
+              console.log(roleId);
+              //const msg = roleId === 1 ? 'admin' : 'user';
+              const msg = response.data.userName;
               this.snackBar.open(`Login successful as ${msg}.`, 'Close', {
                 duration: 3000,
                 verticalPosition: 'top' 

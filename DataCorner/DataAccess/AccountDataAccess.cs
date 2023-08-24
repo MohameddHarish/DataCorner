@@ -39,7 +39,8 @@ namespace DataCorner.DataAccess
                             {
                                 UserName = reader["UserName"].ToString(),
                                 Pwd = reader["Password"].ToString(),
-                                IsAdmin = reader["IsAdmin"].ToString()
+                                IsAdmin = reader["IsAdmin"].ToString(),
+                                RoleId = Convert.ToInt32(reader["RoleId"]),
                             };
                         }
                     }

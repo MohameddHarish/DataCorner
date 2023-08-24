@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.development';
 export class AuthenticationService {
   private apiUrl = environment.baseUrl+'api/account/login';
 
-  private currentUser: { username: string; roleId: number } | null = null;
+  private currentUser!: { username: string; roleId: number };
 
   constructor(private http: HttpClient) {}
 
@@ -25,5 +25,9 @@ export class AuthenticationService {
 
   getUserRole(): string {
     return this.currentUser ? (this.currentUser.roleId === 1 ? 'admin' : 'user') : '';
+  }
+
+  getRoleId(): number {
+    return this.currentUser.roleId;
   }
 }

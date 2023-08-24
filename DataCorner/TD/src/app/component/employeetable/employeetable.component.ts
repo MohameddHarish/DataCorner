@@ -17,6 +17,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class EmployeetableComponent implements OnInit {
   userId!: number;
+  roleId!: number;
   category: any;
   userPosts: any[] = [];
   isUpdateMode: boolean = false;
@@ -42,12 +43,10 @@ export class EmployeetableComponent implements OnInit {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
       this.category = params['category'];
+      this.roleId = this.authService.getRoleId();
       this.getDataForDashboard(this.category);
     });
   }
-    
-  
-
   goBack() {
     window.history.back();
   }
@@ -120,21 +119,21 @@ export class EmployeetableComponent implements OnInit {
   }
   toggleAllColumns(event: MatCheckboxChange) {
     this.showColumns = event.checked;
-
     if (this.showColumns) {
       this.selectedColumns = this.columns;
     } else {
       this.selectedColumns = this.displayedColumns;
     }
   }
-
+  
   toggleColumns() {
     if (this.showColumns) {
-      this.selectedColumns = this.displayedColumns;
+      this.selectedColumns = this.columns;
     } else {
-      this.selectedColumns = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+      this.selectedColumns = this.displayedColumns;
     }
   }
+  
 
   isColumnVisible(column: string): boolean {
     return this.selectedColumns.includes(column);

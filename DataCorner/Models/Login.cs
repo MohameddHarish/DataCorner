@@ -6,5 +6,7 @@
         public string? UserName { get; set; }
         public string? Pwd { get; set; }
         public string? IsAdmin { get; set; }
+
+        public int RoleId { get; set; }
     }
 }
