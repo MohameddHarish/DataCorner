@@ -24,12 +24,12 @@ export class EmployeetableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['serialNumber', 'id', 'name','Email','Phone', 'actions'];
+  displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set' ,'actions'];
   userRole: string = '';
   dashboardData: { [category: string]: any[] } = {};
-  showColumns: boolean = false; // For controlling checkbox state
-  selectedColumns: string[] = this.displayedColumns; // Initially, show selected columns
-  columns: string[] = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'doj', 'project_Id','project_Name', 'category', 'pcd', 'prospects', 'reportingTo', 'division_id','division','sub_Div', 'yop', 'education', 'prev_Exp', 'leadName', 'location','contact', 'project_Experience', 'top', 'tcd', 'dot', 'batch','skill_Catagories','skill_Clusters', 'actions'];
+  showColumns: boolean = false;
+  selectedColumns: string[] = this.displayedColumns;
+  columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId'];
 
   constructor(
     private http: HttpClient,
@@ -42,14 +42,17 @@ export class EmployeetableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-      this.roleId = this.authService.getRoleId();
       this.category = params['category'];
-      this.getDataForDashboard(this.category);
+      this.roleId = this.authService.getRoleId();
+      this.http.get<any[]>(`https://localhost:7247/api/account`).subscribe(
+        (response: any[]) => {
+          const roleData = response.find(role => role.roleId === this.roleId);
+          this.selectedColumns = roleData ? roleData.defaultColumns.split(',') : this.displayedColumns;
+          this.getDataForDashboard(this.category);
+        },
+      );
     });
-  }
-    
-  
-
+  }  
   goBack() {
     window.history.back();
   }
@@ -61,7 +64,6 @@ export class EmployeetableComponent implements OnInit {
 
   getDataFromAPI(category: string) {
     const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
-
     return this.http.get(apiURL);
   }
 
@@ -97,29 +99,22 @@ export class EmployeetableComponent implements OnInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    const keywords = filterValue
-      .split(',')
-      .map((keyword) => keyword.trim().toLowerCase());
+    const keywords = filterValue.split(',').map((keyword) => keyword.trim().toLowerCase());
   
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const searchData = filter.split(',');
-  
       return searchData.every((keyword) =>
         Object.values(data).some((value) => {
           if (typeof value === 'number') {
-            value = value.toString(); // Convert number to string for search
+            value = value.toString();
           }
-  
-          return (
-            (typeof value === 'string' || value instanceof String) &&
-            value.toLowerCase().includes(keyword)
-          );
+          return ((typeof value === 'string' || value instanceof String) && value.toLowerCase().includes(keyword));
         })
       );
     };
-  
     this.dataSource.filter = keywords.join(',');
   }
+
   toggleAllColumns(event: MatCheckboxChange) {
     this.showColumns = event.checked;
 
@@ -134,7 +129,7 @@ export class EmployeetableComponent implements OnInit {
     if (this.showColumns) {
       this.selectedColumns = this.displayedColumns;
     } else {
-      this.selectedColumns = ['serialNumber', 'id', 'name','Email','Phone', 'SkillSet', 'Months_in_SS', 'actions'];
+      this.selectedColumns = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
     }
   }
 
