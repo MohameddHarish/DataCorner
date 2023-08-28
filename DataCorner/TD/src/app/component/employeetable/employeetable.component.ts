@@ -24,12 +24,13 @@ export class EmployeetableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set' ,'actions'];
+  displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set'];
   userRole: string = '';
   dashboardData: { [category: string]: any[] } = {};
   showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
   columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId'];
+
 
   constructor(
     private http: HttpClient,

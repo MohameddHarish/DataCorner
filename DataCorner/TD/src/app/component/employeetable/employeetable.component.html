@@ -56,10 +56,18 @@
           <ng-container *ngFor="let column of selectedColumns">
             <ng-container [matColumnDef]="column">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
-              <td mat-cell *matCellDef="let user">{{ user[column] }}</td>
+              <td mat-cell *matCellDef="let user">
+                <ng-container *ngIf="column !== 'actions'; else actionsColumn">
+                  {{ user[column] }}
+                </ng-container>
+                <ng-template #actionsColumn>
+                  <button mat-icon-button color="primary" aria-label="Edit" (click)="openEditForm(user)">
+                    <mat-icon class="material-symbols-outlined">visibility</mat-icon>
+                  </button>
+                </ng-template>
+              </td>
             </ng-container>
           </ng-container>
-          
           <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: selectedColumns; let even = even; let odd = odd"
             [class.even-row]="even" [class.odd-row]="odd"></tr>
