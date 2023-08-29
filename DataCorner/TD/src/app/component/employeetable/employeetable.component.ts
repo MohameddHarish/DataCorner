@@ -29,7 +29,7 @@ export class EmployeetableComponent implements OnInit {
   dashboardData: { [category: string]: any[] } = {};
   showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
-  columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId'];
+  columns: string[] = ['empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId'];
 
 
   constructor(
@@ -125,7 +125,10 @@ export class EmployeetableComponent implements OnInit {
       this.selectedColumns = this.displayedColumns;
     }
   }
-
+  getSerialNumber(index: number): number {
+    return index + 1;
+  }
+  
   toggleColumns() {
     if (this.showColumns) {
       this.selectedColumns = this.displayedColumns;
