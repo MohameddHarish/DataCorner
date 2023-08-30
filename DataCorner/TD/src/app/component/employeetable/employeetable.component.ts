@@ -24,12 +24,12 @@ export class EmployeetableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set'];
+  displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set','actions'];
   userRole: string = '';
   dashboardData: { [category: string]: any[] } = {};
   showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
-  columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId'];
+  columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId','actions'];
 
 
   constructor(
@@ -125,7 +125,10 @@ export class EmployeetableComponent implements OnInit {
       this.selectedColumns = this.displayedColumns;
     }
   }
-
+  getSerialNumber(index: number): number {
+    return index + 1;
+  }
+  
   toggleColumns() {
     if (this.showColumns) {
       this.selectedColumns = this.displayedColumns;
