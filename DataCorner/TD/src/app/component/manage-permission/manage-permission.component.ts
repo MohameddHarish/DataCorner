@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-manage-permission',
@@ -16,14 +17,18 @@ export class ManagePermissionComponent implements OnInit {
   userId!: number;
   roleId!: number;
   category: any;
+  roleData: any;
   userPosts: any[] = [];
   isUpdateMode: boolean = false;
   @ViewChild(MatSort) sort!: MatSort;
   dashboardData:  { [category: string]: any[] } = {};
+  showColumns: boolean = false;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns: string[] = ['RoleName','id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'doj', 'project_Id','project_Name', 'category', 'pcd', 'prospects', 'reportingTo', 'division_id','division','sub_Div', 'yop', 'education', 'prev_Exp', 'leadName', 'location','contact', 'project_Experience', 'top', 'tcd', 'dot', 'batch','skill_Catagories','skill_Clusters', 'actions'];
   userRole: string = '';
   selectedColumns: string[] = this.displayedColumns;
+  columns: string[] = ['RoleName','serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId','actions'];
+
  
   constructor(
     private http: HttpClient,
@@ -41,46 +46,23 @@ export class ManagePermissionComponent implements OnInit {
       this.http.get<any[]>(`https://localhost:7247/api/account`).subscribe(
         (response: any[]) => {
           const roleData = response.find(role => role.roleId === this.roleId);
-          this.selectedColumns = roleData ? roleData.defaultColumns.split(',') : this.displayedColumns;
-          // this.getDataForDashboard(this.category);
+          this.selectedColumns = this.roleData ? this.roleData.defaultColumns.split(',') : this.displayedColumns;
+
+          response.forEach(user => {
+            const userRole = response.find(role => role.roleId === user.roleId);
+            user.RoleName = userRole ? userRole.roleName : 'Unknown Role'; // Set RoleName property
+          });
+          this.dataSource.data = response;
         },
       );
     });
   }  
-    
   goBack() {
     window.history.back();
   }
 
-  // getDataFromAPI1(category: string) {
-  //   const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
-  //   return this.http.get(apiURL);
-  // }
-  // getDataFromAPI() {
-  //   const apiURL = environment.baseUrl + `api/Account`;
-
-  //   return this.http.get(apiURL);
-  // }
-
-  // getDataForDashboard(category: string) {
-  //   this.getDataFromAPI().subscribe(
-  //     (data: any) => {
-  //       this.dashboardData[category] = data;
-  //       this.dataSource.data = this.dashboardData[category];
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   );
-  // }
-
-  // onCardClicked(category: string) {
-  //   this.getDataForDashboard(category);
-  // }
-
-
   openEditForm(data: any) {
     this.router.navigateByUrl(`view-form/${data.empId}`);
   }
-
+ 
 }
