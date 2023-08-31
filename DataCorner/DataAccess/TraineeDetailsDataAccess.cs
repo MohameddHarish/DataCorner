@@ -38,7 +38,7 @@ namespace DataCorner.DataAccess
 
                 traineeDetails.Add(new TraineeDetailsDto
                 {
-                    emp_Id = Convert.ToInt32(reader["Emp_Id"]),
+                    empId = Convert.ToInt32(reader["Emp_Id"]),
                     Name = reader["Name"].ToString(),
                     DOJ = reader["DOJ"].ToString(),
                     project_Id = reader["Project_Id"].ToString(),
