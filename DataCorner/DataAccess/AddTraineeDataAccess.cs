@@ -25,7 +25,7 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
 
                 var cmd = new MySqlCommand("InsertTraineeDetails2", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", traineeDetails.emp_Id);
+                cmd.Parameters.AddWithValue("@Id", traineeDetails.empId);
                 cmd.Parameters.AddWithValue("@Name", traineeDetails.Name);
                 cmd.Parameters.AddWithValue("@DOJ", traineeDetails.DOJ);
                 cmd.Parameters.AddWithValue("@Project_Id", traineeDetails.project_Id);

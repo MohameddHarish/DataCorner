@@ -2,7 +2,7 @@
 {
     public class TraineeDetailsDto
     {
-        public int emp_Id { get; set; }
+        public int empId { get; set; }
         public string Name { get; set; }
         public string DOJ { get; set; }
         public string project_Id { get; set; }

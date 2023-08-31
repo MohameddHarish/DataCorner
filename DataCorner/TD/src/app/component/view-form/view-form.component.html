@@ -9,18 +9,19 @@
   </div>
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="content">
+      
         <div class="row">
-            <div class="col-md-3">
-                <mat-form-field appearance="outline">
+            <div class="col-md-3" *ngIf="isFieldVisible('empId')">
+                <mat-form-field appearance="outline" >
                     <mat-label>Emp Id</mat-label>
-                    <input matInput placeholder="Emp Id" formControlName="emp_Id">
-                    <mat-error *ngIf="myForm.get('emp_Id')?.invalid && myForm.get('emp_Id')?.touched">
+                    <input matInput placeholder="Emp Id" formControlName="empId">
+                    <mat-error *ngIf="myForm.get('empId')?.invalid && myForm.get('empId')?.touched">
                         Emp Id is required.
                     </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('name')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
                     <input matInput placeholder="Name" formControlName="name">
@@ -30,7 +31,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('doj')">
                 <mat-form-field appearance="outline">
                     <mat-label>DOJ</mat-label>
                     <input matInput placeholder="DOJ" formControlName="doj">
@@ -39,7 +40,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('project_Id')">
                 <mat-form-field appearance="outline">
                   <mat-label>Project ID</mat-label>
                   <mat-select formControlName="project_Id">
@@ -50,7 +51,7 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('category')">
                 <mat-form-field appearance="outline">
                   <mat-label>Category</mat-label>
                   <mat-select formControlName="category">
@@ -61,8 +62,8 @@
                   </mat-error>
                 </mat-form-field>
               </div>
-            <div class="col-md-3">
-                <mat-form-field appearance="outline">
+            <div class="col-md-3" *ngIf="isFieldVisible('pcd')">
+                <mat-form-field appearance="outline" >
                     <mat-label>Project Change Date</mat-label>
                     <input matInput placeholder="Project Change Date" formControlName="pcd">
                     <mat-error *ngIf="myForm.get('pcd')?.invalid && myForm.get('pcd')?.touched">
@@ -71,7 +72,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('prospects')">
                 <mat-form-field appearance="outline">
                     <mat-label>Prospects</mat-label>
                     <input matInput placeholder="Prospects" formControlName="prospects">
@@ -80,7 +81,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3"*ngIf="isFieldVisible('skill_Set')">
                 <mat-form-field appearance="outline">
                   <mat-label>Skill Set</mat-label>
                   <mat-select formControlName="skill_Set">
@@ -91,7 +92,7 @@
                   </mat-error>
                 </mat-form-field>
             </div>         
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('reportingTo')">
                 <mat-form-field appearance="outline">
                     <mat-label>Reporting Person</mat-label>
                     <input matInput placeholder="Reporting Person" formControlName="reportingTo">
@@ -102,7 +103,7 @@
             </div>
             <!-- ... your original code ... -->
 
-<div class="col-md-3">
+<div class="col-md-3" *ngIf="isFieldVisible('division_id')">
     <mat-form-field appearance="outline">
       <mat-label>Division ID</mat-label>
       <div class="input-with-info">
@@ -116,7 +117,7 @@
       </mat-error>
     </mat-form-field>
   </div>          
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('yop')">
                 <mat-form-field appearance="outline">
                     <mat-label>Year of Passout</mat-label>
                     <input matInput placeholder="Year of Passout" formControlName="yop">
@@ -125,7 +126,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('education')">
                 <mat-form-field appearance="outline">
                   <mat-label>Education</mat-label>
                   <mat-select formControlName="education">
@@ -137,7 +138,7 @@
                 </mat-form-field>
               </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('prev_Exp')">
                 <mat-form-field appearance="outline">
                     <mat-label>Prv Exp</mat-label>
                     <input matInput placeholder="Prv Exp" formControlName="prev_Exp">
@@ -147,7 +148,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('leadName')">
                 <mat-form-field appearance="outline">
                     <mat-label>Lead Name</mat-label>
                     <input matInput placeholder="Lead Name" formControlName="leadName">
@@ -156,7 +157,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('location')">
                 <mat-form-field appearance="outline">
                   <mat-label>Current Location</mat-label>
                   <mat-select formControlName="location">
@@ -169,7 +170,7 @@
               </div>
 
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('project_Experience')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Project Experience</mat-label>
                     <input matInput placeholder="Project Experience" formControlName="project_Experience">
@@ -180,7 +181,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('top')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Timeline of the</mat-label>
                     <input matInput placeholder="Timeline of the Project/Released" formControlName="top">
@@ -190,7 +191,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('tcd')">
                 <mat-form-field appearance="outline">
                     <mat-label>Training Completion Date</mat-label>
                     <input matInput placeholder="Training Completion Date" formControlName="tcd">
@@ -201,7 +202,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('dot')">
                 <mat-form-field appearance="outline">
                     <mat-label>Duration of Training</mat-label>
                     <input matInput placeholder="Duration of Training" formControlName="dot">
@@ -212,7 +213,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('months_inSS')">
                 <mat-form-field appearance="outline">
                     <mat-label>Months in SS</mat-label>
                     <input matInput placeholder="Months in SS" formControlName="months_inSS">
@@ -221,7 +222,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('batch')" >
                 <mat-form-field appearance="outline">
                   <mat-label>Batch</mat-label>
                   <mat-select formControlName="batch">
@@ -232,7 +233,7 @@
                   </mat-error>
                 </mat-form-field>
               </div>           
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('contact')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Contact</mat-label>
                     <input matInput placeholder="Contact" formControlName="contact">
@@ -241,8 +242,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="isFieldVisible('mailId')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Email Address</mat-label>
                     <input matInput placeholder="Email Address" formControlName="mailId">

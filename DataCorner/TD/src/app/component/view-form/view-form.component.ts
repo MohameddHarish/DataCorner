@@ -1,4 +1,4 @@
-// view-form.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -9,14 +9,7 @@ import { environment } from 'src/environments/environment.development';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoPopupComponent } from '../info-popup/info-popup.component';
 import { DialogData } from 'src/model/info';
-interface ComponentProperties {
-  batchOptions: string[];
-  categoryOptions: string[];
-  locationOptions: string[];
-  skillSetOptions: string[];
-  educationOptions: string[];
-  projectidOptions: string[];
-}
+import { ComponentProperties,RoleInfo } from 'src/app/interfaces/view-form-interface';
 
 @Component({
   selector: 'app-view-form',
@@ -34,6 +27,9 @@ export class ViewFormComponent implements OnInit {
   skillSetOptions: string[] = [];
   educationOptions: string[] = [];
   projectidOptions: string[] = [];
+  visibleFields: string[] = [];
+  roleInfo: RoleInfo | undefined;
+  
   dropdownMapping: { [key: number]: keyof ComponentProperties } = {
     1: 'educationOptions',
     2: 'categoryOptions',
@@ -56,10 +52,8 @@ export class ViewFormComponent implements OnInit {
 
       const employeeIdParam = params['id'];
         if (employeeIdParam === 'add') {
-        // It is the "add" case, so create a new form for adding data
         this.createForm();
       } else {
-        // It is an actual employee ID, so create the form for updating data and fetch the employee data
         this.isUpdateMode = true;
         this.createForm();
         const employeeId = +employeeIdParam;
@@ -67,10 +61,28 @@ export class ViewFormComponent implements OnInit {
       }
     });
     this.userRole = this.authenticationService.getUserRole();
+    this.http.get<RoleInfo[]>('https://localhost:7247/api/account').subscribe(
+      (response: RoleInfo[]) => {
+        this.roleInfo = response.find((role: RoleInfo) => role.roleName === this.userRole);
+        if (this.roleInfo) {
+          this.visibleFields = this.roleInfo.defaultColumns.split(',');
+        }
+      },
+      error => {
+        console.error('Error fetching role info:', error);
+      }
+    );
     
   }
-
-  
+  isFieldVisible(fieldName: string): boolean {
+    if (this.userRole === 'admin') {
+      return true;
+    }
+    if (this.roleInfo) {
+      return this.roleInfo.defaultColumns.includes(fieldName);
+    }
+    return false;
+  }  
  private getDropdownOptions(): void {
     this.getDropdownData(1);
     this.getDropdownData(2);
@@ -81,7 +93,7 @@ export class ViewFormComponent implements OnInit {
   }
   private createForm(): void {
     this.myForm = this.fb.group({
-      emp_Id: ['', Validators.required],
+      empId: ['', Validators.required],
       name: ['', Validators.required],
       doj: ['', Validators.required],
       project_Id: ['', Validators.required],
@@ -120,7 +132,7 @@ export class ViewFormComponent implements OnInit {
         if (data && data.length > 0) {
           const employeeData = data[0]; 
           this.myForm.patchValue({
-            emp_Id: employeeData.emp_Id,
+            empId: employeeData.empId,
             name: employeeData.name,
             doj: employeeData.doj,
             project_Id: employeeData.project_Id,
@@ -172,15 +184,14 @@ export class ViewFormComponent implements OnInit {
       this.http.post(apiURL, formData).subscribe(
         (response) => {
           console.log('Form data submitted successfully:', response);
-          const category = formData.category; // Assuming your form has a 'category' field
-          this.router.navigateByUrl('employee/' + category); // Navigate to the desired URL after successful form submission
+          const category = formData.category; 
+          this.router.navigateByUrl('employee/' + category); 
         },
         (error) => {
           console.error('Error submitting form data:', error);
         }
       );
     } else {
-      // Handle the case when the form is not valid, if needed
     }
   }
   private getDropdownData(flag: number): void {
@@ -201,14 +212,14 @@ export class ViewFormComponent implements OnInit {
     );
   }
   openInfoPopup(event: Event): void {
-    event.preventDefault(); // Prevent the default behavior (navigation)
+    event.preventDefault(); 
   
     const dialogData: DialogData[] = [
 
     ];
   
     const dialogRef = this.dialog.open(InfoPopupComponent, {
-      width: '600px', // Adjust the width as needed
+      width: '600px', 
       data: dialogData
     });
   }
