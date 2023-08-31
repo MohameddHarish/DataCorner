@@ -54,6 +54,11 @@ export class EmployeetableComponent implements OnInit {
       );
     });
   }  
+  updateUserProperty(user: any, column: string, event: any) {
+    const newValue = event.target.value; 
+    user[column] = newValue;
+  }
+  
   goBack() {
     window.history.back();
   }

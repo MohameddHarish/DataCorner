@@ -61,7 +61,14 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
               <td mat-cell *matCellDef="let user; let i = index">
                 <ng-container *ngIf="column !== 'actions'; else actionsColumn">
-                  <ng-container *ngIf="column !== 'serialNumber'">{{ user[column] }}</ng-container>
+                  <ng-container *ngIf="column !== 'serialNumber'">
+                    <ng-container *ngIf="userRole === 'admin' && columns.includes(column)">
+                      <input matInput [value]="user[column]" (input)="updateUserProperty(user, column, $event)" />
+                    </ng-container>
+                    <ng-container *ngIf="userRole !== 'admin' || !columns.includes(column)">
+                      {{ user[column] }}
+                    </ng-container>
+                  </ng-container>
                   <ng-container *ngIf="column === 'serialNumber'">{{ getSerialNumber(i) }}</ng-container>
                 </ng-container>
                 <ng-template #actionsColumn>
@@ -71,7 +78,7 @@
                 </ng-template>
               </td>
             </ng-container>
-          </ng-container>          
+          </ng-container>
           <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: selectedColumns; let even = even; let odd = odd"
             [class.even-row]="even" [class.odd-row]="odd"></tr>
