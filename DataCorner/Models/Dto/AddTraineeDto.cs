@@ -26,7 +26,7 @@
     public string TOP { get; set; }
     public string TCD { get; set; }
     public string DOT { get; set; }
-    public string Months_inSS { get; set; }
+    public string months_in_SS { get; set; }
     public string Batch { get; set; }
     public string Contact { get; set; }
     public string MailId { get; set; }

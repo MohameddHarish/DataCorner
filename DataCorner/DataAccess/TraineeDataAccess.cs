@@ -66,7 +66,7 @@ namespace DataCorner.DataAccess
                     TOP = reader["TOP"].ToString(),
                     TCD = reader["TCD"].ToString(),
                     DOT = reader["DOT"].ToString(),
-                    months_in_SS = Convert.ToInt32(reader["Months_inSS"]),
+                    months_in_SS = reader["Months_inSS"].ToString(),
                     Batch = reader["Batch"].ToString(),
                     Contact = reader["Contact"].ToString(),
                     MailId = reader["MailId"].ToString()

@@ -49,7 +49,7 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
                 cmd.Parameters.AddWithValue("@TOP", traineeDetails.TOP);
                 cmd.Parameters.AddWithValue("@TCD", traineeDetails.TCD);
                 cmd.Parameters.AddWithValue("@DOT", traineeDetails.DOT);
-                cmd.Parameters.AddWithValue("@Months_inSS", traineeDetails.Months_inSS);
+                cmd.Parameters.AddWithValue("@Months_inSS", traineeDetails.months_in_SS);
                 cmd.Parameters.AddWithValue("@Batch", traineeDetails.Batch);
                 cmd.Parameters.AddWithValue("@Contact", traineeDetails.Contact);
                 cmd.Parameters.AddWithValue("@MailId", traineeDetails.MailId);

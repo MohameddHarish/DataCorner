@@ -190,4 +190,20 @@ export class EmployeetableComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+  submit(userData: any) {
+    const apiURL = environment.baseUrl + 'api/trainee';
+    
+    // Assuming userData contains the user data you want to send
+    this.http.post(apiURL, userData).subscribe(
+      (response) => {
+        console.log('Data sent successfully:', response);
+        // Perform any additional actions after successful submission
+      },
+      (error) => {
+        console.error('Error sending data:', error);
+        // Handle error case if needed
+      }
+    );
+  }
+
 }
