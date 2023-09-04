@@ -9,6 +9,7 @@ import { saveAs } from 'file-saver';
 import { WorkBook, utils, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-employeetable',
@@ -36,7 +37,8 @@ export class EmployeetableComponent implements OnInit {
     private http: HttpClient,
     public router: Router,
     private route: ActivatedRoute,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -51,12 +53,19 @@ export class EmployeetableComponent implements OnInit {
           this.selectedColumns = roleData ? roleData.defaultColumns.split(',') : this.displayedColumns;
           this.getDataForDashboard(this.category);
         },
+        
       );
     });
   }  
   updateUserProperty(user: any, column: string, event: any) {
     const newValue = event.target.value; 
     user[column] = newValue;
+  }
+  showRowUpdatedSnackbar() {
+    this.snackBar.open('Row updated successfully', 'Close', {
+      duration: 3000, // The duration for which the snackbar will be displayed (in milliseconds)
+      verticalPosition: 'top', // You can change the position of the snackbar
+    });
   }
   
   goBack() {
@@ -200,6 +209,7 @@ export class EmployeetableComponent implements OnInit {
         console.error('Error sending data:', error);
       }
     );
+    this.showRowUpdatedSnackbar();
   }
 
 }

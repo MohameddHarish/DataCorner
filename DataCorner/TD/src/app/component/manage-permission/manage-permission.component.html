@@ -17,7 +17,8 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
                 <td mat-cell *matCellDef="let user; let i = index">
                     <ng-container *ngIf="column !== 'serialNumber'">{{ user[column] }}</ng-container> 
-                    <mat-checkbox *ngIf="column !== 'RoleName'" ></mat-checkbox>                 
+                    <mat-checkbox *ngIf="column !== 'RoleName'" [checked]="isColumnSelected(column, user.RoleName)" (change)="toggleColumnSelection($event, column, user)"></mat-checkbox>
+           
                 </td>
               </ng-container>
             </ng-container>          
