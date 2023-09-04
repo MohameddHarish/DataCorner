@@ -77,7 +77,8 @@ export class ManagePermissionComponent implements OnInit {
   
     if (event.checked) {
       // Add the column to the selected columns for the role
-      selectedColumns.push(column);
+      //selectedColumns.push(column);
+      selectedColumns.splice(-2, 0,column);
     } else {
       // Remove the column from the selected columns for the role
       const columnIndex = selectedColumns.indexOf(column);
