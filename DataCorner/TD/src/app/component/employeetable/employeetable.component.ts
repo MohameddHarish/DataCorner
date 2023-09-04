@@ -158,10 +158,22 @@ export class EmployeetableComponent implements OnInit {
   downloadExcel() {
     const category = this.route.snapshot.params['category'];
     const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
-
+  
     this.http.get<any[]>(apiURL).subscribe(
       (data: any[]) => {
-        const worksheet = this.formatDataToWorksheet(data);
+        const columnsToInclude = this.selectedColumns; // Use the selected columns
+  
+        // Filter the data to include only the selected columns
+        const filteredData = data.map(item => {
+          const filteredItem: any = {};
+          columnsToInclude.forEach(column => {
+            filteredItem[column] = item[column];
+          });
+          return filteredItem;
+        });
+  
+        const worksheet = this.formatDataToWorksheet(filteredData);
+  
         var currentdate = new Date();
         const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
         this.downloadExce(worksheet, filename);
@@ -171,6 +183,7 @@ export class EmployeetableComponent implements OnInit {
       }
     );
   }
+  
 
   private formatDataToWorksheet(data: any[]): any[] {
     const worksheet: any[] = [];
