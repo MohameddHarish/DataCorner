@@ -1,0 +1,57 @@
+
+<mat-dialog-content>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Employee Id Column -->
+      <ng-container matColumnDef="EmpId">
+        <mat-header-cell *matHeaderCellDef> Employee Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.empId }} </mat-cell>
+      </ng-container>
+  
+      <!-- Project Id Column -->
+      <ng-container matColumnDef="Project_Id">
+        <mat-header-cell *matHeaderCellDef> Project Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.project_Id }} </mat-cell>
+      </ng-container>
+  
+      <!-- Project Name Column -->
+      <ng-container matColumnDef="ProjectName">
+        <mat-header-cell *matHeaderCellDef> Project Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.projectName }} </mat-cell>
+      </ng-container>
+  
+      <!-- TOP Column -->
+      <ng-container matColumnDef="TOP">
+        <mat-header-cell *matHeaderCellDef> Skill TOP </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.top }} </mat-cell>
+      </ng-container>
+  
+      <!-- Project Skill Column -->
+      <ng-container matColumnDef="Project_Skill">
+        <mat-header-cell *matHeaderCellDef> Project Skill </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.project_Skill }} </mat-cell>
+      </ng-container>
+
+      <!-- Project Role Column -->
+      <ng-container matColumnDef="Project_Role">
+        <mat-header-cell *matHeaderCellDef> Project Role </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.project_Role }} </mat-cell>
+      </ng-container>
+
+      <!-- Role Description Column -->
+      <ng-container matColumnDef="Role_Description">
+        <mat-header-cell *matHeaderCellDef> Role Description </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.role_Description }} </mat-cell>
+      </ng-container>
+
+      <!-- Reporting Person Column -->
+      <ng-container matColumnDef="ReportingPerson">
+        <mat-header-cell *matHeaderCellDef> Reporting Pesron </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.reportingPerson }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-dialog-content>
+  
+  

@@ -40,7 +40,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('project_Id')">
+            <div class="col-md-2" *ngIf="isFieldVisible('project_Id')">
                 <mat-form-field appearance="outline">
                   <mat-label>Project ID</mat-label>
                   <mat-select formControlName="project_Id">
@@ -50,6 +50,11 @@
                     Project ID is required.
                   </mat-error>
                 </mat-form-field>
+              </div>
+              <div class="col-md-1" *ngIf="isFieldVisible('project_Id')">
+                <button mat-icon-button matSuffix (click)="openProjectPopup($event)">
+                  <mat-icon>info</mat-icon>
+                </button>
               </div>
             <div class="col-md-3" *ngIf="isFieldVisible('category')">
                 <mat-form-field appearance="outline">

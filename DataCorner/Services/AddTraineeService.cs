@@ -24,7 +24,10 @@ namespace DataCorner.Services
         {
             return await _dataAccess.GetDropdownValuesAsync(flag);
         }
-
+        public async Task<IEnumerable<ProjectHistory>> GetProjectHistory(int id)
+        {
+            return await _dataAccess.GetProjectHistoryAsync(id);
+        }
     }
 }
   

@@ -135,6 +135,44 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
         return dropdownOptions;
     }
 
+    public async Task<IEnumerable<ProjectHistory>> GetProjectHistoryAsync(int id) 
+    {
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            await connection.OpenAsync();
+
+            using (var command = new MySqlCommand("GetProjectHistoryDetails", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new MySqlParameter("@Id", MySqlDbType.Int32) { Value = id });
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    var prohis = new List<ProjectHistory>();
+
+                    while (await reader.ReadAsync())
+                    {
+                        var phistory = new ProjectHistory
+                        {
+                            EmpId = Convert.ToInt32(reader["EmpId"]),
+                            Project_Id = reader["Project_Id"].ToString(),
+                            ProjectName = reader["ProjectName"].ToString(),
+                            TOP = reader["TOP"].ToString(),
+                            Project_Skill = reader["Project_Skill"].ToString(),
+                            Project_Role = reader["Project_Role"].ToString(),
+                            Role_Description = reader["Role_Description"].ToString(),
+                            ReportingPerson = reader["ReportingPerson"].ToString(),
+                        };
+
+                        prohis.Add(phistory);
+                    }
+
+                    return prohis;
+                }
+            }
+        }
+    }
+
 }
 
 

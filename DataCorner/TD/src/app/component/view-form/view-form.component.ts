@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { InfoPopupComponent } from '../info-popup/info-popup.component';
 import { DialogData } from 'src/model/info';
 import { ComponentProperties,RoleInfo } from 'src/app/interfaces/view-form-interface';
+import { ProjectData } from 'src/model/project';
+import { ProjectPopupComponent } from '../project-popup/project-popup.component';
 
 @Component({
   selector: 'app-view-form',
@@ -59,6 +61,7 @@ export class ViewFormComponent implements OnInit {
         const employeeId = +employeeIdParam;
         this.getEmployeeData(employeeId);
       }
+      console.log(employeeIdParam);
     });
     this.userRole = this.authenticationService.getUserRole();
     this.http.get<RoleInfo[]>('https://localhost:7247/api/account').subscribe(
@@ -170,6 +173,7 @@ export class ViewFormComponent implements OnInit {
         console.error('Error fetching employee data:', error);
       }
     );
+    console.log(employeeId)
   }
   goBack() {
     window.history.back();
@@ -222,6 +226,22 @@ export class ViewFormComponent implements OnInit {
       width: '600px', 
       data: dialogData
     });
+  }
+
+  openProjectPopup(event: Event): void {
+    event.preventDefault(); 
+  
+    const employeeId = this.myForm.get('empId')?.value;
+
+    const projectData: ProjectData[] = [
+      employeeId
+    ];
+  
+    const dialogRef = this.dialog.open(ProjectPopupComponent, {
+      width: '1000px', 
+      data: projectData
+    });
+    console.log(employeeId);
   }
   
   

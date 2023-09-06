@@ -6,6 +6,7 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HeaderComponent } from './component/header/header.component';
 import { ViewFormComponent } from './component/view-form/view-form.component';
 import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
+import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
 
 const routes: Routes = [
  
@@ -38,6 +39,9 @@ const routes: Routes = [
   },
   { path: 'manage-permission',
    component: ManagePermissionComponent 
+  },
+  { path: 'project-popup/:id',
+   component: ProjectPopupComponent 
   },
  
 ];

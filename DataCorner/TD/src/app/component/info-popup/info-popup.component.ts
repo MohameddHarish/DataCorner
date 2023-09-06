@@ -23,5 +23,6 @@ export class InfoPopupComponent {
     this.http.get<any[]>('https://localhost:7247/api/Division/GetDivisionDetails').subscribe(data => {
       this.dataSource = data;
     });
+    
   }
 }

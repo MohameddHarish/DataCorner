@@ -9,5 +9,7 @@ namespace DataCorner.Services.Interfaces
         Task<bool> InsertTraineeDetails(AddTraineesDto traineeDetails);
 
         Task<List<IDropdownOption>> GetDropdownValuesAsync(int flag);
+
+        Task<IEnumerable<ProjectHistory>> GetProjectHistory(int id);
     }
 }

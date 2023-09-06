@@ -10,5 +10,7 @@ namespace DataCorner.DataAccess.Interfaces
 
         Task<List<IDropdownOption>> GetDropdownValuesAsync(int flag);
 
+        Task<IEnumerable<ProjectHistory>> GetProjectHistoryAsync(int id);
+
     }
 }
