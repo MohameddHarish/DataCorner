@@ -55,9 +55,7 @@ export class ManagePermissionComponent implements OnInit {
             // Initialize the selectedColumns based on the default columns
             this.selectedColumnsByRole[user.RoleName] = userRole ? userRole.defaultColumns.split(',') : [];
           });
-  
-          // Now, you can access 'user' outside of the forEach loop
-          // For example, if you want to use it in a function, you can do so here.
+
   
           this.dataSource.data = response;
         },
@@ -79,7 +77,8 @@ export class ManagePermissionComponent implements OnInit {
   
     if (event.checked) {
       // Add the column to the selected columns for the role
-      selectedColumns.push(column);
+      //selectedColumns.push(column);
+      selectedColumns.splice(-2, 0,column);
     } else {
       // Remove the column from the selected columns for the role
       const columnIndex = selectedColumns.indexOf(column);

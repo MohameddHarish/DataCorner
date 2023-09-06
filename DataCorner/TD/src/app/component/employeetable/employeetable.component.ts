@@ -31,6 +31,7 @@ export class EmployeetableComponent implements OnInit {
   showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
   columns: string[] = ['serialNumber','empId', 'name', 'doj', 'project_Id', 'project_Name', 'category', 'pcd', 'prospects', 'skill_Set', 'reportingTo', 'division_id', 'division', 'sub_Div', 'skill_Catagories', 'skill_Clusters', 'yop', 'education', 'prev_Exp', 'leadName', 'location', 'project_Experience', 'top', 'tcd', 'dot', 'months_in_SS', 'batch', 'contact', 'mailId','actions'];
+  selectedRows: any[] = [];
 
 
   constructor(
@@ -156,21 +157,34 @@ export class EmployeetableComponent implements OnInit {
   }
 
   downloadExcel() {
-    const category = this.route.snapshot.params['category'];
-    const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
+  const category = this.route.snapshot.params['category'];
+  const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
 
-    this.http.get<any[]>(apiURL).subscribe(
-      (data: any[]) => {
-        const worksheet = this.formatDataToWorksheet(data);
-        var currentdate = new Date();
-        const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
-        this.downloadExce(worksheet, filename);
-      },
-      (error) => {
-        console.error('Error fetching API data:', error);
-      }
-    );
-  }
+  this.http.get<any[]>(apiURL).subscribe(
+    (data: any[]) => {
+      const columnsToInclude = this.selectedColumns; // Use the selected columns
+
+      // Filter the data to include only the selected columns
+      const filteredData = data.map(item => {
+        const filteredItem: any = {};
+        columnsToInclude.forEach(column => {
+          filteredItem[column] = item[column];
+        });
+        return filteredItem;
+      });
+
+      const worksheet = this.formatDataToWorksheet(filteredData);
+
+      var currentdate = new Date();
+      const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
+      this.downloadExce(worksheet, filename);
+    },
+    (error) => {
+      console.error('Error fetching API data:', error);
+    }
+  );
+}
+
 
   private formatDataToWorksheet(data: any[]): any[] {
     const worksheet: any[] = [];
@@ -211,5 +225,41 @@ export class EmployeetableComponent implements OnInit {
     );
     this.showRowUpdatedSnackbar();
   }
+  toggleRowSelection(user: any) {
+    const index = this.selectedRows.findIndex((selectedUser) => selectedUser.empId === user.empId);
+  
+    if (index === -1) {
+      // User not selected, add to selectedRows
+      this.selectedRows.push(user);
+    } else {
+      // User already selected, remove from selectedRows
+      this.selectedRows.splice(index, 1);
+    }
+  }
+  isSelected(row: any): boolean {
+    console.log(row);
+    return this.selectedRows.some((selectedUser) => selectedUser.empId === row.empId);
+  }
+  submitSelectedRows() {
+    for (const user of this.selectedRows) {
+      const apiURL = environment.baseUrl + 'api/trainee';
+      this.http.post(apiURL, user).subscribe(
+        (response) => {
+          console.log('Data sent successfully:', response);
+          const index = this.selectedRows.findIndex((selectedUser) => selectedUser.empId === user.empId);
+          if (index !== -1) {
+            this.selectedRows.splice(index, 1);
+          }
+        },
+        (error) => {
+          console.error('Error sending data:', error);
+        }
+      );
+    }
+    this.showRowUpdatedSnackbar();
+  }
+  
+  
+  
 
 }
