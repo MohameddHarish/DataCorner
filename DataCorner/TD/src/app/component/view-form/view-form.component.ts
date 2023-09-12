@@ -100,7 +100,7 @@ export class ViewFormComponent implements OnInit {
       name: ['', Validators.required],
       doj: ['', Validators.required],
       project_Id: ['', Validators.required],
-      // project_Name: [''],
+      project_Name: ['', Validators.required],
       category: ['', Validators.required],
       pcd: [''],
       prospects: ['', Validators.required],
@@ -138,9 +138,9 @@ export class ViewFormComponent implements OnInit {
             empId: employeeData.empId,
             name: employeeData.name,
             doj: employeeData.doj,
-            project_Id: employeeData.project_Id,
-            // project_Id:`${employeeData.project_Id} - ${employeeData.project_Name}`,
-            // project_Name: employeeData.project_Name,
+            // project_Id: employeeData.project_Id,
+            project_Id:`${employeeData.project_Id} - ${employeeData.project_Name}`,
+            project_Name: employeeData.project_Name,
             category: employeeData.category,
             pcd: employeeData.pcd,
             prospects: employeeData.prospects,
@@ -168,6 +168,7 @@ export class ViewFormComponent implements OnInit {
         } else {
           console.error('No employee data found for the provided ID.');
         }
+        console.log(this.myForm);
       },
       (error) => {
         console.error('Error fetching employee data:', error);
@@ -182,6 +183,7 @@ export class ViewFormComponent implements OnInit {
   onSubmit(): void {
     
     if (this.myForm.valid) {
+      console.log(this.myForm);3
       const formData = this.myForm.value;
       const apiURL = environment.baseUrl+'api/trainee';
       // console.log(formData);
