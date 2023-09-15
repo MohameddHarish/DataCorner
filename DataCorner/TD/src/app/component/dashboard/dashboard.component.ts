@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   cardData: any;
   userRole: string = '';
   userId!: number;
+  isUpdateMode: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -29,6 +30,10 @@ export class DashboardComponent implements OnInit {
   });
 }
 
+assestdt(){
+  this.isUpdateMode = false;
+    this.router.navigateByUrl('asset-management');
+}
   getDataFromAPI() {
     const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';
 
