@@ -96,8 +96,10 @@
     </div>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <ng-container *ngIf="userRole === 'admin'">
     <div class="update-button-container">
       <button mat-raised-button color="primary" (click)="submitSelectedRows()">Update</button>
     </div>
+  </ng-container>
   </mat-card-content>
 </mat-card>
