@@ -4,7 +4,7 @@
     public string Name { get; set; }
     public string DOJ { get; set; }
     public string project_Id { get; set; }
-    //public string project_Name { get; set; }
+    public string project_Name { get; set; }
     public string Category { get; set; }
     public string PCD { get; set; }
     public string Prospects { get; set; }

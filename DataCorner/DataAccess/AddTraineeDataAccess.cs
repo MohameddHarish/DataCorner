@@ -19,7 +19,7 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
     {
         try
         {
-            //string[] pid = traineeDetails.project_Id.Split(" - ");
+            string[] pid = traineeDetails.project_Id.Split(" - ");
             using (var connection = new MySqlConnection(_connectionString))
             {
                await connection.OpenAsync();
@@ -29,8 +29,8 @@ public class AddTraineeDataAccess : IAddTraineeDataAccess
                 cmd.Parameters.AddWithValue("@Id", traineeDetails.empId);
                 cmd.Parameters.AddWithValue("@Name", traineeDetails.Name);
                 cmd.Parameters.AddWithValue("@DOJ", traineeDetails.DOJ);
-                //cmd.Parameters.AddWithValue("@Project_Id", pid[0]);
-                //cmd.Parameters.AddWithValue("@Project_Name", traineeDetails.project_Name);
+                cmd.Parameters.AddWithValue("@Project_Id", pid[0]);
+                cmd.Parameters.AddWithValue("@Project_Name", traineeDetails.project_Name);
                 cmd.Parameters.AddWithValue("@Category", traineeDetails.Category);
                 cmd.Parameters.AddWithValue("@PCD", traineeDetails.PCD);
                 cmd.Parameters.AddWithValue("@Prospects", traineeDetails.Prospects);
