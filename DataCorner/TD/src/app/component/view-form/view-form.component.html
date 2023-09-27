@@ -218,11 +218,11 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3" *ngIf="isFieldVisible('months_inSS')">
+            <div class="col-md-3" *ngIf="isFieldVisible('months_in_SS')">
                 <mat-form-field appearance="outline">
                     <mat-label>Months in SS</mat-label>
-                    <input matInput placeholder="Months in SS" formControlName="months_inSS">
-                    <mat-error *ngIf="myForm.get('months_inSS')?.invalid && myForm.get('months_inSS')?.touched">
+                    <input matInput placeholder="Months in SS" formControlName="months_in_SS">
+                    <mat-error *ngIf="myForm.get('months_in_SS')?.invalid && myForm.get('months_in_SS')?.touched">
                         Months in SS is required.
                     </mat-error>
                 </mat-form-field>
@@ -235,7 +235,7 @@
                   </mat-select>
                   <mat-error *ngIf="myForm.get('batch')?.invalid && myForm.get('batch')?.touched">
                     Batch is required.
-                  </mat-error>
+                  </mat-error> 
                 </mat-form-field>
               </div>           
             <div class="col-md-3" *ngIf="isFieldVisible('contact')" >

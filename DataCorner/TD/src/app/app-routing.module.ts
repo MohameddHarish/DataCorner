@@ -7,7 +7,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { ViewFormComponent } from './component/view-form/view-form.component';
 import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
-import { AssetManagementComponent } from './component/asset-management/asset-management.component';
+import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
 
 const routes: Routes = [
  
