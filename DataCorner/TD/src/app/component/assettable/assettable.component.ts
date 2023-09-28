@@ -42,6 +42,10 @@ export class AssettableComponent implements OnInit {
     window.history.back();
   }
 
+  assestAdd(){
+    //this.isUpdateMode = false;
+      this.router.navigateByUrl('asset-management');
+  }
    getDataFromAPI() {
     const apiURL = environment.baseUrl + 'api/Trainee?search=""'; 
     return this.http.get(apiURL);
@@ -63,7 +67,7 @@ export class AssettableComponent implements OnInit {
   }
 
   openEditForm(data: any) {
-    this.router.navigateByUrl(`view-form/${data.empId}`);
+    this.router.navigateByUrl(`assest-management/${data.empId}`);
   }
 
   applyFilter(event: Event) {
