@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="example-button-container">
+    <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBack()" >
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h2>Asset Form -</h2>
+    <h2> - {{ myForm.get('name')?.value }}</h2>
+  </div>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="content">  
+        <div class="row">
+            <div class="col-md-3" *ngIf="isFieldVisible('AssetId')">
+                <mat-form-field appearance="outline">
+                    <mat-label>Asset Id</mat-label>
+                    <input matInput placeholder="AssetId" formControlName="AssetId">
+                    <mat-error *ngIf="myForm.get('AssetId')?.invalid && myForm.get('AssetId')?.touched">
+                        Asset Id is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3" *ngIf="isFieldVisible('EmpId')">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Emp Id</mat-label>
+                    <input matInput placeholder="Emp Id" formControlName="EmpId">
+                    <mat-error *ngIf="myForm.get('EmpId')?.invalid && myForm.get('EmpId')?.touched">
+                        Emp Id is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-3" *ngIf="isFieldVisible('EmpName')" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Name" formControlName="EmpName">
+                    <mat-error *ngIf="myForm.get('EmpName')?.invalid && myForm.get('EmpName')?.touched">
+                        Name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3" *ngIf="isFieldVisible('Location')" >
+                <mat-form-field appearance="outline">
+                    <mat-label>location</mat-label>
+                    <input matInput placeholder="location" formControlName="Location">
+                    <mat-error *ngIf="myForm.get('Location')?.invalid && myForm.get('Location')?.touched">
+                        location is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            
+
+            <div class="col-md-3" *ngIf="isFieldVisible('Make')">
+                <mat-form-field appearance="outline">
+                    <mat-label>Make</mat-label>
+                    <input matInput placeholder="Make" formControlName="Make">
+                    <mat-error *ngIf="myForm.get('Make')?.invalid && myForm.get('Make')?.touched">
+                        Make is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+                 
+            <div class="col-md-3" *ngIf="isFieldVisible('ModelNo')">
+                <mat-form-field appearance="outline">
+                    <mat-label>Model No</mat-label>
+                    <input matInput placeholder="Model No " formControlName="ModelNo">
+                    <mat-error *ngIf="myForm.get('ModelNo')?.invalid && myForm.get('ModelNo')?.touched">
+                        Model No is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3" *ngIf="isFieldVisible('Issues')">
+                <mat-form-field appearance="outline">
+                    <mat-label>issues</mat-label>
+                    <input matInput placeholder="issues " formControlName="Issues">
+                    <mat-error *ngIf="myForm.get('Issues')?.invalid && myForm.get('Issues')?.touched">
+                        issues is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </div>
+    <div class="action" *ngIf="userRole === 'admin'" style="margin-top: -18px;">
+        <button mat-raised-button color="primary" type="submit" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        <button mat-raised-button color="warn" type="button">Cancel</button>
+      </div>      
+</form>

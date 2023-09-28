@@ -7,8 +7,12 @@ import { HeaderComponent } from './component/header/header.component';
 import { ViewFormComponent } from './component/view-form/view-form.component';
 import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
+<<<<<<< HEAD
 import { AssetManagementComponent } from './component/asset-management/asset-management.component';
 import { AssettableComponent } from './component/assettable/assettable.component';
+=======
+import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
+>>>>>>> 0032c60811f505e0df18e272bca2d27411f76cc7
 
 const routes: Routes = [
  

@@ -27,6 +27,8 @@ namespace DataCorner.Extensions
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<IAccessService, AccessService>();
             services.AddScoped<IAccessDataAccess, AccessDataAccess>();
+            services.AddScoped<IAddAssestDataAccess, AddAssetDataAcess>();
+            services.AddScoped<IAddAssetService,AssetService>();
         }
 
     }
