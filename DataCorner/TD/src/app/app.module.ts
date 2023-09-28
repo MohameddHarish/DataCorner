@@ -38,6 +38,7 @@ import { InfoPopupComponent } from './component/info-popup/info-popup.component'
 import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
 import { AssetManagementComponent } from './component/asset-management/asset-management.component';
+import { AssettableComponent } from './component/assettable/assettable.component';
 
 
 
@@ -60,6 +61,7 @@ import { AssetManagementComponent } from './component/asset-management/asset-man
     ManagePermissionComponent,
     ProjectPopupComponent,
     AssetManagementComponent,
+    AssettableComponent,
   ],
   imports: [
   
