@@ -81,7 +81,7 @@ export class AssetManagementComponent implements OnInit {
   }
 
   private getEmployeeData(employeeId: number): void {
-    const apiURL = environment.baseUrl+`api/TraineeDetails/${employeeId}`;
+    const apiURL = environment.baseUrl+`api/assetdetails/getAssetDetails/${employeeId}`;
 
     this.http.get<any[]>(apiURL).subscribe(
       (data: any[]) => {
