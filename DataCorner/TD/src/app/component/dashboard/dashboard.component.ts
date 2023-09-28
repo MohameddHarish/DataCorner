@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
 
 assestdt(){
   this.isUpdateMode = false;
-    this.router.navigateByUrl('asset-management');
+    this.router.navigateByUrl('assettable');
 }
   getDataFromAPI() {
     const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';

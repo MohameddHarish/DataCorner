@@ -37,13 +37,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InfoPopupComponent } from './component/info-popup/info-popup.component';
 import { ManagePermissionComponent } from './component/manage-permission/manage-permission.component';
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
+import { AssettableComponent } from './component/assettable/assettable.component';
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
-
-
-
-
-
-
 
 
 
@@ -60,6 +55,7 @@ import { AssetManagementComponent } from './component/asset-management from/asse
     ManagePermissionComponent,
     ProjectPopupComponent,
     AssetManagementComponent,
+    AssettableComponent,
   ],
   imports: [
   
