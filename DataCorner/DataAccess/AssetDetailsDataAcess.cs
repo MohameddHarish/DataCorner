@@ -1,51 +1,62 @@
-﻿using DataCorner.DataAccess.interfaces;
+﻿using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
+using DataCorner.DataAccess.Interfaces;
 using DataCorner.Models;
-
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
-
-
 
 namespace DataCorner.DataAccess
 {
-    public class AssetDetailsDataAcess : IAssetDetailsDataAcess
+    public class AssetDetailsDataAccess : IAssetDetailsDataAccess
     {
         private readonly string _connectionString;
 
-        public AssetDetailsDataAcess(IConfiguration configuration)
+        public AssetDetailsDataAccess(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("ttdconnection");
         }
 
-        public async Task<AddAssets> GetAssetDetailsAsync(int empId)
+        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            try
             {
-                await connection.OpenAsync();
-
-                using (var command = new MySqlCommand("GetAssetDetails", connection))
+                using (var connection = new MySqlConnection(_connectionString))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@p_EmpId", empId);
+                    await connection.OpenAsync();
 
-                    using (var reader = await command.ExecuteReaderAsync())
+                    var cmd = new MySqlCommand("GetAssetDetails", connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("p_EmpId", empId);
+                    cmd.Parameters.AddWithValue("p_Flag", flag);
+
+                    var assets = new List<AddAssets>();
+
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
-                        if (await reader.ReadAsync())
+                        while (await reader.ReadAsync())
                         {
-                            return new AddAssets
+                            var asset = new AddAssets
                             {
                                 AssetId = reader["AssetId"].ToString(),
-                                EmpId = Convert.ToInt32(reader["EmpId"]),
+                                EmpId = (int)reader["EmpId"],
                                 EmpName = reader["EmpName"].ToString(),
                                 Location = reader["Location"].ToString(),
                                 Make = reader["Make"].ToString(),
                                 ModelNo = reader["ModelNo"].ToString(),
                                 Issues = reader["Issues"].ToString()
                             };
+                            assets.Add(asset);
                         }
-                        return null;
                     }
+
+                    return assets;
                 }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed.
+                throw;
             }
         }
     }

@@ -1,10 +1,11 @@
-﻿using DataCorner.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataCorner.Models;
 
-namespace DataCorner.DataAccess.interfaces
+namespace DataCorner.DataAccess.Interfaces
 {
-    public interface IAssetDetailsDataAcess
+    public interface IAssetDetailsDataAccess
     {
-        Task<AddAssets> GetAssetDetailsAsync(int empId);
+        Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag);
     }
-
 }

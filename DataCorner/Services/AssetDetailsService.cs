@@ -1,23 +1,25 @@
-﻿using DataCorner.DataAccess.interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataCorner.DataAccess.Interfaces;
 using DataCorner.Models;
-using DataCorner.Services.interfaces;
+using DataCorner.Services.Interfaces;
 
 namespace DataCorner.Services
 {
     public class AssetDetailsService : IAssetDetailsService
     {
-        private readonly IAssetDetailsDataAcess _assetDetailsDataAcess;
+        private readonly IAssetDetailsDataAccess _assetDetailsDataAccess;
 
-        public AssetDetailsService(IAssetDetailsDataAcess assetDetailsDataAcess)
+        public AssetDetailsService(IAssetDetailsDataAccess assetDetailsDataAccess)
         {
-            _assetDetailsDataAcess = assetDetailsDataAcess;
+            _assetDetailsDataAccess = assetDetailsDataAccess;
         }
 
-        public async Task<AddAssets> GetAssetDetailsAsync(int empId)
+        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag)
         {
             try
             {
-                return await _assetDetailsDataAcess.GetAssetDetailsAsync(empId);
+                return await _assetDetailsDataAccess.GetAssetDetailsAsync(empId, flag);
             }
             catch (Exception ex)
             {
@@ -26,5 +28,4 @@ namespace DataCorner.Services
             }
         }
     }
-
 }

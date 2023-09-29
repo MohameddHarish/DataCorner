@@ -1,9 +1,11 @@
-﻿using DataCorner.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataCorner.Models;
 
-namespace DataCorner.Services.interfaces
+namespace DataCorner.Services.Interfaces
 {
     public interface IAssetDetailsService
     {
-        Task<AddAssets> GetAssetDetailsAsync(int empId);
+        Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag);
     }
 }

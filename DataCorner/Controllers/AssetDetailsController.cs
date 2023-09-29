@@ -1,10 +1,13 @@
-﻿using DataCorner.Services.interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using DataCorner.Models;
+using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataCorner.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/assets")]
     [ApiController]
     public class AssetDetailsController : ControllerBase
     {
@@ -15,12 +18,13 @@ namespace DataCorner.Controllers
             _assetDetailsService = assetDetailsService;
         }
 
-        [HttpGet("{empId}")]
-        public async Task<IActionResult> GetAssetDetails([FromQuery] int empId)
+        [HttpGet]
+        [Route("getAssetDetails")]
+        public async Task<IActionResult> GetAssetDetails([FromQuery] int empId, [FromQuery] int flag = 1)
         {
             try
             {
-                var assetDetails = await _assetDetailsService.GetAssetDetailsAsync(empId);
+                var assetDetails = await _assetDetailsService.GetAssetDetailsAsync(empId, flag);
 
                 if (assetDetails != null)
                 {
@@ -28,7 +32,7 @@ namespace DataCorner.Controllers
                 }
                 else
                 {
-                    return NotFound("Asset not found.");
+                    return NotFound("No assets found.");
                 }
             }
             catch (Exception ex)
