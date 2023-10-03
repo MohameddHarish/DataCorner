@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
-import { MatDialog } from '@angular/material/dialog';
-import { ComponentProperties,RoleInfo } from 'src/app/interfaces/view-form-interface';
-
 
 @Component({
   selector: 'app-asset-management',
@@ -15,98 +11,81 @@ import { ComponentProperties,RoleInfo } from 'src/app/interfaces/view-form-inter
   styleUrls: ['./asset-management.component.scss']
 })
 export class AssetManagementComponent implements OnInit {
-  myForm!: FormGroup; 
-  userRole: string = ''; 
+  myForm!: FormGroup;
+  userRole: string = '';
   isUpdateMode: boolean = false;
   visibleFields: string[] = [];
-  roleInfo: RoleInfo | undefined;
-  
 
-
-  constructor(private fb: FormBuilder,
-    private router: Router, 
-    private http: HttpClient, 
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private dialog:MatDialog) {}
-  
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
+  ) {}
 
-      const employeeIdParam = params['id'];
-        if (employeeIdParam === 'add') {
-        this.createForm();
-      } else {
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const empId = params['empId'];
+
+      if (empId) {
+        // If empId is present, fetch data for the specified empId
         this.isUpdateMode = true;
         this.createForm();
-        const employeeId = +employeeIdParam;
-        this.getEmployeeData(employeeId);
+        this.getAssetData(empId);
+      } else {
+        // If empId is not present, it's an add operation
+        this.createForm();
       }
-      console.log(employeeIdParam);
+
+      this.userRole = this.authenticationService.getUserRole();
     });
-    this.userRole = this.authenticationService.getUserRole();
-    this.http.get<RoleInfo[]>('https://localhost:7247/api/account').subscribe(
-      (response: RoleInfo[]) => {
-        this.roleInfo = response.find((role: RoleInfo) => role.roleName === this.userRole);
-        if (this.roleInfo) {
-          this.visibleFields = this.roleInfo.defaultColumns.split(',');
-        }
-      },
-      error => {
-        console.error('Error fetching role info:', error);
-      }
-    );
-    
+  }
+
+  private createForm(): void {
+    this.myForm = this.fb.group({
+      EmpId: ['', Validators.required],
+      EmpName: ['', Validators.required],
+      AssetId: ['', Validators.required],
+      Make: ['', Validators.required],
+      ModelNo: ['', Validators.required],
+      Issues: ['', Validators.required],
+      Location: ['', Validators.required]
+    });
   }
   isFieldVisible(fieldName: string): boolean {
     if (this.userRole === 'admin') {
       return true;
     }
-    if (this.roleInfo) {
-      return this.roleInfo.defaultColumns.includes(fieldName);
-    }
-    return false;
-  }  
- 
-  private createForm(): void {
-    this.myForm = this.fb.group({
-      EmpId: ['', Validators.required],
-      EmpName: ['', Validators.required],
-      AssetId:['',Validators.required],
-      Make:['',Validators.required],
-      ModelNo:['',Validators.required],
-      Issues:['',Validators.required],
-      Location:['',Validators.required]
-    });
+
+    return this.visibleFields.includes(fieldName);
   }
+  private getAssetData(empId: number): void {
+    const apiURL = environment.baseUrl + `api/assets/getAssetDetails`;
 
-  private getEmployeeData(employeeId: number): void {
-    const apiURL = environment.baseUrl+`api/assetdetails/getAssetDetails/${employeeId}`;
-
-    this.http.get<any[]>(apiURL).subscribe(
+    this.http.get<any[]>(apiURL, { params: { empId: empId.toString(), flag: '2' } }).subscribe(
       (data: any[]) => {
         if (data && data.length > 0) {
-          const employeeData = data[0]; 
+          const assetData = data[0];
           this.myForm.patchValue({
-            EmpId: employeeData.EmpId,
-            EmpName: employeeData.EmpName,
-            AssetId: employeeData.AssetId,
-            Make: employeeData.Make,
-            ModelNo: employeeData.ModelNo,
-            Issues: employeeData.Issues,
-            Location: employeeData.Location,
+            EmpId: assetData.empId,
+            EmpName: assetData.empName,
+            AssetId: assetData.assetId,
+            Make: assetData.make,
+            ModelNo: assetData.modelNo,
+            Issues: assetData.issues,
+            Location: assetData.location,
           });
         } else {
-          console.error('No employee data found for the provided ID.');
+          console.error('No asset data found for the provided empId.');
         }
-        console.log(this.myForm);
       },
       (error) => {
-        console.error('Error fetching employee data:', error);
+        console.error('Error fetching asset data:', error);
       }
     );
-    console.log(employeeId)
   }
+  
   goBack() {
     window.history.back();
   }
