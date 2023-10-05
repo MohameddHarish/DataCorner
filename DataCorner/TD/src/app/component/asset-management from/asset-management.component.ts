@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-asset-management',
@@ -22,6 +24,7 @@ export class AssetManagementComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -89,26 +92,28 @@ export class AssetManagementComponent implements OnInit {
   goBack() {
     window.history.back();
   }
+  showRowUpdatedSnackbar() {
+    this.snackBar.open('Data Submited successfully', 'Close', {
+      duration: 3000, // The duration for which the snackbar will be displayed (in milliseconds)
+      verticalPosition: 'top', // You can change the position of the snackbar
+    });
+  }
 
   onSubmit(): void {
-    
     if (this.myForm.valid) {
-      console.log(this.myForm);3
       const formData = this.myForm.value;
-      const apiURL = environment.baseUrl+'api/assets';
-      // console.log(formData);
+      const apiURL = environment.baseUrl + 'api/assets';
+  
       this.http.post(apiURL, formData).subscribe(
         (response) => {
           console.log('Form data submitted successfully:', response);
         },
         (error) => {
-          console.error('Error submitting form data:', error);
+          console.error('Error sending data:', error);
         }
       );
-    } else {
+      this.showRowUpdatedSnackbar();
     }
   }
- 
-
 }
 
