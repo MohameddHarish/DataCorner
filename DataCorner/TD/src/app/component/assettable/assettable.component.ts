@@ -91,8 +91,21 @@ export class AssettableComponent implements OnInit {
   
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    this.dataSource.filter = filterValue;
+    const filterValue = (event.target as HTMLInputElement).value;
+    const keywords = filterValue.split(',').map((keyword) => keyword.trim().toLowerCase());
+  
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const searchData = filter.split(',');
+      return searchData.every((keyword) =>
+        Object.values(data).some((value) => {
+          if (typeof value === 'number') {
+            value = value.toString();
+          }
+          return ((typeof value === 'string' || value instanceof String) && value.toLowerCase().includes(keyword));
+        })
+      );
+    };
+    this.dataSource.filter = keywords.join(',');
   }
 
   downloadExcel() {

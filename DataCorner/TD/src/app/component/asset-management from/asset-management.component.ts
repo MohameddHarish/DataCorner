@@ -32,12 +32,12 @@ export class AssetManagementComponent implements OnInit {
       const empId = params['empId'];
 
       if (empId) {
-        // If empId is present, fetch data for the specified empId
+        
         this.isUpdateMode = true;
         this.createForm();
         this.getAssetData(empId);
       } else {
-        // If empId is not present, it's an add operation
+       
         this.createForm();
       }
 
@@ -94,8 +94,8 @@ export class AssetManagementComponent implements OnInit {
   }
   showRowUpdatedSnackbar() {
     this.snackBar.open('Data Submited successfully', 'Close', {
-      duration: 3000, // The duration for which the snackbar will be displayed (in milliseconds)
-      verticalPosition: 'top', // You can change the position of the snackbar
+      duration: 3000, 
+      verticalPosition: 'top',
     });
   }
 

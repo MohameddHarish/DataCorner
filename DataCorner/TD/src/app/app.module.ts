@@ -39,7 +39,7 @@ import { ManagePermissionComponent } from './component/manage-permission/manage-
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
 import { AssettableComponent } from './component/assettable/assettable.component';
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
-
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -81,7 +81,8 @@ import { AssetManagementComponent } from './component/asset-management from/asse
     MatSortModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgChartsModule
     
   ],
   bootstrap: [AppComponent]
