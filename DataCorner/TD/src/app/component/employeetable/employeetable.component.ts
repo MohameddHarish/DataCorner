@@ -158,40 +158,46 @@ export class EmployeetableComponent implements OnInit {
   }
 
   downloadExcel() {
-  const category = this.route.snapshot.params['category'];
-  const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
-
-  this.http.get<any[]>(apiURL).subscribe(
-    (data: any[]) => {
-      const columnsToInclude = this.selectedColumns; // Use the selected columns
-
-      // Filter the data to include only the selected columns
-      const filteredData = data.map(item => {
-        const filteredItem: any = {};
-        columnsToInclude.forEach(column => {
-          filteredItem[column] = item[column];
+    const category = this.route.snapshot.params['category'];
+    const apiURL = environment.baseUrl + `api/Trainee?category=${category}&search=""`;
+  
+    this.http.get<any[]>(apiURL).subscribe(
+      (data: any[]) => {
+        const columnsToExclude = ['select', 'serialNumber', 'actions', 'submit'];
+  
+        // Use the selected columns excluding the ones to exclude
+        const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
+  
+        const serialNumberColumn = 'Serial Number';
+  
+        // Filter the data to include only the selected columns and add a serial number
+        const filteredData = data.map((item, index) => {
+          const filteredItem: any = {
+            [serialNumberColumn]: index + 1, // Serial number starting from 1
+          };
+          columnsToInclude.forEach(column => {
+            filteredItem[column] = item[column];
+          });
+          return filteredItem;
         });
-        return filteredItem;
-      });
-
-      const worksheet = this.formatDataToWorksheet(filteredData);
-
-      var currentdate = new Date();
-      const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
-      this.downloadExce(worksheet, filename);
-    },
-    (error) => {
-      console.error('Error fetching API data:', error);
-    }
-  );
-}
-
-
+  
+        const worksheet = this.formatDataToWorksheet(filteredData);
+  
+        var currentdate = new Date();
+        const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
+        this.downloadExce(worksheet, filename);
+      },
+      (error) => {
+        console.error('Error fetching API data:', error);
+      }
+    );
+  }
+  
   private formatDataToWorksheet(data: any[]): any[] {
     const worksheet: any[] = [];
     const headers = Object.keys(data[0]);
     worksheet.push(headers);
-
+  
     data.forEach((item) => {
       const row: any[] = [];
       headers.forEach((header) => {
@@ -199,9 +205,10 @@ export class EmployeetableComponent implements OnInit {
       });
       worksheet.push(row);
     });
-
+  
     return worksheet;
   }
+  
 
   private downloadExce(worksheet: any[], filename: string): void {
     const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };

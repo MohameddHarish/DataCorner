@@ -1,3 +1,11 @@
+body, html {
+    overflow: hidden; /* This might hide the scroll bars on the entire page */
+  }
+
+  .dashboard-container {
+    overflow: hidden; /* Apply this style to the container that holds your dashboard content */
+  }
+
 mat-card:hover {
     transition: 0.3 ease;
     transform: translateY(-3px);
@@ -19,4 +27,7 @@ mat-card:hover {
   flex: 1;
   margin: 5px;
 }
-  
+.col-md-4 {
+    flex: 1;
+    margin-right: 10px;
+  }

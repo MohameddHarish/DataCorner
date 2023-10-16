@@ -106,11 +106,7 @@ export class ViewFormComponent implements OnInit {
       prospects: ['', Validators.required],
       skill_Set: ['', Validators.required],
       reportingTo: [''],
-      division_id:[''],
-      // division: ['', Validators.required],
-      // sub_Div: [''],
-      // skill_Catagories: [''],
-      // skill_Clusters: [''],
+      division_id: [''],
       yop: ['', Validators.required],
       education: ['', Validators.required],
       prev_Exp: [''],
@@ -124,6 +120,16 @@ export class ViewFormComponent implements OnInit {
       batch: ['', Validators.required],
       contact: ['', Validators.required],
       mailId: ['', [Validators.required, Validators.email]],
+    });
+  
+    // Separate form controls for project ID and project Name
+    const project_IdControl = this.myForm.get('project_Id');
+    const project_NameControl = this.myForm.get('project_Name');
+  
+    // Subscribe to changes in project_ID and update project_Name accordingly
+    project_IdControl?.valueChanges.subscribe((value) => {
+      const projectName = value?.split('-')[1]?.trim() || '';
+      project_NameControl?.setValue(projectName);
     });
   }
 
@@ -181,25 +187,26 @@ export class ViewFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    
     if (this.myForm.valid) {
-      console.log(this.myForm);3
       const formData = this.myForm.value;
-      const apiURL = environment.baseUrl+'api/trainee';
-      // console.log(formData);
+      const apiURL = environment.baseUrl + 'api/trainee';
+
       this.http.post(apiURL, formData).subscribe(
         (response) => {
           console.log('Form data submitted successfully:', response);
-          const category = formData.category; 
-          this.router.navigateByUrl('employee/' + category); 
+          const category = formData.category;
+          this.router.navigateByUrl('employee/' + category);
         },
         (error) => {
           console.error('Error submitting form data:', error);
         }
       );
     } else {
+      // Handle the case where the form is invalid
+      console.log('Form is invalid');
     }
   }
+
   private getDropdownData(flag: number): void {
     const apiURL = environment.baseUrl+`api/trainee/${flag}`;
 

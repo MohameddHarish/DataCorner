@@ -30,7 +30,9 @@
           <mat-form-field appearance="outline" style="width: 200px;">
             <div class="column-selector">
               <mat-select [(ngModel)]="selectedColumns" multiple>
+                <ng-container *ngIf="userRole === 'admin'">
                 <mat-checkbox [(ngModel)]="showColumns" (change)="toggleAllColumns($event)">All</mat-checkbox>
+              </ng-container>
                 <mat-option *ngFor="let column of columns" [value]="column">{{ column }}</mat-option>
               </mat-select>
             </div>
@@ -46,11 +48,11 @@
           <button class="Btn" mat-raised-button color="primary" (click)="addForm()">
             <div class="text">Add</div>
           </button>
-      
+        </ng-container>
           <button class="ExprtBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="downloadExcel()">
             <div class="text">Export</div><mat-icon>download</mat-icon>
           </button>
-          
+          <ng-container *ngIf="userRole === 'admin'">
           <button class="UpdateBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="submitSelectedRows()">
             <div class="text">Update</div>
           </button>

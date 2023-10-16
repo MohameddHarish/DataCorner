@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { utils, WorkBook, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,7 +15,8 @@ export class DashboardComponent implements OnInit {
   userRole: string = '';
   userId!: number;
   isUpdateMode: boolean = false;
-
+  chartData: any = {}; // Initialize chartData as an empty object
+  
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -26,26 +28,65 @@ export class DashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-    this.getDataFromAPI();
-  });
-}
+      this.getDataFromAPI();
+    });
+  }
 
-assestdt(){
-  this.isUpdateMode = false;
+  assestdt() {
+    this.isUpdateMode = false;
     this.router.navigateByUrl('assettable');
-}
+  }
+
   getDataFromAPI() {
     const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';
 
     this.http.get(apiURL).subscribe(
       (data: any) => {
-        this.cardData = data; 
+        this.cardData = data;
+        this.prepareChartData(); // Call prepareChartData after fetching data
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
   }
+
+  prepareChartData() {
+    this.chartData = {
+      labels: ['BL', 'NBD', 'NBA', 'NBDA', 'NBNU'],
+      datasets: [
+        {
+          label: 'Count',
+          data: [
+            this.cardData.billable,
+            this.cardData.nonBillableDeploy,
+            this.cardData.nonBillableA,
+            this.cardData.nonBillableDeployA,
+            this.cardData.nonBillableNonUtilize
+          ],
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }
+      ]
+    };
+  }
+  
+  
 
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
