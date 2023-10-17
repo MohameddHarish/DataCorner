@@ -85,9 +85,6 @@ export class DashboardComponent implements OnInit {
       ]
     };
   }
-  
-  
-
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
   }
@@ -143,4 +140,18 @@ export class DashboardComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+//   // Add a method to download the chart card as an image
+// downloadChartCard(chartType: string) {
+//   const canvas: HTMLCanvasElement | null = document.querySelector('canvas'); // Assuming there's only one canvas
+//   if (canvas) {
+//     const imageDataUrl = canvas.toDataURL('image/png');
+//     const link = document.createElement('a');
+//     link.href = imageDataUrl;
+//     link.download = `chart_card_${chartType}.png`;
+//     link.click();
+//   } else {
+//     console.error('Canvas not found.');
+//   }
+// }
+
 }

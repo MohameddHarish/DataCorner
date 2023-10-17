@@ -58,6 +58,7 @@ export class EmployeetableComponent implements OnInit {
         
       );
     });
+    
   }  
   updateUserProperty(user: any, column: string, event: any) {
     const newValue = event.target.value; 
@@ -152,7 +153,7 @@ export class EmployeetableComponent implements OnInit {
       this.selectedColumns = ['serialNumber', 'id', 'name', 'Email', 'Phone', 'SkillSet', 'Months_in_SS', 'actions'];
     }
   }
-
+  
   isColumnVisible(column: string): boolean {
     return this.selectedColumns.includes(column);
   }

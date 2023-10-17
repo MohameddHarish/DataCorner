@@ -41,7 +41,6 @@ import { AssettableComponent } from './component/assettable/assettable.component
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
 import { NgChartsModule } from 'ng2-charts';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -15,9 +15,9 @@
   <div class="row p-3">
 
     <div  class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(75, 192, 192, 0.2) ;">
         <div  class="card-body">
-          <mat-card  *ngIf="cardData" (click)="onCardClicked('BL')">
+          <mat-card style="background-color:rgba(75, 192, 192, 0.2) ;" *ngIf="cardData" (click)="onCardClicked('BL')">
             <mat-card-title>BL</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.billable }}</b>
@@ -33,9 +33,9 @@
     </div>
 
     <div class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(255, 99, 132, 0.2) ;">
         <div class="card-body">
-          <mat-card *ngIf="cardData" (click)="onCardClicked('NBD')">
+          <mat-card style="background-color:rgba(255, 99, 132, 0.2) ;" *ngIf="cardData" (click)="onCardClicked('NBD')">
             <mat-card-title>NBD</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.nonBillableDeploy }}</b>
@@ -49,13 +49,10 @@
         </div>
       </div>
     </div>
-
-  
-
     <div class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(255, 205, 86, 0.2) ;">
         <div class="card-body">
-          <mat-card *ngIf="cardData" (click)="onCardClicked('NBA')">
+          <mat-card style="background-color:rgba(255, 205, 86, 0.2) ;" *ngIf="cardData" (click)="onCardClicked('NBA')">
             <mat-card-title>NBA</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.nonBillableA }}</b>
@@ -69,12 +66,10 @@
         </div>
       </div>
     </div>
-
-
     <div class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(54, 162, 235, 0.2) ;">
         <div class="card-body">
-          <mat-card *ngIf="cardData" (click)="onCardClicked('NBDA')">
+          <mat-card style="background-color:rgba(54, 162, 235, 0.2) ;"  *ngIf="cardData" (click)="onCardClicked('NBDA')">
             <mat-card-title>NBDA</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.nonBillableDeployA }}</b>
@@ -89,13 +84,10 @@
       </div>
     </div>
 
-   
-
-
     <div class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(153, 102, 255, 0.2) ;">
         <div class="card-body">
-          <mat-card *ngIf="cardData" (click)="onCardClicked('NBNU')">
+          <mat-card style="background-color:rgba(153, 102, 255, 0.2) ;" *ngIf="cardData" (click)="onCardClicked('NBNU')">
             <mat-card-title>NBNU</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.nonBillableNonUtilize }}</b>
@@ -110,11 +102,10 @@
       </div>
     </div>
 
-
     <div class="col-md-2">
-      <div class="card">
+      <div class="card" style="background-color:rgba(99, 226, 179, 0.331) ;">
         <div class="card-body">
-          <mat-card *ngIf="cardData" (click)="onCardClicked('All')">
+          <mat-card *ngIf="cardData" style="background-color:rgba(99, 226, 179, 0.331) ;" (click)="onCardClicked('All')">
             <mat-card-title>All</mat-card-title>
             <mat-card-content>
               <b>{{ cardData.allTrainees }}</b>
@@ -154,7 +145,7 @@
 
 <div class="col-md-4">
   <!-- <mat-card style="height: 300px;">
-  <canvas baseChart width="400" height="100"
+  <canvas baseChart 
   [type]="'pie'"
   [datasets]="chartData.datasets"
   [labels]="chartData.labels"

@@ -5,6 +5,13 @@ body, html {
   .dashboard-container {
     overflow: hidden; /* Apply this style to the container that holds your dashboard content */
   }
+  /* Add styling for the download button container */
+.download-button-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 
 mat-card:hover {
     transition: 0.3 ease;
