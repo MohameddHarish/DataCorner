@@ -6,5 +6,6 @@ export interface Asset {
     make: string;
     modelNo: string;
     issues: string;
+    [key: string]: any;
   }
   

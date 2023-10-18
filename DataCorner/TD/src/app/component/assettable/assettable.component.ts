@@ -20,7 +20,7 @@ export class AssettableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['serialNumber', 'assetId', 'empId', 'empName', 'location', 'make', 'modelNo', 'issues', 'action'];
   selectedColumns: string[] = this.displayedColumns;
-
+  [key: string]: any
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -113,12 +113,20 @@ export class AssettableComponent implements OnInit {
 
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
-        const columnsToInclude = this.selectedColumns;
+        //const columnsToInclude = this.selectedColumns;
+        const columnsToExclude = ['select', 'serialNumber', 'action', 'submit'];
+  
+        // Use the selected columns excluding the ones to exclude
+        const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
+  
+        const serialNumberColumn = 'Serial Number';
 
-        const filteredData = data.map((item) => {
-          const filteredItem: any = {};
+        const filteredData = data.map((item,index) => {
+          const filteredItem: any = {
+            [serialNumberColumn]: index + 1,
+          };
           columnsToInclude.forEach((column) => {
-            // filteredItem[column] = item[column];
+            filteredItem[column] = item[column];
           });
           return filteredItem;
         });
@@ -139,10 +147,14 @@ export class AssettableComponent implements OnInit {
   }
 
   private formatDataToWorksheet(data: any[]): any[] {
+    if (!data.length) {
+      return [];
+    }
+  
     const worksheet: any[] = [];
     const headers = Object.keys(data[0]);
     worksheet.push(headers);
-
+  
     data.forEach((item) => {
       const row: any[] = [];
       headers.forEach((header) => {
@@ -150,9 +162,10 @@ export class AssettableComponent implements OnInit {
       });
       worksheet.push(row);
     });
-
+  
     return worksheet;
   }
+  
 
   private downloadExcelFile(worksheet: any[], filename: string): void {
     const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };

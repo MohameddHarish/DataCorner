@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,7 +10,6 @@ import { WorkBook, utils, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employeetable',
@@ -25,7 +24,6 @@ export class EmployeetableComponent implements OnInit {
   isUpdateMode: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('fileInput') fileInput!: ElementRef;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set','actions'];
   userRole: string = '';
@@ -62,7 +60,6 @@ export class EmployeetableComponent implements OnInit {
     });
     
   }  
-  
   updateUserProperty(user: any, column: string, event: any) {
     const newValue = event.target.value; 
     user[column] = newValue;
@@ -81,7 +78,6 @@ export class EmployeetableComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.importExcel();
   }
 
   getDataFromAPI(category: string) {
@@ -271,52 +267,7 @@ export class EmployeetableComponent implements OnInit {
     }
     this.showRowUpdatedSnackbar();
   }
-  onFileChange(event: any): void {
-    const file = event.target.files[0];
-    // You can perform additional validations or checks here
-    // Store the file in a variable or use it directly in the importExcel function
-  }
   
-  importExcel(): void {
-    const fileInput = this.fileInput.nativeElement;
-    if (fileInput.files.length > 0) {
-      const file = fileInput.files[0];
-  
-      // Perform the necessary actions to read and process the Excel file
-      const reader: FileReader = new FileReader();
-      reader.onload = (e: any) => {
-        const binaryString: string = e.target.result;
-        const workbook: XLSX.WorkBook = XLSX.read(binaryString, { type: 'binary' });
-  
-        // Assuming the first sheet of the Excel file is the one you want to import
-        const sheetName: string = workbook.SheetNames[0];
-        const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
-  
-        // Parse the sheet data
-        const importedData: any[] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-  
-        // Remove the header row (if it exists)
-        if (importedData.length > 0 && Array.isArray(importedData[0])) {
-          importedData.shift();
-        }
-  
-        // Get the latest row in the table
-        const latestRow = this.dataSource.data[this.dataSource.data.length - 1];
-  
-        // Assign the imported data to the latest row
-        Object.assign(latestRow, importedData[0]);
-  
-        // Update MatTableDataSource with the modified data
-        this.dataSource.data = this.dataSource.data;
-  
-        // Clear the file input
-        fileInput.value = '';
-      };
-  
-      // Read the file as binary data
-      reader.readAsBinaryString(file);
-    }
-  }
   
   
 
