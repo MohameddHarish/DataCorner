@@ -108,11 +108,13 @@
       <button mat-raised-button color="primary" (click)="submitSelectedRows()">Update</button>
     </div>
   </ng-container> -->
-  <button class="ImportBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="ImportFile()">
-    <div class="text">Import</div><mat-icon>file_upload</mat-icon>
-    <input #fileInput type="file" (change)="onFileSelected($event)" style="display:none" />
+  <!-- Add this within your existing HTML structure -->
+<div class="import-button-container">
+  <input type="file" #fileInput (change)="onFileChange($event)" accept=".xlsx, .xls" />
+  <button class="ImportBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="importExcel()">
+    <div class="text">Import</div><mat-icon>cloud_upload</mat-icon>
   </button>
-
+</div>
 
   </mat-card-content>
 </mat-card>
