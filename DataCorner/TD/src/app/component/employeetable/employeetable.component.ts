@@ -10,6 +10,8 @@ import { WorkBook, utils, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ElementRef } from '@angular/core';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-employeetable',
@@ -24,6 +26,7 @@ export class EmployeetableComponent implements OnInit {
   isUpdateMode: boolean = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('fileInput') fileInput!: ElementRef;
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
   displayedColumns: string[] = ['serialNumber','empId', 'name', 'mailId', 'contact','skill_Set','actions'];
   userRole: string = '';
@@ -267,8 +270,76 @@ export class EmployeetableComponent implements OnInit {
     }
     this.showRowUpdatedSnackbar();
   }
+  ImportFile(){
+    // Trigger a click on the hidden file input element
+    this.fileInput.nativeElement.click();
+  }
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
   
+    if (file) {
+      const reader = new FileReader();
   
+      reader.onload = (e: any) => {
+        try {
+          const data = e.target.result;
+          const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+  
+          const sheetName = workbook.SheetNames[0];
+          const worksheet: XLSX.WorkSheet = workbook.Sheets[sheetName];
+  
+          const importedData: any[][] = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as any[][];
+  
+          // Process the imported data as needed
+          console.log(importedData);
+  
+          // Assuming that your data has a consistent structure
+          this.updateMatTable(importedData);
+  
+        } catch (error) {
+          console.error('Error parsing Excel file:', error);
+          // Show a snackbar message or handle the error appropriately
+        }
+      };
+  
+      reader.readAsBinaryString(file);
+    }
+  }
   
 
+  updateMatTable(importedData: any[][]) {
+    const newData: any[] = [];
+  
+    // Assuming the first row of imported data contains column headers
+    const columnHeaders = importedData[0];
+  
+    // Check if the columns in the imported data match the expected columns
+    if (this.areColumnsValid(columnHeaders)) {
+      // Loop through the rows in the imported data
+      for (let i = 1; i < importedData.length; i++) {
+        const rowData = importedData[i];
+        const newRow: any = {};
+  
+        // Loop through the columns in the imported data
+        for (let j = 0; j < columnHeaders.length; j++) {
+          newRow[columnHeaders[j]] = rowData[j];
+        }
+  
+        newData.push(newRow);
+      }
+  
+      // Add the new data to the existing MatTable data
+      this.dataSource.data = [...this.dataSource.data, ...newData];
+    } else {
+      console.error('Columns in the imported data do not match the expected columns.');
+      // Show a snackbar message or handle the error appropriately
+    }
+  }
+  
+  areColumnsValid(importedColumns: string[]): boolean {
+    // Compare the expected columns with the columns in the imported data
+    return JSON.stringify(importedColumns) === JSON.stringify(this.displayedColumns);
+  }
+  
+  
 }
