@@ -10,6 +10,8 @@ import { WorkBook, utils, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as XLSX from 'xlsx';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-employeetable',
@@ -40,7 +42,8 @@ export class EmployeetableComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -267,8 +270,64 @@ export class EmployeetableComponent implements OnInit {
     }
     this.showRowUpdatedSnackbar();
   }
+//   handleFileInput(event: any): void {
+//     const file = event.target.files[0];
   
+//     if (file) {
+//       const reader = new FileReader();
   
+//       reader.onload = (e: any) => {
+//         const data = e.target.result;
+//         this.processExcelData(data);
+//       };
   
+//       reader.readAsBinaryString(file);
+//     }
+//   }
+  
+//   processExcelData(data: string): void {
+//     const workbook: WorkBook = XLSX.read(data, { type: 'binary' });
+//     const sheetName = workbook.SheetNames[0];
+//     const worksheet: any = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+    
+//     console.log('Processed Excel Data:', worksheet);
+    
+//     // Now 'worksheet' contains an array of objects representing your Excel data.
+//     // You need to add this data to your table's data source.
+//     this.dataSource.data = [...this.dataSource.data, ...worksheet];
+// this.cdr.detectChanges();
+//   }
+uploadToAPI(event: any): void {
+  const file = event.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data = e.target.result;
+      this.processAndUploadDataToAPI(data);
+    };
+
+    reader.readAsBinaryString(file);
+  }
+  
+}
+
+private processAndUploadDataToAPI(data: string): void {
+  const workbook: WorkBook = XLSX.read(data, { type: 'binary' });
+  const sheetName = workbook.SheetNames[0];
+  const worksheet: any = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+  // Assuming your API accepts an array of items, you can directly send the worksheet data
+  this.http.post(environment.baseUrl + 'api/trainee', worksheet).subscribe(
+    (response) => {
+      console.log('Data uploaded successfully:', response);
+    },
+    (error) => {
+      console.error('Error uploading data:', error);
+    }
+  );
+}
+ 
 
 }
