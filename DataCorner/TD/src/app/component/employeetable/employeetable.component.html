@@ -109,17 +109,10 @@
     </div>
   </ng-container> -->
   <ng-container *ngIf="userRole === 'admin'">
-  <!-- <input type="file" (change)="handleFileInput($event)" accept=".xlsx, .xls" style="display: none" #fileInput />
+  <input type="file" (change)="handleFileInput($event)" accept=".xlsx, .xls" style="display: none" #fileInput />
   <button class="ImportBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="fileInput.click()">
     <div class="text">Import</div><mat-icon>upload</mat-icon>
-  </button> -->
-  <!-- Add this button to trigger file input -->
-<button class="UploadBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="fileInputUpload.click()">
-  <div class="text">Import Excel File</div><mat-icon>cloud_upload</mat-icon>
-</button>
-
-<!-- Hidden file input -->
-<input type="file" (change)="uploadToAPI($event)" style="display: none" #fileInputUpload />
+  </button>
 </ng-container>
   </mat-card-content>
 </mat-card>
