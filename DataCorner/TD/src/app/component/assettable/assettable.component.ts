@@ -18,7 +18,7 @@ import { Asset } from 'src/app/interfaces/asset-form-interface';
 export class AssettableComponent implements OnInit {
   dataSource = new MatTableDataSource<Asset>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['serialNumber', 'assetId', 'empId', 'empName', 'location', 'make', 'modelNo', 'issues', 'action'];
+  displayedColumns: string[] = ['serialNumber', 'assetNo', 'empId', 'empName', 'location', 'brand', 'modelNo', 'issues','assetGroup', 'action'];
   selectedColumns: string[] = this.displayedColumns;
   [key: string]: any
   constructor(

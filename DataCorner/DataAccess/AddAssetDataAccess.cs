@@ -26,13 +26,24 @@ public class AddAssetDataAcess : IAddAssestDataAccess
 
                 var cmd = new MySqlCommand("InsertAssetDetails", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("p_AssetId", assetDetails.AssetId);
+                cmd.Parameters.AddWithValue("p_AssetNo", assetDetails.AssetNo);
                 cmd.Parameters.AddWithValue("p_EmpId", assetDetails.EmpId);
                 cmd.Parameters.AddWithValue("p_EmpName", assetDetails.EmpName);
                 cmd.Parameters.AddWithValue("p_Location", assetDetails.Location);
-                cmd.Parameters.AddWithValue("p_Make", assetDetails.Make);
+                cmd.Parameters.AddWithValue("p_Brand", assetDetails.Brand);
                 cmd.Parameters.AddWithValue("p_ModelNo", assetDetails.ModelNo);
                 cmd.Parameters.AddWithValue("p_Issues", assetDetails.Issues);
+                cmd.Parameters.AddWithValue("p_AssetGroup", assetDetails.AssetGroup);
+                cmd.Parameters.AddWithValue("p_AssetType", assetDetails.AssetType);
+                cmd.Parameters.AddWithValue("p_Description", assetDetails.Description);
+                cmd.Parameters.AddWithValue("p_AssetStatus", assetDetails.AssetStatus);
+                cmd.Parameters.AddWithValue("p_SerialNo", assetDetails.SerialNo);
+                cmd.Parameters.AddWithValue("p_PurchaseDate", assetDetails.PurchaseDate);
+                cmd.Parameters.AddWithValue("p_InvoiceNo", assetDetails.InvoiceNo);
+                cmd.Parameters.AddWithValue("p_OriginalValue", assetDetails.OriginalValue);
+                cmd.Parameters.AddWithValue("p_CurrenValue", assetDetails.CurrentValue);
+                cmd.Parameters.AddWithValue("p_Warranty", assetDetails.Warranty);
+                cmd.Parameters.AddWithValue("p_Remarks", assetDetails.Remarks);
                 await cmd.ExecuteNonQueryAsync();
             }
 

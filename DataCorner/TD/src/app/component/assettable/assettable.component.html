@@ -69,7 +69,7 @@
   <!-- Asset Id Column -->
   <ng-container matColumnDef="assetId">
     <th mat-header-cell *matHeaderCellDef>Asset ID</th>
-    <td mat-cell *matCellDef="let asset">{{ asset.assetId }}</td>
+    <td mat-cell *matCellDef="let asset">{{ asset.assetNo }}</td>
   </ng-container>
 
   <!-- Employee Id Column -->
@@ -93,7 +93,7 @@
   <!-- Make Column -->
   <ng-container matColumnDef="make">
     <th mat-header-cell *matHeaderCellDef>Make</th>
-    <td mat-cell *matCellDef="let asset">{{ asset.make }}</td>
+    <td mat-cell *matCellDef="let asset">{{ asset.brand }}</td>
   </ng-container>
 
   <!-- Model Number Column -->
@@ -106,6 +106,12 @@
   <ng-container matColumnDef="issues">
     <th mat-header-cell *matHeaderCellDef>Issues</th>
     <td mat-cell *matCellDef="let asset">{{ asset.issues }}</td>
+  </ng-container>
+
+  <!-- AssetGroup Column -->
+  <ng-container matColumnDef="assetgroup">
+    <th mat-header-cell *matHeaderCellDef>Asset Group</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.AssetGroup }}</td>
   </ng-container>
 
   <!-- Action Column -->

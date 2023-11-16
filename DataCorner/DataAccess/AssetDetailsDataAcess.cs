@@ -38,13 +38,25 @@ namespace DataCorner.DataAccess
                         {
                             var asset = new AddAssets
                             {
-                                AssetId = reader["AssetId"].ToString(),
+                                AssetNo = reader["AssetNo"].ToString(),
                                 EmpId = (int)reader["EmpId"],
                                 EmpName = reader["EmpName"].ToString(),
                                 Location = reader["Location"].ToString(),
-                                Make = reader["Make"].ToString(),
+                                Brand = reader["Brand"].ToString(),
                                 ModelNo = reader["ModelNo"].ToString(),
-                                Issues = reader["Issues"].ToString()
+                                Issues = reader["Issues"].ToString(),
+                                AssetGroup = reader["AssetGroup"].ToString(),
+                                AssetType = reader["AssetType"].ToString(),
+                                Description = reader["Description"].ToString(),
+                                AssetStatus = reader["AssetStatus"].ToString(),
+                                SerialNo = reader["SerialNo"].ToString(),
+                                PurchaseDate = reader["PurchaseDate"].ToString(),
+                                InvoiceNo = reader["InvoiceNo"].ToString(),
+                                OriginalValue = reader["OriginalValue"].ToString(),
+                                CurrentValue = reader["CurrentValue"].ToString(),
+                                Warranty = reader["Warranty"].ToString(),
+                                Remarks = reader["Warranty"].ToString()
+
                             };
                             assets.Add(asset);
                         }
