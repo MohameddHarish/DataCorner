@@ -18,7 +18,15 @@ import { Asset } from 'src/app/interfaces/asset-form-interface';
 export class AssettableComponent implements OnInit {
   dataSource = new MatTableDataSource<Asset>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['serialNumber', 'assetNo', 'empId', 'empName', 'location', 'brand', 'modelNo', 'issues','assetGroup', 'action'];
+  displayedColumns: string[] = ['serialNumber', 'assetNo', 'empId', 'empName', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description',
+        'assetStatus',
+        'serialNo',
+        'purchaseDate',
+        'invoiceNo',
+        'originalValue',
+        'currentValue',
+        'warranty',
+        'remarks','action'];	
   selectedColumns: string[] = this.displayedColumns;
   [key: string]: any
   constructor(
@@ -47,6 +55,7 @@ export class AssettableComponent implements OnInit {
   }
 
   getDataFromAPI(flag: number) {
+    
     const apiURL = environment.baseUrl + 'api/assets/getAssetDetails';
     return this.http.get<Asset[]>(apiURL, { params: { flag: flag.toString() } });
   }
@@ -57,6 +66,7 @@ export class AssettableComponent implements OnInit {
     this.getDataFromAPI(flag).subscribe(
       (data: Asset[]) => {
         this.dataSource.data = data;
+        console.log(data)
       },
       (error) => {
         console.error('Error fetching data:', error);

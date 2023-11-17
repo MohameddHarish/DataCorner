@@ -1,9 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { utils, WorkBook, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+
+
+
+
+
+
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexXAxis,
+  ApexPlotOptions,
+  ApexFill,
+  ApexStroke
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: any;
+  chart: any;
+  chart1:any;
+  dataLabels: any;
+  plotOptions: any;
+  xaxis: any;
+  colors: string[];
+  fill: ApexFill;
+  stroke: ApexStroke;
+
+
+
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +46,14 @@ export class DashboardComponent implements OnInit {
   userRole: string = '';
   userId!: number;
   isUpdateMode: boolean = false;
-  chartData: any = {}; // Initialize chartData as an empty object
+  chartData: any = {};
+  // chartData: ChartDataSets[];
+  // chartOptions: ChartOptions;
   
+
+  @ViewChild("chart") chart!: ChartComponent;
+  public chartOptions!: Partial<ChartOptions>;
+
   constructor(
     private http: HttpClient,
     public router: Router,
@@ -43,7 +80,10 @@ export class DashboardComponent implements OnInit {
     this.http.get(apiURL).subscribe(
       (data: any) => {
         this.cardData = data;
-        this.prepareChartData(); // Call prepareChartData after fetching data
+        this.prepareChartData();
+        // this.Batchart();
+        console.log('Chart Data:', this.chartData);
+
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -51,9 +91,11 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+
   prepareChartData() {
     this.chartData = {
       labels: ['BL', 'NBD', 'NBA', 'NBDA', 'NBNU'],
+    
       datasets: [
         {
           label: 'Count',
@@ -80,27 +122,95 @@ export class DashboardComponent implements OnInit {
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+      
+          
         }
       ]
+    
     };
+    
   }
+
+//  Batchart(){
+    
+//   this.chartOptions = {
+
+   
+//     series: [
+//       {
+//         name: 'Count',
+//         data: [
+//           this.cardData.billable,
+//           this.cardData.nonBillableDeploy,
+//           this.cardData.nonBillableA,
+//           this.cardData.nonBillableDeployA,
+//           this.cardData.nonBillableNonUtilize
+//         ],
+//       }
+//     ],
+    
+//     chart: {
+//       type: "bar",
+//       height: 350,
+//       stacked: true
+      
+//     },
+//     stroke: {
+//       width: 1,
+//       colors: ["#fff"]
+//     },
+//     fill: {
+//       opacity: 1
+//     },
+   
+ 
+//     plotOptions: {
+//       bar: {
+//         horizontal: false,
+       
+//         columnWidth: '50%',
+//       },
+      
+//     },
+
+//     colors: [
+//       "#33b2df",
+//       "#546E7A",
+//       "#d4526e",
+//       "#13d8aa",
+//       "#A5978B",
+     
+//     ],
+//     dataLabels: {
+
+//       enabled: true,
+      
+//     },
+//     xaxis: {
+//       categories: ['BL', 'NBD', 'NBA', 'NBDA', 'NBNU'],
+      
+//     },
+
+
+
+   
+
+//   };
+
+//  }
+  // Colors for individual bars
+
+
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
   }
-  
 
-
-  // Method to convert API response to Excel worksheet
   private formatDataToWorksheet(data: any[]): any[] {
-    // Assuming data is an array of objects with key-value pairs
     const worksheet: any[] = [];
-
-    // Add header row
     const headers = Object.keys(data[0]);
     worksheet.push(headers);
 
-    // Add data rows
     data.forEach((item) => {
       const row: any[] = [];
       headers.forEach((header) => {
@@ -112,8 +222,6 @@ export class DashboardComponent implements OnInit {
     return worksheet;
   }
 
-  // Method to download the API response as Excel workbook
-
   downloadExcel(category: string) {
     const apiURL = environment.baseUrl+`api/Trainee?category=${category}&search=""`;
 
@@ -122,14 +230,15 @@ export class DashboardComponent implements OnInit {
         const worksheet = this.formatDataToWorksheet(data);
         var currentdate = new Date();
         const filename = `Report_${category}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
-        this.downloadExce(worksheet, filename);
+        this.downloadExcelFile(worksheet, filename);
       },
       (error) => {
         console.error('Error fetching API data:', error);
       } 
     );
   }
-  private downloadExce(worksheet: any[], filename: string): void {
+
+  private downloadExcelFile(worksheet: any[], filename: string): void {
     const workbook: WorkBook = { SheetNames: ['data'], Sheets: { data: utils.aoa_to_sheet(worksheet) } };
     const excelBuffer: any = write(workbook, { bookType: 'xlsx', type: 'array' });
     const data: Blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -140,18 +249,6 @@ export class DashboardComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
-//   // Add a method to download the chart card as an image
-// downloadChartCard(chartType: string) {
-//   const canvas: HTMLCanvasElement | null = document.querySelector('canvas'); // Assuming there's only one canvas
-//   if (canvas) {
-//     const imageDataUrl = canvas.toDataURL('image/png');
-//     const link = document.createElement('a');
-//     link.href = imageDataUrl;
-//     link.download = `chart_card_${chartType}.png`;
-//     link.click();
-//   } else {
-//     console.error('Canvas not found.');
-//   }
-// }
-
 }
+
+

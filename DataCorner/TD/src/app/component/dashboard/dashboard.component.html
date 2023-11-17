@@ -1,5 +1,6 @@
-<app-header></app-header>
 
+
+<app-header></app-header>
 <div class="dashboard-container">
   <div class="row" >
   <div class="column"><h2>DASHBOARD</h2></div>
@@ -121,23 +122,25 @@
     </div>
     <div class="row">
 <div class="col-md-4">
-  <mat-card>
-<canvas baseChart style="height: 300px;"
-[datasets]="chartData.datasets"
-[labels]="chartData.labels"
-[options]="{ responsive: true }"
-[legend]="true"
-[type]="'bar'">
-</canvas>
-</mat-card>
+  <mat-card style="height: 300px;">
+    <canvas baseChart 
+    [type]="'bar'"
+    [datasets]="chartData.datasets"
+    [labels]="chartData.labels"
+    [options]="{ responsive: true }"
+    [plugins]="chartData.plugins"
+    [legend]="true">
+  </canvas>
+  </mat-card>
 </div>
 <div class="col-md-4">
-  <mat-card style="height: 300px;">
+  <mat-card>
   <canvas baseChart style="height: 300px;"
         [labels]="chartData.labels"
         [datasets]="chartData.datasets"
         [options]="{ responsive: true }"
-        [legend]="true"
+      
+        [legend]="false"
         [type]="'line'">
 </canvas>
 </mat-card>
@@ -150,6 +153,7 @@
   [datasets]="chartData.datasets"
   [labels]="chartData.labels"
   [options]="{ responsive: true }"
+  [plugins]="chartData.plugins"
   [legend]="true">
 </canvas>
 </mat-card>
@@ -167,4 +171,5 @@
     </div>
   </div>
 </div>
+
 </div>

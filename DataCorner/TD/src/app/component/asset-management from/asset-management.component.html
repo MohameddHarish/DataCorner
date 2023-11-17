@@ -4,44 +4,44 @@
       <span class="material-icons">arrow_back</span>
     </button>
     <h2>Asset Form -</h2>
-    <h2>  {{ myForm.get('EmpName')?.value }}</h2>
+    <h2>  {{ myForm.get('empName')?.value }}</h2>
   </div>
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-    <div class="content">  
-        <div class="row">
-            <div class="col-md-3" *ngIf="isFieldVisible('AssetId')">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="content">
+      <div class="row">
+            <div class="col-md-3" *ngIf="isFieldVisible('assetNo')">
                 <mat-form-field appearance="outline">
                     <mat-label>Asset Id</mat-label>
-                    <input matInput placeholder="AssetId" formControlName="AssetId">
-                    <mat-error *ngIf="myForm.get('AssetId')?.invalid && myForm.get('AssetId')?.touched">
+                    <input matInput placeholder="assetNo" formControlName="assetNo">
+                    <mat-error *ngIf="myForm.get('assetNo')?.invalid && myForm.get('assetNo')?.touched">
                         Asset Id is required.
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('EmpId')">
+            <div class="col-md-3" *ngIf="isFieldVisible('empId')">
                 <mat-form-field appearance="outline" >
                     <mat-label>Emp Id</mat-label>
-                    <input matInput placeholder="Emp Id" formControlName="EmpId">
-                    <mat-error *ngIf="myForm.get('EmpId')?.invalid && myForm.get('EmpId')?.touched">
+                    <input matInput placeholder="empId" formControlName="empId">
+                    <mat-error *ngIf="myForm.get('empId')?.invalid && myForm.get('empId')?.touched">
                         Emp Id is required.
                     </mat-error>
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3" *ngIf="isFieldVisible('EmpName')" >
+            <div class="col-md-3" *ngIf="isFieldVisible('empName')" >
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input matInput placeholder="Name" formControlName="EmpName">
-                    <mat-error *ngIf="myForm.get('EmpName')?.invalid && myForm.get('EmpName')?.touched">
+                    <input matInput placeholder="empName" formControlName="empName">
+                    <mat-error *ngIf="myForm.get('empName')?.invalid && myForm.get('empName')?.touched">
                         Name is required.
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('Location')" >
+            <div class="col-md-3" *ngIf="isFieldVisible('location')" >
                 <mat-form-field appearance="outline">
                     <mat-label>location</mat-label>
-                    <input matInput placeholder="location" formControlName="Location">
-                    <mat-error *ngIf="myForm.get('Location')?.invalid && myForm.get('Location')?.touched">
+                    <input matInput placeholder="location" formControlName="location">
+                    <mat-error *ngIf="myForm.get('location')?.invalid && myForm.get('location')?.touched">
                         location is required.
                     </mat-error>
                 </mat-form-field>
@@ -49,39 +49,153 @@
 
             
 
-            <div class="col-md-3" *ngIf="isFieldVisible('Make')">
+            <div class="col-md-3" *ngIf="isFieldVisible('brand')">
                 <mat-form-field appearance="outline">
-                    <mat-label>Make</mat-label>
-                    <input matInput placeholder="Make" formControlName="Make">
-                    <mat-error *ngIf="myForm.get('Make')?.invalid && myForm.get('Make')?.touched">
-                        Make is required.
+                    <mat-label>brand</mat-label>
+                    <input matInput placeholder="brand" formControlName="brand">
+                    <mat-error *ngIf="myForm.get('brand')?.invalid && myForm.get('brand')?.touched">
+                        brand is required.
                     </mat-error>
                 </mat-form-field>
             </div>
                  
-            <div class="col-md-3" *ngIf="isFieldVisible('ModelNo')">
+            <div class="col-md-3" *ngIf="isFieldVisible('modelNo')">
                 <mat-form-field appearance="outline">
                     <mat-label>Model No</mat-label>
-                    <input matInput placeholder="Model No " formControlName="ModelNo">
-                    <mat-error *ngIf="myForm.get('ModelNo')?.invalid && myForm.get('ModelNo')?.touched">
+                    <input matInput placeholder="modelNo " formControlName="modelNo">
+                    <mat-error *ngIf="myForm.get('modelNo')?.invalid && myForm.get('modelNo')?.touched">
                         Model No is required.
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('Issues')">
+            <div class="col-md-3" *ngIf="isFieldVisible('issues')">
                 <mat-form-field appearance="outline">
                     <mat-label>issues</mat-label>
-                    <input matInput placeholder="issues " formControlName="Issues">
-                    <mat-error *ngIf="myForm.get('Issues')?.invalid && myForm.get('Issues')?.touched">
+                    <input matInput placeholder="issues " formControlName="issues">
+                    <mat-error *ngIf="myForm.get('issues')?.invalid && myForm.get('issues')?.touched">
                         issues is required.
                     </mat-error>
                 </mat-form-field>
             </div>
+            <div class="col-md-3" *ngIf="isFieldVisible('serialNo')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Serial No</mat-label>
+                  <input matInput placeholder="serialNo" formControlName="serialNo">
+                  <mat-error *ngIf="myForm.get('serialNo')?.invalid && myForm.get('serialNo')?.touched">
+                    Serial No is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-3" *ngIf="isFieldVisible('purchaseDate')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Purchase Date</mat-label>
+                  <input matInput placeholder="purchaseDate" formControlName="purchaseDate">
+                  <mat-error *ngIf="myForm.get('purchaseDate')?.invalid && myForm.get('purchaseDate')?.touched">
+                    Purchase Date is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-3" *ngIf="isFieldVisible('invoiceNo')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Invoice No</mat-label>
+                  <input matInput placeholder="invoiceNo" formControlName="invoiceNo">
+                  <mat-error *ngIf="myForm.get('invoiceNo')?.invalid && myForm.get('invoiceNo')?.touched">
+                    Invoice No is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-3" *ngIf="isFieldVisible('originalValue')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Original Value</mat-label>
+                  <input matInput placeholder="originalValue" formControlName="originalValue">
+                  <mat-error *ngIf="myForm.get('originalValue')?.invalid && myForm.get('originalValue')?.touched">
+                    Original Value is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-3" *ngIf="isFieldVisible('currentValue')">
+                <mat-form-field appearance="outline">
+                  <mat-label>Current Value</mat-label>
+                  <input matInput placeholder="currentValue" formControlName="currentValue">
+                  <mat-error *ngIf="myForm.get('currentValue')?.invalid && myForm.get('currentValue')?.touched">
+                    Current Value is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+              <div class="col-md-3" *ngIf="isFieldVisible('warranty')">
+                <mat-form-field appearance="outline">
+                  <mat-label>warranty</mat-label>
+                  <input matInput placeholder="warranty" formControlName="warranty">
+                  <mat-error *ngIf="myForm.get('warranty')?.invalid && myForm.get('warranty')?.touched">
+                    warranty is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <!-- Asset Group Field -->
+      <div class="col-md-3" *ngIf="isFieldVisible('assetGroup')">
+        <mat-form-field appearance="outline">
+          <mat-label>Asset Group</mat-label>
+          <input matInput placeholder="Asset Group" formControlName="assetGroup">
+          <mat-error *ngIf="myForm.get('assetGroup')?.invalid && myForm.get('assetGroup')?.touched">
+            Asset Group is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Asset Type Field -->
+      <div class="col-md-3" *ngIf="isFieldVisible('assetType')">
+        <mat-form-field appearance="outline">
+          <mat-label>Asset Type</mat-label>
+          <input matInput placeholder="Asset Type" formControlName="assetType">
+          <mat-error *ngIf="myForm.get('assetType')?.invalid && myForm.get('assetType')?.touched">
+            Asset Type is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Description Field -->
+      <div class="col-md-3" *ngIf="isFieldVisible('description')">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="description">
+          <mat-error *ngIf="myForm.get('description')?.invalid && myForm.get('description')?.touched">
+            Description is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Asset Status Field -->
+      <div class="col-md-3" *ngIf="isFieldVisible('assetStatus')">
+        <mat-form-field appearance="outline">
+          <mat-label>Asset Status</mat-label>
+          <input matInput placeholder="Asset Status" formControlName="assetStatus">
+          <mat-error *ngIf="myForm.get('assetStatus')?.invalid && myForm.get('assetStatus')?.touched">
+            Asset Status is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Remarks Field -->
+      <div class="col-md-3" *ngIf="isFieldVisible('remarks')">
+        <mat-form-field appearance="outline">
+          <mat-label>Remarks</mat-label>
+          <input matInput placeholder="Remarks" formControlName="remarks">
+          <mat-error *ngIf="myForm.get('remarks')?.invalid && myForm.get('remarks')?.touched">
+            Remarks is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+              
         </div>
 
     </div>
     <div class="action" *ngIf="userRole === 'admin'" style="margin-top: -18px;">
-        <button mat-raised-button color="primary" type="submit" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
-        <button mat-raised-button color="warn" type="button">Cancel</button>
+        <button mat-raised-button color="primary" type="submit" (click)="goBack()" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        <button mat-raised-button color="warn" type="button" (click)="goBack()" >Cancel</button>
       </div>      
 </form>

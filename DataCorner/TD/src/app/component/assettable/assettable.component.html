@@ -55,24 +55,27 @@
       </div>
     </div>
 
+   
+
     <div class="mat-elevation-z4">
       <div class="table-responsive">
         <!-- asset.component.html -->
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Serial Number Column -->
+        <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover">
+          <!-- Serial Number Column -->
   <ng-container matColumnDef="serialNumber">
     <th mat-header-cell *matHeaderCellDef> SerialNo </th>
     <td mat-cell *matCellDef="let index = index">{{ index + 1 }}</td>
   </ng-container>
 
   <!-- Asset Id Column -->
-  <ng-container matColumnDef="assetId">
-    <th mat-header-cell *matHeaderCellDef>Asset ID</th>
+  <ng-container matColumnDef="assetNo">
+    <th mat-header-cell *matHeaderCellDef>Asset NO</th>
     <td mat-cell *matCellDef="let asset">{{ asset.assetNo }}</td>
   </ng-container>
 
-  <!-- Employee Id Column -->
+
+  <!-- Employee ID Column -->
   <ng-container matColumnDef="empId">
     <th mat-header-cell *matHeaderCellDef>Employee ID</th>
     <td mat-cell *matCellDef="let asset">{{ asset.empId }}</td>
@@ -91,7 +94,7 @@
   </ng-container>
 
   <!-- Make Column -->
-  <ng-container matColumnDef="make">
+  <ng-container matColumnDef="brand">
     <th mat-header-cell *matHeaderCellDef>Make</th>
     <td mat-cell *matCellDef="let asset">{{ asset.brand }}</td>
   </ng-container>
@@ -108,10 +111,70 @@
     <td mat-cell *matCellDef="let asset">{{ asset.issues }}</td>
   </ng-container>
 
-  <!-- AssetGroup Column -->
-  <ng-container matColumnDef="assetgroup">
+  <!-- Asset Group Column -->
+  <ng-container matColumnDef="assetGroup">
     <th mat-header-cell *matHeaderCellDef>Asset Group</th>
-    <td mat-cell *matCellDef="let asset">{{ asset.AssetGroup }}</td>
+    <td mat-cell *matCellDef="let asset">{{ asset.assetGroup }}</td>
+  </ng-container>
+
+  <!-- Asset Type Column -->
+  <ng-container matColumnDef="assetType">
+    <th mat-header-cell *matHeaderCellDef>Asset Type</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.assetType }}</td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.description }}</td>
+  </ng-container>
+
+  <!-- Asset Status Column -->
+  <ng-container matColumnDef="assetStatus">
+    <th mat-header-cell *matHeaderCellDef>Asset Status</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.assetStatus }}</td>
+  </ng-container>
+
+  <!-- Serial Number Column -->
+  <ng-container matColumnDef="serialNo">
+    <th mat-header-cell *matHeaderCellDef>Serial Number</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.serialNo }}</td>
+  </ng-container>
+
+  <!-- Purchase Date Column -->
+  <ng-container matColumnDef="purchaseDate">
+    <th mat-header-cell *matHeaderCellDef>Purchase Date</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.purchaseDate }}</td>
+  </ng-container>
+
+  <!-- Invoice Number Column -->
+  <ng-container matColumnDef="invoiceNo">
+    <th mat-header-cell *matHeaderCellDef>Invoice Number</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.invoiceNo }}</td>
+  </ng-container>
+
+  <!-- Original Value Column -->
+  <ng-container matColumnDef="originalValue">
+    <th mat-header-cell *matHeaderCellDef>Original Value</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.originalValue }}</td>
+  </ng-container>
+
+  <!-- Current Value Column -->
+  <ng-container matColumnDef="currentValue">
+    <th mat-header-cell *matHeaderCellDef>Current Value</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.currentValue }}</td>
+  </ng-container>
+
+  <!-- Warranty Column -->
+  <ng-container matColumnDef="warranty">
+    <th mat-header-cell *matHeaderCellDef>Warranty</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.warranty }}</td>
+  </ng-container>
+
+  <!-- Remarks Column -->
+  <ng-container matColumnDef="remarks">
+    <th mat-header-cell *matHeaderCellDef>Remarks</th>
+    <td mat-cell *matCellDef="let asset">{{ asset.remarks }}</td>
   </ng-container>
 
   <!-- Action Column -->

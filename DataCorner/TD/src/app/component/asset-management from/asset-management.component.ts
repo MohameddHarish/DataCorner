@@ -27,6 +27,9 @@ export class AssetManagementComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {}
 
+
+
+  
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const empId = params['empId'];
@@ -47,13 +50,25 @@ export class AssetManagementComponent implements OnInit {
 
   private createForm(): void {
     this.myForm = this.fb.group({
-      EmpId: ['', Validators.required],
-      EmpName: ['', Validators.required],
-      AssetId: ['', Validators.required],
-      Make: ['', Validators.required],
-      ModelNo: ['', Validators.required],
-      Issues: ['', Validators.required],
-      Location: ['', Validators.required]
+      empId: ['', Validators.required],
+      empName: ['', Validators.required],
+      assetNo: ['', Validators.required],
+      brand: ['', Validators.required],
+      modelNo: ['', Validators.required],
+      issues: ['', Validators.required],
+      location: ['', Validators.required],
+      assetGroup:[''],
+      assetType:[''],
+      description:[''],
+      assetStatus:[''],
+      serialNo:[''],
+      purchaseDate:[''],
+      invoiceNo:[''],
+      originalValue:[''],
+      currentValue:[''],
+      warranty:[''],
+      remarks:[''],
+
     });
   }
   isFieldVisible(fieldName: string): boolean {
@@ -71,13 +86,24 @@ export class AssetManagementComponent implements OnInit {
         if (data && data.length > 0) {
           const assetData = data[0];
           this.myForm.patchValue({
-            EmpId: assetData.empId,
-            EmpName: assetData.empName,
-            AssetId: assetData.assetId,
-            Make: assetData.make,
-            ModelNo: assetData.modelNo,
-            Issues: assetData.issues,
-            Location: assetData.location,
+            empId: assetData.empId,
+            empName: assetData.empName,
+            assetNo: assetData.assetNo,
+            brand: assetData.brand,
+            modelNo: assetData.modelNo,
+            issues: assetData.issues,
+            location: assetData.location,
+            assetGroup:assetData.assetGroup,
+            assetType:assetData.assetType,
+            description:assetData.description,
+            assetStatus:assetData.assetStatus,
+            serialNo:assetData.serialNo,
+            purchaseDate:assetData.purchaseDate,
+            invoiceNo:assetData.invoiceNo,
+            originalValue:assetData.originalValue,
+            currentValue:assetData.currentValue,
+            warranty:assetData.warranty,
+            remarks:assetData.remarks,
           });
         } else {
           console.error('No asset data found for the provided empId.');
@@ -107,13 +133,15 @@ export class AssetManagementComponent implements OnInit {
       this.http.post(apiURL, formData).subscribe(
         (response) => {
           console.log('Form data submitted successfully:', response);
+          const category = formData.category;
+          this.router.navigateByUrl('assets/' + category);
+          this.showRowUpdatedSnackbar();
         },
         (error) => {
           console.error('Error sending data:', error);
         }
       );
-      this.showRowUpdatedSnackbar();
+      
     }
   }
 }
-

@@ -40,6 +40,7 @@ import { ProjectPopupComponent } from './component/project-popup/project-popup.c
 import { AssettableComponent } from './component/assettable/assettable.component';
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
 import { NgChartsModule } from 'ng2-charts';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { NgChartsModule } from 'ng2-charts';
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    NgChartsModule
+    NgChartsModule,
+    NgApexchartsModule,
     
   ],
   bootstrap: [AppComponent]
