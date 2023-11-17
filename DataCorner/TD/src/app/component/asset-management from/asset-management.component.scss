@@ -1,101 +1,100 @@
 .example-fill-remaining-space {
-    flex: 1 1 auto;
-  }
-  
-  .example-spacer {
-    flex: 1 1 auto;
-  }
-  
-  form {
-    overflow: hidden;
-  }
-  
-  .content {
-    padding: 20px;
-  }
+  flex: 1 1 auto;
+}
 
-  mat-form-field {
-    width: 100%;
-  }
-  
-  mat-form-field input.mat-input {
-    padding: 8px; 
-    font-size: 14px; 
-  }
-   
-  mat-form-field .mat-error {
-    color: red; 
-    font-size: 12px;
-  }
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -5px;
-  }
-  
-  .col-md-3 {
-    padding: 5px;
-    flex: 0 0 calc(25% - 10px);
-    max-width: calc(25% - 10px);
-  }
-  
+.example-spacer {
+  flex: 1 1 auto;
+}
 
-  mat-toolbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #2196F3; 
-    color: white;
-  }
-  
+form {
+  overflow: hidden;
+}
 
-  mat-toolbar mat-icon {
-    margin-right: 5px;
-  }
-  
+.content {
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field input.mat-input {
+  padding: 8px; 
+  font-size: 14px; 
+}
  
-  .action {
-    display: flex;
-    justify-content: flex-start; 
-    margin-bottom: 5px;
-    margin-left: 7px;
-    padding-left: 15px;
-  }
-  
-  
-  .action button {
-    margin-right: 10px; 
-    padding: 10px ; 
-  }
-  .example-button-container{
-    display: flex;
-    margin-left: 18px;
-    margin-top: 10px;
-  }
- .backButton{
-  width: 35px;
-  height:35px;
+mat-form-field .mat-error {
+  color: red; 
+  font-size: 12px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px;
+}
+
+.col-md-3 {
+  padding: 5px;
+  flex: 0 0 calc(25% - 10px);
+  max-width: calc(25% - 10px);
+}
+
+
+mat-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #2196F3; 
+  color: white;
+}
+
+
+mat-toolbar mat-icon {
+  margin-right: 5px;
+}
+
+
+.action {
+  display: flex;
+  justify-content: flex-start; 
+  margin-bottom: 5px;
+  margin-left: 7px;
+  padding-left: 15px;
+}
+
+
+.action button {
+  margin-right: 10px; 
+  padding: 10px ; 
+}
+.example-button-container{
+  display: flex;
+  margin-left: 18px;
+  margin-top: 10px;
+}
+.backButton{
+width: 35px;
+height:35px;
 } 
 h2{
-  padding-left: 12px;
+padding-left: 12px;
 }
-  .input-with-info {
-    position: relative;
-  }
-  
-  .input-with-info input {
-    padding-right: 40px; /* Adjust as needed to create space for the button */
-  }
-  
-  .input-with-info button {
-    position: absolute;
-    top: 50%;
-    right: 5px; /* Adjust as needed for the desired distance from the right edge */
-    transform: translateY(-50%);
-  }
-  
-  
+.input-with-info {
+  position: relative;
+}
 
-  
-  
+.input-with-info input {
+  padding-right: 40px; /* Adjust as needed to create space for the button */
+}
+
+.input-with-info button {
+  position: absolute;
+  top: 50%;
+  right: 5px; /* Adjust as needed for the desired distance from the right edge */
+  transform: translateY(-50%);
+}
+
+
+
+

@@ -260,7 +260,7 @@
 
     </div>
     <div class="action" *ngIf="userRole === 'admin'" style="margin-top: -18px;">
-      <button mat-raised-button color="primary" type="submit">{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
-        <button mat-raised-button color="warn" type="button">Cancel</button>
+      <button mat-raised-button color="primary" type="submit" (click)="goBack()"  >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        <button mat-raised-button color="warn" type="button"  (click)="goBack()">Cancel</button>
       </div>      
 </form>

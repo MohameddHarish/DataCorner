@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'assettable',
     component:AssettableComponent
+  },
+  {
+    path:'assets/:category',
+    component:AssettableComponent
   }
  
 ];

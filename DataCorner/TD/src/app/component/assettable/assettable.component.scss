@@ -67,3 +67,13 @@ mat-paginator {
 h2{
   padding-left: 12px;
 }
+/* Add this within your existing CSS or SCSS */
+.import-button-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ImportBtn {
+  margin-left: 10px;
+}
