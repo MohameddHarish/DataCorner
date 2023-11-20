@@ -41,7 +41,7 @@ public class AddAssetDataAcess : IAddAssestDataAccess
                 cmd.Parameters.AddWithValue("p_PurchaseDate", assetDetails.PurchaseDate);
                 cmd.Parameters.AddWithValue("p_InvoiceNo", assetDetails.InvoiceNo);
                 cmd.Parameters.AddWithValue("p_OriginalValue", assetDetails.OriginalValue);
-                cmd.Parameters.AddWithValue("p_CurrenValue", assetDetails.CurrentValue);
+                cmd.Parameters.AddWithValue("p_CurrentValue", assetDetails.CurrentValue);
                 cmd.Parameters.AddWithValue("p_Warranty", assetDetails.Warranty);
                 cmd.Parameters.AddWithValue("p_Remarks", assetDetails.Remarks);
                 await cmd.ExecuteNonQueryAsync();

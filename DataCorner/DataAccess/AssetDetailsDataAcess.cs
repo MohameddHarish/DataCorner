@@ -55,7 +55,7 @@ namespace DataCorner.DataAccess
                                 OriginalValue = reader["OriginalValue"].ToString(),
                                 CurrentValue = reader["CurrentValue"].ToString(),
                                 Warranty = reader["Warranty"].ToString(),
-                                Remarks = reader["Warranty"].ToString()
+                                Remarks = reader["Remarks"].ToString()
 
                             };
                             assets.Add(asset);

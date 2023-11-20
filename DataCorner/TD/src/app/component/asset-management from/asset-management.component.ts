@@ -14,10 +14,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AssetManagementComponent implements OnInit {
   myForm!: FormGroup;
-  userRole: string = '';
-  isUpdateMode: boolean = false;
+  userRole = '';
+  isUpdateMode = false;
   visibleFields: string[] = [];
-
+  assetTypeOptions: string[] = ['Laptop', 'Charger', 'Mouse', 'Phone', 'SIM card', 'VOIP phone', 'Magicjack', 'Monitor'];
+  locationOptions: string[] = ['Guindy', 'Mepz', 'Tidel', 'Tanjore', 'Client Location / WFH'];
+  assetGroupOptions: string[] = ['Admin Asset'];
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -57,7 +59,7 @@ export class AssetManagementComponent implements OnInit {
       modelNo: ['', Validators.required],
       issues: ['', Validators.required],
       location: ['', Validators.required],
-      assetGroup:[''],
+      assetGroup:['Admin Asset'],
       assetType:[''],
       description:[''],
       assetStatus:[''],
