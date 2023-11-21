@@ -9,7 +9,7 @@
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <div class="content">
       <div class="row">
-            <div class="col-md-3" *ngIf="isFieldVisible('assetNo')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>Asset No</mat-label>
                     <input matInput placeholder="assetNo" formControlName="assetNo">
@@ -18,7 +18,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('empId')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline" >
                     <mat-label>Emp Id</mat-label>
                     <input matInput placeholder="empId" formControlName="empId">
@@ -28,7 +28,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-md-3" *ngIf="isFieldVisible('empName')" >
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
                     <input matInput placeholder="empName" formControlName="empName">
@@ -38,7 +38,7 @@
                 </mat-form-field>
             </div>
             <!-- Asset Status Field -->
-      <div class="col-md-3" *ngIf="isFieldVisible('assetStatus')">
+      <div class="col-md-3">
         <mat-form-field appearance="outline">
           <mat-label>Asset Status</mat-label>
           <input matInput placeholder="Asset Status" formControlName="assetStatus">
@@ -63,7 +63,7 @@
 
             
 
-            <div class="col-md-3" *ngIf="isFieldVisible('brand')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>brand</mat-label>
                     <input matInput placeholder="brand" formControlName="brand">
@@ -73,7 +73,7 @@
                 </mat-form-field>
             </div>
                  
-            <div class="col-md-3" *ngIf="isFieldVisible('modelNo')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>Model No</mat-label>
                     <input matInput placeholder="modelNo " formControlName="modelNo">
@@ -82,7 +82,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('issues')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>issues</mat-label>
                     <input matInput placeholder="issues " formControlName="issues">
@@ -91,7 +91,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-3" *ngIf="isFieldVisible('serialNo')">
+            <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Serial No</mat-label>
                   <input matInput placeholder="serialNo" formControlName="serialNo">
@@ -101,7 +101,7 @@
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3" *ngIf="isFieldVisible('purchaseDate')">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Purchase Date</mat-label>
                   <input matInput placeholder="purchaseDate" formControlName="purchaseDate">
@@ -111,7 +111,7 @@
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3" *ngIf="isFieldVisible('invoiceNo')">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Invoice No</mat-label>
                   <input matInput placeholder="invoiceNo" formControlName="invoiceNo">
@@ -121,7 +121,7 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-3" *ngIf="isFieldVisible('originalValue')">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Original Value</mat-label>
                   <input matInput placeholder="originalValue" formControlName="originalValue">
@@ -131,7 +131,7 @@
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3" *ngIf="isFieldVisible('currentValue')">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Current Value</mat-label>
                   <input matInput placeholder="currentValue" formControlName="currentValue">
@@ -141,7 +141,7 @@
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3" *ngIf="isFieldVisible('warranty')">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>warranty</mat-label>
                   <input matInput placeholder="warranty" formControlName="warranty">
@@ -180,7 +180,7 @@
     </div>
 
       <!-- Description Field -->
-      <div class="col-md-3" *ngIf="isFieldVisible('description')">
+      <div class="col-md-3" >
         <mat-form-field appearance="outline">
           <mat-label>Description</mat-label>
           <input matInput placeholder="Description" formControlName="description">
@@ -202,7 +202,7 @@
       </div> -->
 
       <!-- Remarks Field -->
-      <div class="col-md-3" *ngIf="isFieldVisible('remarks')">
+      <div class="col-md-3" >
         <mat-form-field appearance="outline">
           <mat-label>Remarks</mat-label>
           <input matInput placeholder="Remarks" formControlName="remarks">
@@ -215,7 +215,7 @@
         </div>
 
     </div>
-    <div class="action" *ngIf="userRole === 'admin'" style="margin-top: -18px;">
+    <div class="action" *ngIf="userRole === 'operation'" style="margin-top: -18px;">
         <button mat-raised-button color="primary" type="submit" (click)="goBack()" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
         <button mat-raised-button color="warn" type="button" (click)="goBack()" >Cancel</button>
       </div>      

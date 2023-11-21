@@ -1,6 +1,5 @@
-
-
 <app-header></app-header>
+<ng-container *ngIf="userRole !== 'operation'">
 <div class="dashboard-container">
   <div class="row" >
   <div class="column"><h2>DASHBOARD</h2></div>
@@ -120,10 +119,12 @@
         </div>
       </div>
     </div>
+    <ng-container *ngIf="userRole !== 'operation'">
     <div class="row">
+      
 <div class="col-md-4">
-  <mat-card style="height: 300px;">
-    <canvas baseChart 
+  <mat-card >
+    <canvas baseChart style="height: 300px;"
     [type]="'bar'"
     [datasets]="chartData.datasets"
     [labels]="chartData.labels"
@@ -169,7 +170,183 @@
 </mat-card>
     </div> -->
     </div>
+  </ng-container>
   </div>
 </div>
 
 </div>
+</ng-container>
+<ng-container *ngIf="userRole === 'operation'">
+<div class="dashboard-container">
+  <div class="row" >
+  <div class="column"><h2>DASHBOARD</h2></div>
+  <div class="column" style="margin-left: 70%;">
+    <ng-container *ngIf="userRole === 'operation'">
+      <button mat-raised-button style="margin-left: 70px;" color="primary" (click)="assestdt()">Assests</button>
+    </ng-container>
+  </div>
+</div>
+
+
+<div class="">
+  <div class="row p-3">
+
+    <div  class="col-md-2">
+      <div class="card" style="background-color:rgba(75, 192, 192, 0.2) ;">
+        <div  class="card-body">
+          <mat-card style="background-color:rgba(75, 192, 192, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('Laptop')">
+            <mat-card-title>LAPTOP</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.laptop }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('Laptop')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="card" style="background-color:rgba(255, 99, 132, 0.2) ;">
+        <div class="card-body">
+          <mat-card style="background-color:rgba(255, 99, 132, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('Phone')">
+            <mat-card-title>MOBILES</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.phone }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('Phone')" >
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background-color:rgba(255, 205, 86, 0.2) ;">
+        <div class="card-body">
+          <mat-card style="background-color:rgba(255, 205, 86, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('SimCards')">
+            <mat-card-title>SIM CARDS</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.simCards }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('SimCards')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card" style="background-color:rgba(54, 162, 235, 0.2) ;">
+        <div class="card-body">
+          <mat-card style="background-color:rgba(54, 162, 235, 0.2) ;"  *ngIf="AssetcardData" (click)="onCardClicked('MagicJack')">
+            <mat-card-title>MAGIC JACK</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.magicJack }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('MagicJack')" >
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="card" style="background-color:rgba(153, 102, 255, 0.2) ;">
+        <div class="card-body">
+          <mat-card style="background-color:rgba(153, 102, 255, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('VoipPhone')">
+            <mat-card-title>VOIP PHONE</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.voipPhone }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('VoipPhone')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="card" style="background-color:rgba(99, 226, 179, 0.331) ;">
+        <div class="card-body">
+          <mat-card *ngIf="AssetcardData" style="background-color:rgba(99, 226, 179, 0.331) ;" (click)="AssetcardClicked()">
+            <mat-card-title>ALL</mat-card-title>
+            <mat-card-content>
+              <b>{{ AssetcardData.allAssets }}</b>
+            </mat-card-content>
+          </mat-card>
+          <ng-container *ngIf="userRole === 'operation'">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('All')">
+            Export<mat-icon>download</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+<div class="col-md-4" >
+  <mat-card  >
+    <canvas baseChart style="height: 300px;" 
+    [type]="'bar'"
+    [datasets]="chartData.datasets"
+    [labels]="chartData.labels"
+    [options]="{ responsive: true }"
+    [plugins]="chartData.plugins"
+    [legend]="true">
+  </canvas>
+  </mat-card>
+</div>
+<div class="col-md-4">
+  <mat-card>
+  <canvas baseChart style="height: 300px;"
+        [labels]="chartData.labels"
+        [datasets]="chartData.datasets"
+        [options]="{ responsive: true }"
+        [legend]="false"
+        [type]="'line'">
+</canvas>
+</mat-card>
+</div>
+<div class="col-md-4">
+  <mat-card style="height: 300px;">
+  <canvas baseChart 
+  [type]="'pie'"
+  [datasets]="chartData.datasets"
+  [labels]="chartData.labels"
+  [options]="{ responsive: true }"
+  [plugins]="chartData.plugins"
+  [legend]="true">
+</canvas>
+</mat-card>
+  </div>
+  <!-- <div class="col-md-4">
+    <mat-card style="height: 300px;">
+    <canvas baseChart
+        [datasets]="chartData.datasets"
+        [options]="{ responsive: true }"
+        [labels]="chartData.labels"
+        [type]="'radar'">
+</canvas>
+</mat-card>
+    </div> -->
+    </div>
+  </div>
+</div>
+
+</div>
+
+</ng-container>

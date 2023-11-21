@@ -138,6 +138,7 @@ export class AssetManagementComponent implements OnInit {
           const category = formData.category;
           this.router.navigateByUrl('assets/' + category);
           this.showRowUpdatedSnackbar();
+          window.location.reload();
         },
         (error) => {
           console.error('Error sending data:', error);

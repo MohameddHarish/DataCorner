@@ -4,12 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { utils, WorkBook, write } from 'xlsx';
 import { environment } from 'src/environments/environment.development';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-
-
-
-
-
-
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -47,6 +41,7 @@ export class DashboardComponent implements OnInit {
   userId!: number;
   isUpdateMode: boolean = false;
   chartData: any = {};
+  AssetcardData: any;
   // chartData: ChartDataSets[];
   // chartOptions: ChartOptions;
   
@@ -66,6 +61,7 @@ export class DashboardComponent implements OnInit {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
       this.getDataFromAPI();
+      this.getAssetData();
     });
   }
 
@@ -91,6 +87,58 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getAssetData(){
+    const apiURL = `https://localhost:7247/api/AssetDashboard`;
+    this.http.get(apiURL).subscribe(
+      (data:any)=>{
+      this.AssetcardData = data;
+      this.AssetChartData();
+      },
+      (error) => {
+        console.error('Error fetching Data',error);
+      }
+    ) ;
+    
+  }
+  
+  AssetChartData(){
+    this.chartData={
+      labels:['LAPTOP','MOBILES','SIM CARDS','MAGIC JACK','VOIP PHONE'],
+      datasets: [
+        {
+          label: 'Count',
+          data: [
+            this.AssetcardData.laptop ,
+            this.AssetcardData.phone,
+            this.AssetcardData.simCards,
+            this.AssetcardData.magicJack,
+            this.AssetcardData.voipPhone
+          ],
+          backgroundColor: [
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 205, 86, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)' 
+          ],
+          borderColor: [
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 205, 86, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1,
+      
+          
+        }
+      ]
+    
+    };
+    
+  }
 
   prepareChartData() {
     this.chartData = {
@@ -200,7 +248,9 @@ export class DashboardComponent implements OnInit {
 
 //  }
   // Colors for individual bars
-
+  AssetcardClicked(){
+    this.router.navigateByUrl('assettable')
+  }
 
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
