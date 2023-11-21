@@ -119,6 +119,8 @@
         </div>
       </div>
     </div>
+
+    
     <ng-container *ngIf="userRole !== 'operation'">
     <div class="row">
       
@@ -176,6 +178,10 @@
 
 </div>
 </ng-container>
+
+
+
+<!--------------------------------------- Asset Management Dashboard ------------------------------------------------------>
 <ng-container *ngIf="userRole === 'operation'">
 <div class="dashboard-container">
   <div class="row" >
@@ -296,7 +302,7 @@
         </div>
       </div>
     </div>
-
+    <ng-container *ngIf="userRole === 'operation'">
     <div class="row">
 <div class="col-md-4" >
   <mat-card  >
@@ -344,6 +350,7 @@
 </mat-card>
     </div> -->
     </div>
+    </ng-container>
   </div>
 </div>
 
