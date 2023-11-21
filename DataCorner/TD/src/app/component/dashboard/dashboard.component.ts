@@ -60,16 +60,24 @@ export class DashboardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.userId = +params['id'];
       this.userRole = this.authService.getUserRole();
-      this.getDataFromAPI();
-      this.getAssetData();
+      this.getDataBasedOnUserRole();
     });
+  }
+  getDataBasedOnUserRole() {
+    if (this.userRole === 'operation') {
+      // Fetch data for the operation user
+      this.getAssetData();
+    } else {
+      // Fetch data for other roles (e.g., trainee)
+      this.getDataFromAPI();
+    }
   }
 
   assestdt() {
     this.isUpdateMode = false;
     this.router.navigateByUrl('assettable');
   }
-
+//trainee dashboard api
   getDataFromAPI() {
     const apiURL = environment.baseUrl+'api/Dashboard/GetDashboardCount/1';
 
@@ -87,6 +95,7 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  //asset dashboard api
   getAssetData(){
     const apiURL = `https://localhost:7247/api/AssetDashboard`;
     this.http.get(apiURL).subscribe(
@@ -100,7 +109,6 @@ export class DashboardComponent implements OnInit {
     ) ;
     
   }
-  
   AssetChartData(){
     this.chartData={
       labels:['LAPTOP','MOBILES','SIM CARDS','MAGIC JACK','VOIP PHONE'],
