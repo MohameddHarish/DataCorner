@@ -54,9 +54,10 @@ const routes: Routes = [
     component:AssettableComponent
   },
   {
-    path:'assets/:category',
-    component:AssettableComponent
+    path: 'AssetList/:assetType',
+    component: AssettableComponent
   }
+  
  
 ];
 

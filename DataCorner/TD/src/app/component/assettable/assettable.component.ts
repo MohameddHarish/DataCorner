@@ -38,6 +38,10 @@ export class AssettableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      const assetType = params['assetType'];
+      // Use assetType as needed
+    });
     this.getDataForDashboard();
   }
 
@@ -54,25 +58,33 @@ export class AssettableComponent implements OnInit {
     this.router.navigateByUrl('asset-management');
   }
 
-  getDataFromAPI(flag: number) {
-    
-    const apiURL = environment.baseUrl + 'api/assets/getAssetDetails';
-    return this.http.get<Asset[]>(apiURL, { params: { flag: flag.toString() } });
+  getDataFromAPI(assetType: string) {
+    const apiURL = environment.baseUrl + `api/AssetList/${assetType}`;
+  
+    return this.http.get<Asset[]>(apiURL);
   }
+  
 
   getDataForDashboard() {
-    const flag = 1;
+    this.route.params.subscribe(params => {
+      const assetType = params['assetType'];
   
-    this.getDataFromAPI(flag).subscribe(
-      (data: Asset[]) => {
-        this.dataSource.data = data;
-        console.log(data)
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
+      if (assetType) {
+        this.getDataFromAPI(assetType).subscribe(
+          (data: Asset[]) => {
+            this.dataSource.data = data;
+            console.log(data);
+          },
+          (error) => {
+            console.error('Error fetching data:', error);
+          }
+        );
+      } else {
+        console.error('AssetType parameter not found.');
       }
-    );
+    });
   }
+  
 
   onCardClicked() {
     this.getDataForDashboard();

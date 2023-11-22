@@ -263,6 +263,9 @@ export class DashboardComponent implements OnInit {
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
   }
+  onAssetCardClicked(AssetType: string) {
+    this.router.navigateByUrl(`AssetList/${AssetType}`);
+  }  
 
   private formatDataToWorksheet(data: any[]): any[] {
     const worksheet: any[] = [];
