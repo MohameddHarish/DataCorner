@@ -131,7 +131,8 @@ export class AssettableComponent implements OnInit {
   }
 
   downloadExcel() {
-    const apiURL = environment.baseUrl + 'api/assets/getAssetDetails';
+    const assetType = this.route.snapshot.params['assetType'];
+    const apiURL =  environment.baseUrl + `api/AssetList/${assetType}`;
 
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
