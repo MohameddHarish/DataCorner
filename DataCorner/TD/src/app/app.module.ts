@@ -41,8 +41,6 @@ import { AssettableComponent } from './component/assettable/assettable.component
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { MenubarComponent } from './layout/menubar/menubar.component';
-import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
@@ -59,7 +57,6 @@ import { MaterialModule } from './material/material.module';
     ProjectPopupComponent,
     AssetManagementComponent,
     AssettableComponent,
-    MenubarComponent,
   ],
   imports: [
   
@@ -88,8 +85,6 @@ import { MaterialModule } from './material/material.module';
     MatCheckboxModule,
     NgChartsModule,
     NgApexchartsModule,
-    MaterialModule
-   
     
   ],
   bootstrap: [AppComponent]

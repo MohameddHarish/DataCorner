@@ -9,17 +9,12 @@ import { ManagePermissionComponent } from './component/manage-permission/manage-
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
 import { AssettableComponent } from './component/assettable/assettable.component';
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
-import { MenubarComponent } from './layout/menubar/menubar.component';
 
 const routes: Routes = [
  
   {
     path: '',
     component: LoginComponent
-  },
-  {
-    path:'home',
-    component:MenubarComponent
   },
   { path: 'employee/:category', component: EmployeetableComponent },
 
