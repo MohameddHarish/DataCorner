@@ -4,9 +4,9 @@
   <div class="row" >
   <div class="column"><h2>DASHBOARD</h2></div>
   <div class="column" style="margin-left: 70%;">
-    <ng-container *ngIf="userRole === 'admin'">
+    <!-- <ng-container *ngIf="userRole === 'admin'">
       <button mat-raised-button style="margin-left: 70px;" color="primary" (click)="assestdt()">Assests</button>
-    </ng-container>
+    </ng-container> -->
   </div>
 </div>
 
@@ -187,9 +187,9 @@
   <div class="row" >
   <div class="column"><h2>DASHBOARD</h2></div>
   <div class="column" style="margin-left: 70%;">
-    <ng-container *ngIf="userRole === 'operation'">
+    <!-- <ng-container *ngIf="userRole === 'operation'">
       <button mat-raised-button style="margin-left: 70px;" color="primary" (click)="assestdt()">Assests</button>
-    </ng-container>
+    </ng-container> -->
   </div>
 </div>
 
@@ -200,14 +200,14 @@
     <div  class="col-md-2">
       <div class="card" style="background-color:rgba(75, 192, 192, 0.2) ;">
         <div  class="card-body">
-          <mat-card style="background-color:rgba(75, 192, 192, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('Laptop')">
+          <mat-card style="background-color:rgba(75, 192, 192, 0.2) ;" *ngIf="AssetcardData" (click)="onAssetCardClicked('Laptop')">
             <mat-card-title>LAPTOP</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.laptop }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('Laptop')">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('Laptop')">
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>
@@ -218,14 +218,14 @@
     <div class="col-md-2">
       <div class="card" style="background-color:rgba(255, 99, 132, 0.2) ;">
         <div class="card-body">
-          <mat-card style="background-color:rgba(255, 99, 132, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('Phone')">
+          <mat-card style="background-color:rgba(255, 99, 132, 0.2) ;" *ngIf="AssetcardData" (click)="onAssetCardClicked('Phone')">
             <mat-card-title>MOBILES</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.phone }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('Phone')" >
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('Phone')" >
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>
@@ -235,14 +235,14 @@
     <div class="col-md-2">
       <div class="card" style="background-color:rgba(255, 205, 86, 0.2) ;">
         <div class="card-body">
-          <mat-card style="background-color:rgba(255, 205, 86, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('SimCards')">
+          <mat-card style="background-color:rgba(255, 205, 86, 0.2) ;" *ngIf="AssetcardData" (click)="onAssetCardClicked('SIM card')">
             <mat-card-title>SIM CARDS</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.simCards }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('SimCards')">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('SIM card')">
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>
@@ -252,14 +252,14 @@
     <div class="col-md-2">
       <div class="card" style="background-color:rgba(54, 162, 235, 0.2) ;">
         <div class="card-body">
-          <mat-card style="background-color:rgba(54, 162, 235, 0.2) ;"  *ngIf="AssetcardData" (click)="onCardClicked('MagicJack')">
+          <mat-card style="background-color:rgba(54, 162, 235, 0.2) ;"  *ngIf="AssetcardData" (click)="onAssetCardClicked('Magicjack')">
             <mat-card-title>MAGIC JACK</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.magicJack }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('MagicJack')" >
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('Magicjack')" >
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>
@@ -270,14 +270,14 @@
     <div class="col-md-2">
       <div class="card" style="background-color:rgba(153, 102, 255, 0.2) ;">
         <div class="card-body">
-          <mat-card style="background-color:rgba(153, 102, 255, 0.2) ;" *ngIf="AssetcardData" (click)="onCardClicked('VoipPhone')">
+          <mat-card style="background-color:rgba(153, 102, 255, 0.2) ;" *ngIf="AssetcardData" (click)="onAssetCardClicked('VOIP phone')">
             <mat-card-title>VOIP PHONE</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.voipPhone }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('VoipPhone')">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('VOIP phone')">
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>
@@ -288,14 +288,14 @@
     <div class="col-md-2">
       <div class="card" style="background-color:rgba(99, 226, 179, 0.331) ;">
         <div class="card-body">
-          <mat-card *ngIf="AssetcardData" style="background-color:rgba(99, 226, 179, 0.331) ;" (click)="AssetcardClicked()">
+          <mat-card *ngIf="AssetcardData" style="background-color:rgba(99, 226, 179, 0.331) ;" (click)="onAssetCardClicked('All')">
             <mat-card-title>ALL</mat-card-title>
             <mat-card-content>
               <b>{{ AssetcardData.allAssets }}</b>
             </mat-card-content>
           </mat-card>
           <ng-container *ngIf="userRole === 'operation'">
-          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="downloadExcel('All')">
+          <button mat-stroked-button matTooltip="Download" class="btn-border" (click)="AssetdownloadExcel('All')">
             Export<mat-icon>download</mat-icon>
           </button>
         </ng-container>

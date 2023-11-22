@@ -263,6 +263,9 @@ export class DashboardComponent implements OnInit {
   onCardClicked(category: string) {
     this.router.navigateByUrl(`employee/${category}`);
   }
+  onAssetCardClicked(AssetType: string) {
+    this.router.navigateByUrl(`AssetList/${AssetType}`);
+  }  
 
   private formatDataToWorksheet(data: any[]): any[] {
     const worksheet: any[] = [];
@@ -307,6 +310,24 @@ export class DashboardComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+
+  AssetdownloadExcel(assetType: string) {
+    const apiURL =  environment.baseUrl + `api/AssetList/${assetType}`;
+
+    this.http.get<any[]>(apiURL).subscribe(
+      (data: any[]) => {
+        const worksheet = this.formatDataToWorksheet(data);
+        var currentdate = new Date();
+        const filename = `Report_${assetType}_${currentdate.getDate()}-${currentdate.getMonth() + 1}-${currentdate.getFullYear()}`;
+        this.downloadExcelFile(worksheet, filename);
+      },
+      (error) => {
+        console.error('Error fetching API data:', error);
+      } 
+    );
+  }
+  
+  
 }
 
 
