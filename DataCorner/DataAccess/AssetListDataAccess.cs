@@ -47,8 +47,8 @@ namespace DataCorner.DataAccess
                 assets.Add(new AddAssets
                 {
                     AssetNo = reader["AssetNo"].ToString(),
-                    EmpId = Convert.ToInt32(reader["EmpId"]),
-                    EmpName = reader["EmpName"].ToString(),
+                    //EmpId = Convert.ToInt32(reader["EmpId"]),
+                    //EmpName = reader["EmpName"].ToString(),
                     Location = reader["Location"].ToString(),
                     Brand = reader["Brand"].ToString(),
                     ModelNo = reader["ModelNo"].ToString(),

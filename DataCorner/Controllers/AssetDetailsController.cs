@@ -20,11 +20,11 @@ namespace DataCorner.Controllers
 
         [HttpGet]
         [Route("getAssetDetails")]
-        public async Task<IActionResult> GetAssetDetails([FromQuery] int empId, [FromQuery] int flag = 1)
+        public async Task<IActionResult> GetAssetDetails([FromQuery] string assetNo, [FromQuery] int flag = 1)
         {
             try
             {
-                var assetDetails = await _assetDetailsService.GetAssetDetailsAsync(empId, flag);
+                var assetDetails = await _assetDetailsService.GetAssetDetailsAsync(assetNo, flag);
 
                 if (assetDetails != null)
                 {

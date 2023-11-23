@@ -34,13 +34,13 @@ export class AssetManagementComponent implements OnInit {
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const empId = params['empId'];
+      const assetNo = params['assetNo'];
 
-      if (empId) {
+      if (assetNo) {
         
         this.isUpdateMode = true;
         this.createForm();
-        this.getAssetData(empId);
+        this.getAssetData(assetNo);
       } else {
        
         this.createForm();
@@ -52,8 +52,8 @@ export class AssetManagementComponent implements OnInit {
 
   private createForm(): void {
     this.myForm = this.fb.group({
-      empId: ['', Validators.required],
-      empName: ['', Validators.required],
+      // empId: ['', Validators.required],
+      // empName: ['', Validators.required],
       assetNo: ['', Validators.required],
       brand: ['', Validators.required],
       modelNo: ['', Validators.required],
@@ -80,16 +80,16 @@ export class AssetManagementComponent implements OnInit {
 
     return this.visibleFields.includes(fieldName);
   }
-  private getAssetData(empId: number): void {
+  private getAssetData(assetNo: any): void {
     const apiURL = environment.baseUrl + `api/assets/getAssetDetails`;
 
-    this.http.get<any[]>(apiURL, { params: { empId: empId.toString(), flag: '2' } }).subscribe(
+    this.http.get<any[]>(apiURL, { params: { assetNo: assetNo.toString(), flag: '2' } }).subscribe(
       (data: any[]) => {
         if (data && data.length > 0) {
           const assetData = data[0];
           this.myForm.patchValue({
-            empId: assetData.empId,
-            empName: assetData.empName,
+            // empId: assetData.empId,
+            // empName: assetData.empName,
             assetNo: assetData.assetNo,
             brand: assetData.brand,
             modelNo: assetData.modelNo,

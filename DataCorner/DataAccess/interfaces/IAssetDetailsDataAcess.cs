@@ -6,6 +6,6 @@ namespace DataCorner.DataAccess.Interfaces
 {
     public interface IAssetDetailsDataAccess
     {
-        Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag);
+        Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(string assetNo, int flag);
     }
 }

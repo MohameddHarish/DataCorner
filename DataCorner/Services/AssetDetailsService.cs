@@ -15,11 +15,11 @@ namespace DataCorner.Services
             _assetDetailsDataAccess = assetDetailsDataAccess;
         }
 
-        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag)
+        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(string assetNo, int flag)
         {
             try
             {
-                return await _assetDetailsDataAccess.GetAssetDetailsAsync(empId, flag);
+                return await _assetDetailsDataAccess.GetAssetDetailsAsync(assetNo, flag);
             }
             catch (Exception ex)
             {

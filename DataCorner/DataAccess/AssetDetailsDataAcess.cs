@@ -17,7 +17,7 @@ namespace DataCorner.DataAccess
             _connectionString = configuration.GetConnectionString("ttdconnection");
         }
 
-        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(int empId, int flag)
+        public async Task<IEnumerable<AddAssets>> GetAssetDetailsAsync(string assetNo, int flag)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace DataCorner.DataAccess
 
                     var cmd = new MySqlCommand("GetAssetDetails", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_EmpId", empId);
+                    cmd.Parameters.AddWithValue("p_AssetNo", assetNo);
                     cmd.Parameters.AddWithValue("p_Flag", flag);
 
                     var assets = new List<AddAssets>();
@@ -39,8 +39,8 @@ namespace DataCorner.DataAccess
                             var asset = new AddAssets
                             {
                                 AssetNo = reader["AssetNo"].ToString(),
-                                EmpId = (int)reader["EmpId"],
-                                EmpName = reader["EmpName"].ToString(),
+                                //EmpId = (int)reader["EmpId"],
+                                //EmpName = reader["EmpName"].ToString(),
                                 Location = reader["Location"].ToString(),
                                 Brand = reader["Brand"].ToString(),
                                 ModelNo = reader["ModelNo"].ToString(),

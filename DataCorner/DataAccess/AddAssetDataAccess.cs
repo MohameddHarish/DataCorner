@@ -27,8 +27,8 @@ public class AddAssetDataAcess : IAddAssestDataAccess
                 var cmd = new MySqlCommand("InsertAssetDetails", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_AssetNo", assetDetails.AssetNo);
-                cmd.Parameters.AddWithValue("p_EmpId", assetDetails.EmpId);
-                cmd.Parameters.AddWithValue("p_EmpName", assetDetails.EmpName);
+                //cmd.Parameters.AddWithValue("p_EmpId", assetDetails.EmpId);
+                //cmd.Parameters.AddWithValue("p_EmpName", assetDetails.EmpName);
                 cmd.Parameters.AddWithValue("p_Location", assetDetails.Location);
                 cmd.Parameters.AddWithValue("p_Brand", assetDetails.Brand);
                 cmd.Parameters.AddWithValue("p_ModelNo", assetDetails.ModelNo);

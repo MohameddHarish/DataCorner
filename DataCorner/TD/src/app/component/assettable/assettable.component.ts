@@ -18,7 +18,7 @@ import { Asset } from 'src/app/interfaces/asset-form-interface';
 export class AssettableComponent implements OnInit {
   dataSource = new MatTableDataSource<Asset>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['serialNumber', 'assetNo', 'empId', 'empName', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description',
+  displayedColumns: string[] = ['serialNumber', 'assetNo',  'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description',
         'assetStatus',
         'serialNo',
         'purchaseDate',
@@ -94,20 +94,22 @@ export class AssettableComponent implements OnInit {
     this.router.navigateByUrl(`view-form/${data.empId}`);
   }
   performAction(row: any) {
-    // Assuming row has the necessary data, including empId
-    const empId = row?.empId;
+    // Assuming row has the necessary data, including assetNo
+    const assetNo = row?.assetNo;
   
-    // Check if empId is a valid number
-    if (isNaN(empId) || empId === null) {
-      console.error('Invalid empId:', empId);
+    // Check if assetNo is a valid string
+    if (!assetNo) {
+      console.error('Invalid assetNo:', assetNo);
       return;
     }
-    // Construct the URL with the empId parameter
-    const url = `https://localhost:7247/api/assets/getAssetDetails?empId=${empId}&flag=2`;
+  
+    // Construct the URL with the assetNo parameter
+    const url = `https://localhost:7247/api/assets/getAssetDetails?assetNo=${assetNo}&flag=2`;
   
     // Navigate to the constructed URL
-    this.router.navigate(['asset-management'], { queryParams: { empId: empId, flag: 2 } });
+    this.router.navigate(['asset-management'], { queryParams: { assetNo: assetNo, flag: 2 } });
   }
+  
   
   
   

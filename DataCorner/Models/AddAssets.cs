@@ -5,8 +5,8 @@ namespace DataCorner.Models
     public class AddAssets
     {
         public string AssetNo { get; set; }
-        public int EmpId { get; set; }
-        public string EmpName { get; set; }
+        //public int EmpId { get; set; }
+        //public string EmpName { get; set; }
         public string Location { get; set; }
         public string Brand { get; set; }
         public string ModelNo { get; set; }
