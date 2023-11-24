@@ -1,4 +1,3 @@
-// assettable.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,7 +8,8 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
 import { utils, WorkBook, write } from 'xlsx';
 import { Asset } from 'src/app/interfaces/asset-form-interface';
-
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-assettable',
   templateUrl: './assettable.component.html',
@@ -18,6 +18,7 @@ import { Asset } from 'src/app/interfaces/asset-form-interface';
 export class AssettableComponent implements OnInit {
   dataSource = new MatTableDataSource<Asset>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  userRole:string ='';
   displayedColumns: string[] = ['serialNumber', 'assetNo',  'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description',
         'assetStatus',
         'serialNo',
@@ -26,8 +27,18 @@ export class AssettableComponent implements OnInit {
         'originalValue',
         'currentValue',
         'warranty',
-        'remarks','action'];	
+        'remarks','actions'];	
+        showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
+  columns: string[] = ['serialNumber', 'assetNo', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus',
+  'serialNo',
+  'purchaseDate',
+  'invoiceNo',
+  'originalValue',
+  'currentValue',
+  'warranty',
+  'remarks','actions'];	
+  selectedRows: any[] = [];
   [key: string]: any
   constructor(
     private http: HttpClient,
@@ -47,8 +58,12 @@ export class AssettableComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    //this.dataSource.sort=this.sort;
   }
-
+  updateUserProperty(user: any, column: string, event: any) {
+    const newValue = event.target.value; 
+    user[column] = newValue;
+  }
   
   goBack() {
     window.history.back();
@@ -56,7 +71,7 @@ export class AssettableComponent implements OnInit {
 
   assetAdd() {
     this.router.navigateByUrl('asset-management');
-  }
+  } 
 
   getDataFromAPI(assetType: string) {
     const apiURL = environment.baseUrl + `api/AssetList/${assetType}`;
@@ -139,7 +154,7 @@ export class AssettableComponent implements OnInit {
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
         //const columnsToInclude = this.selectedColumns;
-        const columnsToExclude = ['select', 'serialNumber', 'action', 'submit'];
+        const columnsToExclude = ['select', 'serialNumber', 'actions', 'submit'];
   
         // Use the selected columns excluding the ones to exclude
         const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
@@ -203,4 +218,68 @@ export class AssettableComponent implements OnInit {
     a.click();
     window.URL.revokeObjectURL(url);
   }
+  toggleAllColumns(event: MatCheckboxChange) {
+    this.showColumns = event.checked;
+
+    if (this.showColumns) {
+      this.selectedColumns = this.columns;
+      console.log(this.selectedColumns);
+      
+    } else {
+      this.selectedColumns = this.displayedColumns;
+    }
+  }
+  getSerialNumber(index: number): number {
+    return index + 1;
+  }
+  
+  toggleColumns() {
+    if (this.showColumns) {
+      this.selectedColumns = this.displayedColumns;
+    } else {
+      this.selectedColumns = ['serialNumber', 'assetNo', 'empId', 'empName','brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus','actions'];
+    }
+  }
+  
+  toggleRowSelection(user: any) {
+    const index = this.selectedRows.findIndex((selectedUser) => selectedUser.empId === user.empId);
+  
+    if (index === -1) {
+      // User not selected, add to selectedRows
+      this.selectedRows.push(user);
+    } else {
+      // User already selected, remove from selectedRows
+      this.selectedRows.splice(index, 1);
+    }
+  }
+  isSelected(row: any): boolean {
+    console.log(row);
+    return this.selectedRows.some((selectedUser) => selectedUser.empId === row.empId);
+  }
+  submitSelectedRows() {
+    for (const user of this.selectedRows) {
+      const apiURL = environment.baseUrl + 'api/assets';
+      this.http.post(apiURL, user).subscribe(
+        (response) => {
+          console.log('Data sent successfully:', response);
+          const index = this.selectedRows.findIndex((selectedUser) => selectedUser.empId === user.empId);
+          if (index !== -1) {
+            this.selectedRows.splice(index, 1);
+          }
+        },
+        (error) => {
+          console.error('Error sending data:', error);
+        }
+      );
+    }
+   
+  }
+  isColumnVisible(column: string): boolean {
+    return this.selectedColumns.includes(column);
+  }
 }
+
+
+
+
+
