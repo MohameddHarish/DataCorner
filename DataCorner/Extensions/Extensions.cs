@@ -37,6 +37,8 @@ namespace DataCorner.Extensions
             services.AddScoped<IAssetDashboardDataAccess,AssetDashboardDataAccess>();
             services.AddScoped<IAssetListService, AssetListService>();
             services.AddScoped<IAssetListDataAccess, AssetListDataAccess>();
+            services.AddScoped<IAssetHistoryDataAccess, AssetHistoryDataAccess>();
+            services.AddScoped<IAssetHistoryService, AssetHistoryService>();
         }
 
     }
