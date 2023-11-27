@@ -18,6 +18,20 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+
+            <div class="col-md-3">
+              <mat-form-field appearance="outline">
+                  <mat-label>Asset Type</mat-label>
+                  <mat-select formControlName="assetType">
+                      <mat-option *ngFor="let option of assetTypeOptions" [value]="option">
+                          {{ option }}
+                      </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="myForm.get('assetType')?.invalid && myForm.get('assetType')?.touched">
+                      Asset Type is required.
+                  </mat-error>
+              </mat-form-field>
+          </div>
             <!-- <div class="col-md-3" >
                 <mat-form-field appearance="outline" >
                     <mat-label>Emp Id</mat-label>
@@ -38,15 +52,7 @@
                 </mat-form-field>
             </div> -->
             <!-- Asset Status Field -->
-      <div class="col-md-3">
-        <mat-form-field appearance="outline">
-          <mat-label>Asset Status</mat-label>
-          <input matInput placeholder="Asset Status" formControlName="assetStatus">
-          <mat-error *ngIf="myForm.get('assetStatus')?.invalid && myForm.get('assetStatus')?.touched">
-            Asset Status is required.
-          </mat-error>
-        </mat-form-field>
-      </div>
+      
             <div class="col-md-3">
               <mat-form-field appearance="outline">
                   <mat-label>Location</mat-label>
@@ -61,6 +67,19 @@
               </mat-form-field>
           </div>
 
+          <div class="col-md-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Asset Status</mat-label>
+              <mat-select formControlName="assetStatus">
+                <mat-option *ngFor="let option of assetStatusOptions" [value]="option">
+                    {{ option }}
+                </mat-option>
+            </mat-select>
+              <mat-error *ngIf="myForm.get('assetStatus')?.invalid && myForm.get('assetStatus')?.touched">
+                Asset Status is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
             
 
             <div class="col-md-3" >
@@ -165,19 +184,7 @@
                 </mat-form-field>
             </div>
       <!-- Asset Type Field -->
-      <div class="col-md-3">
-        <mat-form-field appearance="outline">
-            <mat-label>Asset Type</mat-label>
-            <mat-select formControlName="assetType">
-                <mat-option *ngFor="let option of assetTypeOptions" [value]="option">
-                    {{ option }}
-                </mat-option>
-            </mat-select>
-            <mat-error *ngIf="myForm.get('assetType')?.invalid && myForm.get('assetType')?.touched">
-                Asset Type is required.
-            </mat-error>
-        </mat-form-field>
-    </div>
+      
 
       <!-- Description Field -->
       <div class="col-md-3" >
