@@ -105,6 +105,12 @@
                     <mat-icon class="material-symbols-outlined">visibility</mat-icon>
                   </button>
                 </ng-template>
+                <!-- Modify this section in your HTML -->
+<ng-container *ngIf="column === 'status'">
+  <button mat-button color="primary" (click)="performStatusAction(user)" *ngIf="user.showStatusButton !== false">
+    {{ user.allocationAction }}
+  </button>
+</ng-container>
               </td>
             </ng-container>
           </ng-container>
@@ -114,6 +120,7 @@
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" [attr.colspan]="selectedColumns.length">No data matching the filter "{{ input.value }}"</td>
           </tr>
+          
         </table>
       </div>
     </div>

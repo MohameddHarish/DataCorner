@@ -7,5 +7,8 @@ export interface Asset {
     modelNo: string;
     issues: string;
     [key: string]: any;
+    assetStatus: string;
+  showStatusButton?: boolean;
+  allocationAction?: string;
   }
   

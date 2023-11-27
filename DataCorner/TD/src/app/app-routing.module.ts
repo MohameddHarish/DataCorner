@@ -9,6 +9,8 @@ import { ManagePermissionComponent } from './component/manage-permission/manage-
 import { ProjectPopupComponent } from './component/project-popup/project-popup.component';
 import { AssettableComponent } from './component/assettable/assettable.component';
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
+import { AssetAllocateFormComponent } from './component/asset-allocate-form/asset-allocate-form.component';
+import { AssetReturnFormComponent } from './component/asset-return-form/asset-return-form.component';
 
 const routes: Routes = [
  
@@ -56,6 +58,14 @@ const routes: Routes = [
   {
     path: 'AssetList/:assetType',
     component: AssettableComponent
+  },
+  {
+    path:'Allocate',
+    component:AssetAllocateFormComponent
+  },
+  {
+    path:'Return',
+    component:AssetReturnFormComponent
   }
   
  

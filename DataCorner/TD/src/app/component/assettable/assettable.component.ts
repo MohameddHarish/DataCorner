@@ -10,6 +10,7 @@ import { utils, WorkBook, write } from 'xlsx';
 import { Asset } from 'src/app/interfaces/asset-form-interface';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort } from '@angular/material/sort';
+
 @Component({
   selector: 'app-assettable',
   templateUrl: './assettable.component.html',
@@ -27,7 +28,7 @@ export class AssettableComponent implements OnInit {
         'originalValue',
         'currentValue',
         'warranty',
-        'remarks','actions'];	
+        'remarks','status','actions'];	
         showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
   columns: string[] = ['serialNumber', 'assetNo', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus',
@@ -37,8 +38,10 @@ export class AssettableComponent implements OnInit {
   'originalValue',
   'currentValue',
   'warranty',
-  'remarks','actions'];	
+  'remarks','status','actions'];	
   selectedRows: any[] = [];
+  statusColumn = 'status';
+
   [key: string]: any
   constructor(
     private http: HttpClient,
@@ -87,6 +90,10 @@ export class AssettableComponent implements OnInit {
       if (assetType) {
         this.getDataFromAPI(assetType).subscribe(
           (data: Asset[]) => {
+            data.forEach(user => {
+              user['showStatusButton'] = true; // Set showStatusButton to true for each row
+              user['allocationAction'] = user.assetStatus === 'Issued' ? 'Return' : 'Allocate'; // Set initial action
+            });
             this.dataSource.data = data;
             console.log(data);
           },
@@ -277,6 +284,20 @@ export class AssettableComponent implements OnInit {
   isColumnVisible(column: string): boolean {
     return this.selectedColumns.includes(column);
   }
+  performStatusAction(row: any) {
+    // Determine the action based on the assetStatus
+    if (row.assetStatus === 'Issued') {
+      row.allocationAction = 'Return';
+      this.router.navigate(['Return']); // Navigate to AssetReturnFormComponent
+    } else {
+      row.allocationAction = 'Allocate';
+      this.router.navigate(['Allocate']); // Navigate to AssetAllocateFormComponent
+    }
+  
+    // Your logic for the status button click
+    console.log(`${row.allocationAction} button clicked for:`, row);
+  }
+  
 }
 
 
