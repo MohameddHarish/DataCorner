@@ -19,6 +19,7 @@ export class AssetManagementComponent implements OnInit {
   visibleFields: string[] = [];
   assetTypeOptions: string[] = ['Laptop', 'Charger', 'Mouse', 'Phone', 'SIM card', 'VOIP phone', 'Magicjack', 'Monitor'];
   locationOptions: string[] = ['Guindy', 'Mepz', 'Tidel', 'Tanjore', 'Client Location / WFH'];
+  assetStatusOptions: string[]= ['Issued','Available','Under Repair','Decommissioned','Damaged'];
   assetGroupOptions: string[] = ['Admin Asset'];
   constructor(
     private fb: FormBuilder,
