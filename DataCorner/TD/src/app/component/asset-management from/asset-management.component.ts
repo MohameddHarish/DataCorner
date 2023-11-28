@@ -22,6 +22,7 @@ export class AssetManagementComponent implements OnInit {
   assetStatusOptions: string[]= ['Issued','Available','Under Repair','Decommissioned','Damaged'];
   assetGroupOptions: string[] = ['Admin Asset'];
   constructor(
+    
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
