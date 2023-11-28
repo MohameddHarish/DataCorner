@@ -120,12 +120,10 @@
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3">
+              <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                   <mat-label>Purchase Date</mat-label>
-                  <input matInput [matDatepicker]="purchaseDatepicker" placeholder="purchaseDate" formControlName="purchaseDate">
-                  <mat-datepicker-toggle matSuffix [for]="purchaseDatepicker"></mat-datepicker-toggle>
-                  <mat-datepicker #purchaseDatepicker></mat-datepicker>
+                  <input matInput placeholder="purchaseDate" formControlName="purchaseDate">
                   <mat-error *ngIf="myForm.get('purchaseDate')?.invalid && myForm.get('purchaseDate')?.touched">
                     Purchase Date is required.
                   </mat-error>
