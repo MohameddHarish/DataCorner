@@ -291,7 +291,7 @@ export class AssettableComponent implements OnInit {
       this.router.navigate(['Return']); // Navigate to AssetReturnFormComponent
     } else {
       row.allocationAction = 'Allocate';
-      this.router.navigate(['Allocate']); // Navigate to AssetAllocateFormComponent
+      this.router.navigate(['Allocate'], { queryParams: { assetNo: row.assetNo } });
     }
   
     // Your logic for the status button click

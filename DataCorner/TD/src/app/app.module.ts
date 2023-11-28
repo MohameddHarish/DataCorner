@@ -41,6 +41,8 @@ import { AssettableComponent } from './component/assettable/assettable.component
 import { AssetManagementComponent } from './component/asset-management from/asset-management.component';
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { AssetAllocateFormComponent } from './component/asset-allocate-form/asset-allocate-form.component';
+
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ProjectPopupComponent,
     AssetManagementComponent,
     AssettableComponent,
+    AssetAllocateFormComponent,
   ],
   imports: [
   
