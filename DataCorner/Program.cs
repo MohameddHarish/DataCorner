@@ -29,10 +29,17 @@ app.UseRouting();
 // Enable CORS
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+// Serve Angular static files
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+app.UseRouting();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
+// This middleware will serve your Angular app for all other requests
 app.MapFallbackToFile("index.html");
 
 app.Run();

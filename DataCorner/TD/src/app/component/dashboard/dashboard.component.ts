@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
 
   //asset dashboard api
   getAssetData(){
-    const apiURL = `https://localhost:7247/api/AssetDashboard`;
+    const apiURL = environment.baseUrl+'api/AssetDashboard';
     this.http.get(apiURL).subscribe(
       (data:any)=>{
       this.AssetcardData = data;

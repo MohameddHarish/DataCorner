@@ -124,9 +124,9 @@ export class AssettableComponent implements OnInit {
       console.error('Invalid assetNo:', assetNo);
       return;
     }
-  
+
     // Construct the URL with the assetNo parameter
-    const url = `https://localhost:7247/api/assets/getAssetDetails?assetNo=${assetNo}&flag=2`;
+    const url = environment.baseUrl+`/api/assets/getAssetDetails?assetNo=${assetNo}&flag=2`;
   
     // Navigate to the constructed URL
     this.router.navigate(['asset-management'], { queryParams: { assetNo: assetNo, flag: 2 } });
