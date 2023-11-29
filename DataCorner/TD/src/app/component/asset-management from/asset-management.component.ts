@@ -84,6 +84,7 @@ export class AssetManagementComponent implements OnInit {
   }
   private getAssetData(assetNo: any): void {
     const apiURL = environment.baseUrl + `api/assets/getAssetDetails`;
+    
 
     this.http.get<any[]>(apiURL, { params: { assetNo: assetNo.toString(), flag: '2' } }).subscribe(
       (data: any[]) => {
@@ -102,7 +103,7 @@ export class AssetManagementComponent implements OnInit {
             description:assetData.description,
             assetStatus:assetData.assetStatus,
             serialNo:assetData.serialNo,
-            purchaseDate:assetData.purchaseDate,
+            purchaseDate: this.convertToDate(assetData.purchaseDate),
             invoiceNo:assetData.invoiceNo,
             originalValue:assetData.originalValue,
             currentValue:assetData.currentValue,
@@ -118,6 +119,20 @@ export class AssetManagementComponent implements OnInit {
       }
     );
   }
+  private convertToDate(dateString: string | undefined): Date | null {
+    if (!dateString) {
+      return null;
+    }
+  
+    const [day, month, year] = dateString.split('-').map(Number);
+  
+    // Set a default time (e.g., 12:00 PM) for the date
+    const defaultTime = '12:00:00';
+    const [hour, minute, second] = defaultTime.split(':').map(Number);
+  
+    // Months in JavaScript are zero-based, so subtract 1 from the month
+    return new Date(year, month - 1, day, hour, minute, second);
+  }
   
   goBack() {
     window.history.back();
@@ -131,7 +146,12 @@ export class AssetManagementComponent implements OnInit {
 
   onSubmit(): void {
     if (this.myForm.valid) {
-      const formData = this.myForm.value;
+      // Clone the form data to avoid modifying the original form values
+      const formData = { ...this.myForm.value };
+  
+      // Convert the purchaseDate to the desired format (DD-MM-YYYY) for submission
+      formData.purchaseDate = this.convertDateToCustomFormat(formData.purchaseDate);
+  
       const apiURL = environment.baseUrl + 'api/assets';
   
       this.http.post(apiURL, formData).subscribe(
@@ -146,7 +166,20 @@ export class AssetManagementComponent implements OnInit {
           console.error('Error sending data:', error);
         }
       );
-      
     }
   }
+  
+  // Function to convert date to custom format (DD-MM-YYYY)
+  private convertDateToCustomFormat(date: Date | null): string | null {
+    if (!date) {
+      return null;
+    }
+  
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+  
+    return `${day}-${month}-${year}`;
+  }
+  
 }
