@@ -54,8 +54,8 @@
       <div class="col-md-3" >
         <mat-form-field appearance="outline">
           <mat-label>Remarks</mat-label>
-          <input matInput placeholder="Remarks" formControlName="remarks">
-          <mat-error *ngIf="myForm.get('remarks')?.invalid && myForm.get('remarks')?.touched">
+          <input matInput placeholder="Remarks" formControlName="allocateRemarks">
+          <mat-error *ngIf="myForm.get('allocateRemarks')?.invalid && myForm.get('allocateRemarks')?.touched">
             Remarks is required.
           </mat-error>
         </mat-form-field>
@@ -65,7 +65,7 @@
 
     </div>
     <div class="action" *ngIf="userRole === 'operation'" style="margin-top: -18px;">
-        <button mat-raised-button color="primary" type="submit" (click)="goBack()" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+      <button mat-raised-button color="primary" type="submit">Allocate</button>
         <button mat-raised-button color="warn" type="button" (click)="goBack()" >Cancel</button>
       </div>      
 </form>

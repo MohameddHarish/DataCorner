@@ -291,12 +291,14 @@ export class AssettableComponent implements OnInit {
       this.router.navigate(['Return']); // Navigate to AssetReturnFormComponent
     } else {
       row.allocationAction = 'Allocate';
+      // Navigate to AssetAllocateFormComponent and pass assetNo in queryParams
       this.router.navigate(['Allocate'], { queryParams: { assetNo: row.assetNo } });
     }
   
     // Your logic for the status button click
     console.log(`${row.allocationAction} button clicked for:`, row);
   }
+  
   
 }
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,12 +14,12 @@ import { environment } from 'src/environments/environment.development';
 })
 export class AssetAllocateFormComponent implements OnInit  {
 
- myForm!: FormGroup;
+  myForm!: FormGroup;
   userRole = '';
   isUpdateMode = false;
   visibleFields: string[] = [];
 
-constructor(
+  constructor(
     private fb: FormBuilder,
     private router: Router,
     private http: HttpClient,
@@ -28,93 +28,50 @@ constructor(
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      const assetNo = params['assetNo'];
-
-      if (assetNo) {
-        
-        this.isUpdateMode = true;
-        this.createForm();
-        this. getAssetData(assetNo);
-      } else {
-       
-        this.createForm();
-      }
-
-      this.userRole = this.authenticationService.getUserRole();
-    });
-  }
-
-  
-  private createForm(): void {
+  ngOnInit() {
     this.myForm = this.fb.group({
+      assetNo: ['', Validators.required],
       empId: ['', Validators.required],
       empName: ['', Validators.required],
-      assetNo: ['', Validators.required],
-      allocatedOn:['', Validators.required],
-      allocateRemarks:['', Validators.required],
-
+      allocatedOn: ['', Validators.required],
+      allocateRemarks: ['', Validators.required],
     });
-  }
-
-  isFieldVisible(fieldName: string): boolean {
-    if (this.userRole === 'admin') {
-      return true;
-    }
-
-    return this.visibleFields.includes(fieldName);
-  }
-  private getAssetData(assetNo: any): void {
-    const apiURL = environment.baseUrl + `api/assets/getAssetDetails`;
-
-    this.http.get<any[]>(apiURL, { params: { assetNo: assetNo.toString(), flag: '2' } }).subscribe(
-      (data: any[]) => {
-        if (data && data.length > 0) {
-          const assetData = data[0];
-        
-          this.myForm.patchValue({
-            assetNo: assetData.assetNo,
-            remarks:assetData.remarks,
-          });
-        } else {
-          console.error('No asset data found for the provided empId.');
-        }
-      },
-      (error) => {
-        console.error('Error fetching asset data:', error);
+  
+    // Get the assetNo from the queryParams
+    this.route.queryParams.subscribe((params) => {
+      const assetNo = params['assetNo'];
+  
+      // Use assetNo as needed, e.g., populate the assetNo form control
+      if (assetNo) {
+        this.myForm.patchValue({ assetNo: assetNo });
       }
-    );
-  }
-  
-  goBack() {
-    window.history.back();
-  }
-  showRowUpdatedSnackbar() {
-    this.snackBar.open('Data Submited successfully', 'Close', {
-      duration: 3000, 
-      verticalPosition: 'top',
     });
-  }
-
-  onSubmit(): void {
-    if (this.myForm.valid) {
-      const formData = this.myForm.value;
-      const apiURL = environment.baseUrl + 'api/AssetHistory/allocate';
   
-      this.http.post(apiURL, formData).subscribe(
+    this.userRole = this.authenticationService.getUserRole();
+  }
+  
+  
+
+onSubmit() {
+  if (this.myForm.valid) {
+    const formData = { ...this.myForm.value };
+    const apiURL = environment.baseUrl + 'api/assethistory/Allocate';
+    this.http.post(apiURL, formData)
+      .subscribe(
         (response) => {
-          console.log('Form data submitted successfully:', response);
-          const category = formData.category;
-          // this.router.navigateByUrl('assets/' + category);
-          this.showRowUpdatedSnackbar();
-          // window.location.reload();
+          console.log('Post request successful', response);
+          this.snackBar.open('Allocation successful', 'Close', { duration: 3000 });
+          this.router.navigateByUrl('/assettable')
         },
         (error) => {
-          console.error('Error sending data:', error);
+
         }
       );
-      
-    }
+  }
+}
+
+
+  goBack() {
+    window.history.back();
   }
 }
