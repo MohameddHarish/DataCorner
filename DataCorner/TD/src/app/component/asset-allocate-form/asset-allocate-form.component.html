@@ -40,7 +40,7 @@
                 </mat-form-field>
             </div> 
            
-            <div class="col-md-3" >
+            <!-- <div class="col-md-3" >
                 <mat-form-field appearance="outline">
                     <mat-label>Allocated ON</mat-label>
                     <input matInput placeholder="allocatedOn" formControlName="allocatedOn">
@@ -48,6 +48,17 @@
                         Name is required.
                     </mat-error>
                 </mat-form-field>
+            </div> -->
+            <div class="col-md-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Allocated On</mat-label>
+                <input matInput [matDatepicker]="AllocateDatepicker" placeholder="Allocated On" formControlName="allocatedOn">
+                <mat-datepicker-toggle matSuffix [for]="AllocateDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #AllocateDatepicker></mat-datepicker>
+                <mat-error *ngIf="myForm.get('allocatedOn')?.invalid && myForm.get('allocatedOn')?.touched">
+                  Allocated On is required.
+                </mat-error>
+              </mat-form-field>
             </div>
       
  

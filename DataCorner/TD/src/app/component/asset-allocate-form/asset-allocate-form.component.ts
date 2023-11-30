@@ -49,22 +49,40 @@ export class AssetAllocateFormComponent implements OnInit  {
   
     this.userRole = this.authenticationService.getUserRole();
   }
+ 
+  // Function to convert date to custom format (DD-MM-YYYY)
+  private convertDateToCustomFormat(date: Date | null): string | null {
+    if (!date) {
+      return null;
+    }
+  
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+  
+    return `${day}-${month}-${year}`;
+  }
   
   
 
 onSubmit() {
   if (this.myForm.valid) {
     const formData = { ...this.myForm.value };
+     // Convert the allocatedOn to the desired format (DD-MM-YYYY) for submission
+     formData.allocatedOn = this.convertDateToCustomFormat(formData.allocatedOn);
     const apiURL = environment.baseUrl + 'api/assethistory/Allocate';
     this.http.post(apiURL, formData)
       .subscribe(
         (response) => {
+      
+
           console.log('Post request successful', response);
           this.snackBar.open('Allocation successful', 'Close', { duration: 3000 });
-          this.router.navigateByUrl('/assettable')
+          
         },
         (error) => {
-
+              // Inside onSubmit() method
+this.router.navigateByUrl('/AssetList/All');
         }
       );
   }

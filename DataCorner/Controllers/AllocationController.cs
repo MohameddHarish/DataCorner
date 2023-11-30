@@ -4,7 +4,7 @@ using DataCorner.Models;
 using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DataCorner.Controllers
+namespace DataCorner.Controllers   //not used in the front end
 {
     [Route("api/[controller]")]
     [ApiController]

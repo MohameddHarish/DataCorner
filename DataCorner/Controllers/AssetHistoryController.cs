@@ -5,7 +5,7 @@ using DataCorner.Services.interfaces;
 using DataCorner.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DataCorner.Controllers
+namespace DataCorner.Controllers //Asset History controller used to  allocation and return asset purpose
 {
     [Route("api/[controller]")]
     [ApiController]
