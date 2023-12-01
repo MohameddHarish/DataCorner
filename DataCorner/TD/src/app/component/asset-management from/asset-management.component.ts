@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { environment } from 'src/environments/environment.development';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AssetInfoPopupComponent } from '../asset-info-popup/asset-info-popup.component';
+import { AssetDialogData } from 'src/model/asset-info';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -21,6 +24,7 @@ export class AssetManagementComponent implements OnInit {
   locationOptions: string[] = ['Guindy', 'Mepz', 'Tidel', 'Tanjore', 'Client Location / WFH'];
   assetStatusOptions: string[]= ['Issued','Available','Under Repair','Decommissioned','Damaged'];
   assetGroupOptions: string[] = ['Admin Asset'];
+
   constructor(
     
     private fb: FormBuilder,
@@ -28,7 +32,8 @@ export class AssetManagementComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog:MatDialog
   ) {}
 
 
@@ -144,6 +149,35 @@ export class AssetManagementComponent implements OnInit {
     });
   }
 
+  // openProjectPopup(event: Event): void {
+     
+  //   event.preventDefault(); 
+  
+  //   const dialogData: AssetDialogData[] = [
+
+  //   ];
+  //   const employeeId = this.myForm.get('empId')?.value;
+
+  //   // const projectData: ProjectData[] = [
+  //   //   employeeId
+  //   // ];
+  //   const dialogRef = this.dialog.open(AssetInfoPopupComponent, {
+  //     width: '1000px', 
+  //     // data: projectData
+  //   });
+  // }
+  openAssetPopup(event: Event): void {
+    event.preventDefault(); 
+  
+    const dialogData: AssetDialogData[] = [
+
+    ];
+  
+    const dialogRef = this.dialog.open(AssetInfoPopupComponent, {
+      width: '700px', 
+      data: dialogData
+    });
+  }
   onSubmit(): void {
     if (this.myForm.valid) {
       // Clone the form data to avoid modifying the original form values
