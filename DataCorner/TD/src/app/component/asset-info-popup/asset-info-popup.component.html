@@ -1,0 +1,51 @@
+
+<mat-dialog-content>
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Asset No Column -->
+      <ng-container matColumnDef="assetNo">
+        <mat-header-cell *matHeaderCellDef> Asset No </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.assetNo }} </mat-cell>
+      </ng-container>
+  
+      <!-- Employee Id Column -->
+      <ng-container matColumnDef="empId">
+        <mat-header-cell *matHeaderCellDef> Employee Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.empId }} </mat-cell>
+      </ng-container>
+  
+      <!-- Employee Name Column -->
+      <ng-container matColumnDef="empName">
+        <mat-header-cell *matHeaderCellDef> Employee Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.empName }} </mat-cell>
+      </ng-container>
+  
+      <!-- Allocated On Column -->
+      <ng-container matColumnDef="allocatedOn">
+        <mat-header-cell *matHeaderCellDef> Allocated On </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.allocatedOn }} </mat-cell>
+      </ng-container>
+  
+      <!-- Allocate Remarks Column -->
+      <ng-container matColumnDef="allocatRemarks">
+        <mat-header-cell *matHeaderCellDef> Allocat Remarks </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.allocatRemarks }} </mat-cell>
+      </ng-container>
+
+      <!-- Returned On Column -->
+      <ng-container matColumnDef="returnedOn">
+        <mat-header-cell *matHeaderCellDef> Returned On </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.returnedOn }} </mat-cell>
+      </ng-container>
+
+      <!-- Returned Remarks Column -->
+      <ng-container matColumnDef="returnedRemarks">
+        <mat-header-cell *matHeaderCellDef> Returned Remarks </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.returnedRemarks }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-dialog-content>
+  
+  

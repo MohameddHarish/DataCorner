@@ -149,23 +149,6 @@ export class AssetManagementComponent implements OnInit {
     });
   }
 
-  // openProjectPopup(event: Event): void {
-     
-  //   event.preventDefault(); 
-  
-  //   const dialogData: AssetDialogData[] = [
-
-  //   ];
-  //   const employeeId = this.myForm.get('empId')?.value;
-
-  //   // const projectData: ProjectData[] = [
-  //   //   employeeId
-  //   // ];
-  //   const dialogRef = this.dialog.open(AssetInfoPopupComponent, {
-  //     width: '1000px', 
-  //     // data: projectData
-  //   });
-  // }
   openAssetPopup(event: Event): void {
     event.preventDefault(); 
   
