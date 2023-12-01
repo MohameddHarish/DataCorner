@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      pwd: ['', Validators.required]
-    });
+      password: ['', Validators.required]  // Change 'pwd' to 'password'
+    });    
   }
 
   ngOnInit() {}
@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       const enteredUsername = this.loginForm.value.username;
-      const enteredPassword = this.loginForm.value.pwd;
+      const enteredPassword = this.loginForm.value.password;
+
 
       this.showSpinner = true;
 
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
   }
   
   togglePasswordVisibility() {
+    console.log('Toggle Password Visibility');
     this.passwordVisible = !this.passwordVisible;
-  }
+  }  
 }

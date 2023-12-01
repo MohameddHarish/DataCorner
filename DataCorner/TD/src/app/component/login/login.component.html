@@ -64,12 +64,12 @@
               <div class="row">
                 <mat-form-field appearance="outline">
                   <mat-label>Password</mat-label>
-                  <input matInput type="password" formControlName="pwd" required>
+                  <input matInput [type]="passwordVisible ? 'text' : 'password'" formControlName="password" required>
                   <mat-icon matSuffix (click)="togglePasswordVisibility()">
                     {{ passwordVisible ? 'visibility_off' : 'visibility' }}
                   </mat-icon>
-                </mat-form-field>
-              </div>
+                </mat-form-field>                
+              </div>              
               <button mat-raised-button color="primary" type="submit">Login</button>
               
               <div class="loading-overlay" *ngIf="showSpinner">
