@@ -77,12 +77,13 @@ onSubmit() {
       
 
           console.log('Post request successful', response);
-          this.snackBar.open('Allocation successful', 'Close', { duration: 3000 });
+          // this.snackBar.open('Allocation successful', 'Close', { duration: 3000 });
           
         },
         (error) => {
               // Inside onSubmit() method
 this.router.navigateByUrl('/AssetList/All');
+this.snackBar.open('Asset Allocated', 'Close', { duration: 3000 });
         }
       );
   }
