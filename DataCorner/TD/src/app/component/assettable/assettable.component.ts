@@ -161,7 +161,7 @@ export class AssettableComponent implements OnInit {
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
         //const columnsToInclude = this.selectedColumns;
-        const columnsToExclude = ['select', 'serialNumber', 'actions', 'submit'];
+        const columnsToExclude = ['select', 'serialNumber', 'actions', 'submit','status'];
   
         // Use the selected columns excluding the ones to exclude
         const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
