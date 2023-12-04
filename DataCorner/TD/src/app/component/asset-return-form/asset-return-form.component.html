@@ -1,1 +1,122 @@
-<p>asset-return-form works!</p>
+
+<app-header></app-header>
+<div class="example-button-container">
+    <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBack()" >
+      <span class="material-icons">arrow_back</span>
+    </button>
+    <h2>Asset Return Form -</h2>
+    <h2>  {{ myForm.get('assetNo')?.value }}</h2>
+  </div>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="content">
+      <div class="row">
+            <div class="col-md-3" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Asset No</mat-label>
+                    <input matInput placeholder="assetNo" formControlName="assetNo">
+                    <mat-error *ngIf="myForm.get('assetNo')?.invalid && myForm.get('assetNo')?.touched">
+                        Asset Id is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+         <div class="col-md-3" >
+                <mat-form-field appearance="outline" >
+                    <mat-label>Emp Id</mat-label>
+                    <input matInput placeholder="empId" formControlName="empId">
+                    <mat-error *ngIf="myForm.get('empId')?.invalid && myForm.get('empId')?.touched">
+                        Emp Id is required.
+                    </mat-error>
+                </mat-form-field>
+            </div> 
+
+             <div class="col-md-3" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="empName" formControlName="empName">
+                    <mat-error *ngIf="myForm.get('empName')?.invalid && myForm.get('empName')?.touched">
+                        Name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div> 
+           
+            <!-- <div class="col-md-3" >
+                <mat-form-field appearance="outline">
+                    <mat-label>Allocated ON</mat-label>
+                    <input matInput placeholder="allocatedOn" formControlName="allocatedOn">
+                    <mat-error *ngIf="myForm.get('allocatedOn')?.invalid && myForm.get('allocatedOn')?.touched">
+                        Name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div> -->
+            <!-- Assuming 'MMM dd yyyy' as the desired date format, adjust as needed -->
+            <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Allocated On</mat-label>
+                  <input matInput [matDatepicker]="AllocateDatepicker" placeholder="Allocated On" formControlName="allocatedOn"
+                    [value]="myForm.get('allocatedOn')?.value">
+                  <mat-datepicker-toggle matSuffix [for]="AllocateDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #AllocateDatepicker></mat-datepicker>
+                  <mat-error *ngIf="myForm.get('allocatedOn')?.invalid && myForm.get('allocatedOn')?.touched">
+                    Allocated On is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              
+  
+      
+ 
+      <div class="col-md-3" >
+        <mat-form-field appearance="outline">
+          <mat-label>Allocated Remarks</mat-label>
+          <input matInput placeholder="Remarks" formControlName="allocateRemarks">
+          <mat-error *ngIf="myForm.get('allocateRemarks')?.invalid && myForm.get('allocateRemarks')?.touched">
+            Remarks is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Returned On</mat-label>
+          <input matInput [matDatepicker]="ReturnDatepicker" placeholder="Returned On" formControlName="returnedOn">
+          <mat-datepicker-toggle matSuffix [for]="ReturnDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #ReturnDatepicker></mat-datepicker>
+          <mat-error *ngIf="myForm.get('returnedOn')?.invalid && myForm.get('returnedOn')?.touched">
+            Returned On is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      
+      <div class="col-md-3" >
+        <mat-form-field appearance="outline">
+          <mat-label>Return Remarks</mat-label>
+          <input matInput placeholder="Remarks" formControlName="returnRemarks">
+          <mat-error *ngIf="myForm.get('returnRemarks')?.invalid && myForm.get('returnRemarks')?.touched">
+            Remarks is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Asset Status</mat-label>
+          <mat-select formControlName="newStatus">
+            <mat-option *ngFor="let option of assetStatusOptions" [value]="option">
+                {{ option }}
+            </mat-option>
+        </mat-select>
+          <mat-error *ngIf="myForm.get('newStatus')?.invalid && myForm.get('newStatus')?.touched">
+            Asset Status is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+              
+        </div>
+
+    </div>
+    <div class="action" *ngIf="userRole === 'operation'" style="margin-top: -18px;">
+      <button mat-raised-button color="primary" type="submit">Return</button>
+        <button mat-raised-button color="warn" type="button" (click)="goBack()" >Cancel</button>
+      </div>      
+</form>

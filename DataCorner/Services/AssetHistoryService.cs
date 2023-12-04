@@ -22,6 +22,11 @@ namespace DataCorner.Services
         {
             await dataAccess.InsertReturnStatusAsync(assetHistory.AssetNo, assetHistory.EmpId, assetHistory.EmpName, assetHistory.ReturnedOn , assetHistory.ReturnRemarks, newStatus);
         }
+
+        public async Task<IEnumerable<AssetHistory>> GetAssetHistoryAsync(string assetNo, int flag)
+        {
+            return await dataAccess.GetAssetHistoryAsync(assetNo, flag);
+        }
     }
 
 }

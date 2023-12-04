@@ -47,6 +47,35 @@ namespace DataCorner.Controllers //Asset History controller used to  allocation 
                 return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
+        [HttpGet]
+        [Route("getassethistory")]
+        public async Task<IActionResult> GetAssetHistory([FromQuery] string assetNo)
+        {
+            try
+            {
+                var assetHistory = await _assetHistoryService.GetAssetHistoryAsync(assetNo, 1); // Assuming 1 is the flag for "getassethistory"
+                return Ok(assetHistory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("getreturnassethistory")]
+        public async Task<IActionResult> GetReturnAssetHistory([FromQuery] string assetNo)
+        {
+            try
+            {
+                var returnAssetHistory = await _assetHistoryService.GetAssetHistoryAsync(assetNo, 2); // Assuming 2 is the flag for "getreturnassethistory"
+                return Ok(returnAssetHistory);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            }
+        }
 
     }
 }

@@ -288,7 +288,7 @@ export class AssettableComponent implements OnInit {
     // Determine the action based on the assetStatus
     if (row.assetStatus === 'Issued') {
       row.allocationAction = 'Return';
-      this.router.navigate(['Return']); // Navigate to AssetReturnFormComponent
+      this.router.navigate(['Return'],{ queryParams: { assetNo: row.assetNo } });
     } else {
       row.allocationAction = 'Allocate';
       // Navigate to AssetAllocateFormComponent and pass assetNo in queryParams

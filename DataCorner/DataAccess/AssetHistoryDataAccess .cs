@@ -59,5 +59,45 @@ namespace DataCorner.DataAccess
                 }
             }
         }
+        public async Task<IEnumerable<AssetHistory>> GetAssetHistoryAsync(string assetNo, int flag)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                using (var command = new MySqlCommand("GetAllocationHistory", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@p_AssetNo", assetNo);
+                    command.Parameters.AddWithValue("@Flag", flag);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        var assetHistoryList = new List<AssetHistory>();
+
+                        while (await reader.ReadAsync())
+                        {
+                            var assetHistory = new AssetHistory
+                            {
+                                AssetNo = reader["AssetNo"].ToString(),
+                                EmpId = (int)reader["EmpId"],
+                                EmpName = reader["EmpName"].ToString(),
+                                AllocatedOn = reader["AllocatedOn"].ToString(),
+                                AllocateRemarks = reader["AllocatRemarks"].ToString(),
+                                ReturnedOn = reader["ReturnedOn"].ToString(),
+                                ReturnRemarks = reader["ReturnRemarks"].ToString(),
+                                //NewStatus = reader["NewStatus"].ToString() // Assuming there is a "NewStatus" column
+                            };
+
+                            assetHistoryList.Add(assetHistory);
+                        }
+
+                        return assetHistoryList;
+                    }
+                }
+            }
+        }
     }
 }
+    

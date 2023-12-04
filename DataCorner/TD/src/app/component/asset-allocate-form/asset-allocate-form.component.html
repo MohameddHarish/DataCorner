@@ -4,7 +4,7 @@
     <button mat-fab color="primary" aria-label="Example icon button with a home icon" class="backButton" (click)="goBack()" >
       <span class="material-icons">arrow_back</span>
     </button>
-    <h2>Asset Form -</h2>
+    <h2>Asset Allocate Form -</h2>
     <h2>  {{ myForm.get('assetNo')?.value }}</h2>
   </div>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()">

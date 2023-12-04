@@ -43,7 +43,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { AssetAllocateFormComponent } from './component/asset-allocate-form/asset-allocate-form.component';
 import { AssetInfoPopupComponent } from './component/asset-info-popup/asset-info-popup.component';
-
+import { AssetReturnFormComponent } from './component/asset-return-form/asset-return-form.component';
 
 
 @NgModule({
@@ -62,6 +62,7 @@ import { AssetInfoPopupComponent } from './component/asset-info-popup/asset-info
     AssettableComponent,
     AssetAllocateFormComponent,
     AssetInfoPopupComponent,
+    AssetReturnFormComponent
   ],
   imports: [
   

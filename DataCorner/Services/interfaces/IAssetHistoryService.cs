@@ -6,6 +6,8 @@ namespace DataCorner.Services.interfaces
     {
         Task AllocateAssetAsync(AssetHistory assetHistory);
         Task ReturnAssetAsync(AssetHistory assetHistory, string newStatus);
+
+        Task<IEnumerable<AssetHistory>> GetAssetHistoryAsync(string assetNo, int flag);
     }
 
 }
