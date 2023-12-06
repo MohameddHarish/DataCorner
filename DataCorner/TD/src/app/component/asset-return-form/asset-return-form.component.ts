@@ -145,7 +145,7 @@ onSubmit() {
   if (this.myForm.valid) {
     const formData = { ...this.myForm.value };
      // Convert the allocatedOn to the desired format (DD-MM-YYYY) for submission
-     formData.allocatedOn = this.convertDateToCustomFormat(formData.returnedOn);
+     formData.returnedOn = this.convertDateToCustomFormat(formData.returnedOn);
     const apiURL = environment.baseUrl + 'api/assethistory/return';
     this.http.post(apiURL, formData)
       .subscribe(

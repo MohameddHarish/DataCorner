@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-project-popup',
@@ -30,7 +31,8 @@ export class ProjectPopupComponent {
   }
 
   loadProjectDetails(employeeId: number): void {
-    this.http.get<any[]>(`https://localhost:7247/api/trainee/GetProjectHistory/${employeeId}`).subscribe(data => {
+    const apiURL = environment.baseUrl+`api/trainee/GetProjectHistory/${employeeId}`;
+    this.http.get<any[]>(apiURL).subscribe(data => {
       this.dataSource = data;
     });
     
