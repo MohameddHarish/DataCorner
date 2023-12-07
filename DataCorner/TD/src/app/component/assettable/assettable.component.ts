@@ -69,7 +69,7 @@ export class AssettableComponent implements OnInit {
   }
   
   goBack() {
-    window.history.back();
+    this.router.navigate(['dashboard']);
   }
 
   assetAdd() {
