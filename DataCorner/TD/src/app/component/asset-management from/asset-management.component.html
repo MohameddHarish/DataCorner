@@ -67,25 +67,27 @@
               </mat-form-field>
           </div>
 
-          <div class="col-md-2">
+          <div class="col-md-2 asset-status-container">
             <mat-form-field appearance="outline">
               <mat-label>Asset Status</mat-label>
               <mat-select formControlName="assetStatus">
                 <mat-option *ngFor="let option of assetStatusOptions" [value]="option">
-                    {{ option }}
+                  {{ option }}
                 </mat-option>
-            </mat-select>
+              </mat-select>
               <mat-error *ngIf="myForm.get('assetStatus')?.invalid && myForm.get('assetStatus')?.touched">
                 Asset Status is required.
               </mat-error>
             </mat-form-field>
           </div>
+          
 
-          <div class="col-md-1">
-            <button mat-icon-button matSuffix (click)="openAssetPopup($event)">
-              <mat-icon>info</mat-icon>
+          <div class="col-md-1" style="margin-left: 10px;">
+            <button mat-button color="primary" (click)="openAssetPopup($event)">
+                View Allocation History
             </button>
-          </div>
+        </div>
+        
             
 
             <div class="col-md-3" >
@@ -231,7 +233,7 @@
 
     </div>
     <div class="action" *ngIf="userRole === 'operation'" style="margin-top: -18px;">
-        <button mat-raised-button color="primary" type="submit" (click)="goBack()" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
+        <button mat-raised-button color="primary" type="submit" >{{ isUpdateMode ? 'Update' : 'Submit' }}</button>
         <button mat-raised-button color="warn" type="button" (click)="goBack()" >Cancel</button>
       </div>      
 </form>

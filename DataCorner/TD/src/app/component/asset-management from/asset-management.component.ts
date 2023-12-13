@@ -176,17 +176,24 @@
         this.http.post(apiURL, formData).subscribe(
           (response) => {
             console.log('Form data submitted successfully:', response);
-            const category = formData.category;
-            this.router.navigateByUrl('assets/' + category);
-            this.showRowUpdatedSnackbar();
-            window.location.reload();
+            
           },
           (error) => {
             console.error('Error sending data:', error);
+            this.router.navigateByUrl('/AssetList/All');
+            this.showRowUpdatedSnackbar();
           }
         );
+      } else {
+        // Display a snack bar indicating that required fields are not filled
+        this.snackBar.open('Please fill in all required fields', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'] // You can define a CSS class for styling error snack bar
+        });
       }
     }
+    
     
     // Function to convert date to custom format (DD-MM-YYYY)
     private convertDateToCustomFormat(date: Date | null): string | null {

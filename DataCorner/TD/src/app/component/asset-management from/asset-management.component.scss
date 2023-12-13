@@ -94,6 +94,15 @@ padding-left: 12px;
   right: 5px; /* Adjust as needed for the desired distance from the right edge */
   transform: translateY(-50%);
 }
+.asset-status-container {
+  display: flex;
+  align-items: center;
+}
+
+.asset-status-container mat-form-field {
+  flex: 1;
+  margin-right: 10px; /* Adjust the margin as needed */
+}
 
 
 

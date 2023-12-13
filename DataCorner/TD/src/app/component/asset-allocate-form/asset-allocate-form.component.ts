@@ -83,7 +83,7 @@ onSubmit() {
         (error) => {
               // Inside onSubmit() method
 this.router.navigateByUrl('/AssetList/All');
-this.snackBar.open('Asset Allocated', 'Close', { duration: 3000 });
+this.snackBar.open('Asset Allocated', 'Close', { duration: 3000,verticalPosition: 'top' });
         }
       );
   }

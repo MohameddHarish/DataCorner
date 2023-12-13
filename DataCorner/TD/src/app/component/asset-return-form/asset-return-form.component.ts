@@ -137,22 +137,20 @@ export class AssetReturnFormComponent {
 onSubmit() {
   if (this.myForm.valid) {
     const formData = { ...this.myForm.value };
+    console.log(this.myForm);
      // Convert the allocatedOn to the desired format (DD-MM-YYYY) for submission
      formData.returnedOn = this.convertDateToCustomFormat(formData.returnedOn);
     const apiURL = environment.baseUrl + 'api/assethistory/return';
     this.http.post(apiURL, formData)
       .subscribe(
         (response) => {
-      
-
           console.log('Post request successful', response);
           // this.snackBar.open('Allocation successful', 'Close', { duration: 3000 });
-          
         },
         (error) => {
               // Inside onSubmit() method
 this.router.navigateByUrl('/AssetList/All');
-this.snackBar.open('Asset Returned', 'Close', { duration: 3000 });
+this.snackBar.open('Asset Returned', 'Close', { duration: 3000,verticalPosition: 'top' });
         }
       );
   }

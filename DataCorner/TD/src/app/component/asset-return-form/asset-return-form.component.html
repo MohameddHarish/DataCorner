@@ -97,15 +97,14 @@
           </mat-error>
         </mat-form-field>
       </div>
-
-      <div class="col-md-2">
+      <div class="col-md-2 asset-status-container">
         <mat-form-field appearance="outline">
           <mat-label>Asset Status</mat-label>
           <mat-select formControlName="newStatus">
             <mat-option *ngFor="let option of assetStatusOptions" [value]="option">
-                {{ option }}
+              {{ option }}
             </mat-option>
-        </mat-select>
+          </mat-select>
           <mat-error *ngIf="myForm.get('newStatus')?.invalid && myForm.get('newStatus')?.touched">
             Asset Status is required.
           </mat-error>
