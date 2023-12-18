@@ -73,12 +73,19 @@
         serialNo:[''],
         purchaseDate:[''],
         invoiceNo:[''],
-        originalValue:[''],
-        currentValue:[''],
+        originalValue: ['', [Validators.required, Validators.pattern(/^-?\d+(\.\d{1,2})?$/)]],
+        currentValue: ['', [Validators.required, Validators.pattern(/^-?\d+(\.\d{1,2})?$/)]],
         warranty:[''],
         remarks:[''],
 
       });
+    }
+    get originalValueControl() {
+      return this.myForm.get('originalValue');
+    }
+    
+    get currentValueControl() {
+      return this.myForm.get('currentValue');
     }
     isFieldVisible(fieldName: string): boolean {
       if (this.userRole === 'admin') {

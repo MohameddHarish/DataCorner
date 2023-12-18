@@ -153,22 +153,22 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-3" >
+              <div class="col-md-3">
                 <mat-form-field appearance="outline">
                   <mat-label>Original Value</mat-label>
-                  <input matInput placeholder="originalValue" formControlName="originalValue">
+                  <input matInput placeholder="originalValue" formControlName="originalValue" type="number">
                   <mat-error *ngIf="myForm.get('originalValue')?.invalid && myForm.get('originalValue')?.touched">
-                    Original Value is required.
+                    Original Value is required and must be a number.
                   </mat-error>
                 </mat-form-field>
               </div>
               
-              <div class="col-md-3" >
+              <div class="col-md-3">
                 <mat-form-field appearance="outline">
                   <mat-label>Current Value</mat-label>
-                  <input matInput placeholder="currentValue" formControlName="currentValue">
+                  <input matInput placeholder="currentValue" formControlName="currentValue" type="number">
                   <mat-error *ngIf="myForm.get('currentValue')?.invalid && myForm.get('currentValue')?.touched">
-                    Current Value is required.
+                    Current Value is required and must be a number.
                   </mat-error>
                 </mat-form-field>
               </div>
