@@ -103,6 +103,17 @@ padding-left: 12px;
   flex: 1;
   margin-right: 10px; /* Adjust the margin as needed */
 }
+/* Add this style to your component's CSS or the global styles file */
+.allocation-history-button {
+  width: 78px; /* Adjust the width as needed */
+  height: 75px; /* Adjust the height as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 28px;
+}
+
 
 
 

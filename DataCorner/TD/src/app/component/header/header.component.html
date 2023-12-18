@@ -1,18 +1,21 @@
 <mat-toolbar color="primary">
-    <!-- <button mat-icon-button class="example-icon" (click)="Home()" aria-label="Example icon-button with menu icon">
-      <mat-icon>home</mat-icon>
-    </button> -->
-    <!-- <span>SIGHT SPECTRUM</span> -->
-    
-    <button type="button" (click)="Home()" style="border-color:transparent;">
-      <img src="../../../assets/SightspectrumName.jpeg" class="headerLogo" alt="Logo" >
-    </button>
-  
-    <span class="example-spacer"></span>
-  
-    <span class="example-fill-remaining-space"></span>
-  
-    <button mat-raised-button  color="warn"  class ="login-button"(click)="logout()">Log out</button>
-  </mat-toolbar>
-    
- 
+  <div class="left-side">
+      <button type="button" (click)="Home()" style="border-color: transparent;">
+          <img src="../../../assets/SightspectrumName.jpeg" class="headerLogo" alt="Logo">
+      </button>
+      <!-- You can add additional elements or styles for the left side if needed -->
+  </div>
+
+  <span class="example-spacer"></span>
+  <ng-container *ngIf="userRole === 'operation'">
+  <div class="button">
+  <!-- <a mat-button routerLink="/dashboard">Dashboard</a> -->
+  <a mat-button routerLink="/asset-management">Add Asset</a>
+  <a mat-button routerLink="/AssetList/All">Asset List</a>
+
+</div>
+</ng-container>
+  <span class="example-fill-remaining-space"></span>
+
+  <button mat-raised-button color="warn" class="login-button" (click)="logout()">Log out</button>
+</mat-toolbar>

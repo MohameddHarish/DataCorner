@@ -44,7 +44,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AssetAllocateFormComponent } from './component/asset-allocate-form/asset-allocate-form.component';
 import { AssetInfoPopupComponent } from './component/asset-info-popup/asset-info-popup.component';
 import { AssetReturnFormComponent } from './component/asset-return-form/asset-return-form.component';
-
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,7 @@ import { AssetReturnFormComponent } from './component/asset-return-form/asset-re
     MatCheckboxModule,
     NgChartsModule,
     NgApexchartsModule,
-    
+    MatListModule
   ],
   bootstrap: [AppComponent]
 })

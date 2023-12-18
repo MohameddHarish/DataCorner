@@ -28,7 +28,7 @@ export class AssettableComponent implements OnInit {
         'originalValue',
         'currentValue',
         'warranty',
-        'remarks','status','actions'];	
+        'remarks','status','View/Edit'];	
         showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
   columns: string[] = ['serialNumber', 'assetNo', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus',
@@ -38,7 +38,7 @@ export class AssettableComponent implements OnInit {
   'originalValue',
   'currentValue',
   'warranty',
-  'remarks','status','actions'];	
+  'remarks','status','View/Edit'];	
   selectedRows: any[] = [];
   statusColumn = 'status';
 
@@ -161,7 +161,7 @@ export class AssettableComponent implements OnInit {
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
         //const columnsToInclude = this.selectedColumns;
-        const columnsToExclude = ['select', 'serialNumber', 'actions', 'submit','status'];
+        const columnsToExclude = ['select', 'serialNumber', 'View/Edit', 'submit','status'];
   
         // Use the selected columns excluding the ones to exclude
         const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
@@ -244,7 +244,7 @@ export class AssettableComponent implements OnInit {
     if (this.showColumns) {
       this.selectedColumns = this.displayedColumns;
     } else {
-      this.selectedColumns = ['serialNumber', 'assetNo', 'empId', 'empName','brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus','actions'];
+      this.selectedColumns = ['serialNumber', 'assetNo', 'empId', 'empName','brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus','View/Edit'];
     }
   }
   

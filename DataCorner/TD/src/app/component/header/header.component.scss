@@ -1,22 +1,42 @@
 .example-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
-  mat-toolbar{
-    background-color: white;
-  }
-  // .logo {
-  //   display: flex;
-  //   align-items: center;
-  // }
-  
-  .logo-image {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-right: 10px;
-  }
-  .headerLogo{
-    width: 200px;
-    height: 40px;
-  }
+mat-toolbar {
+  background-color: white;
+}
+
+.logo-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.headerLogo {
+  width: 200px;
+  height: 40px;
+}
+
+.left-side {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+}
+
+.example-spacer,
+.example-fill-remaining-space {
+  flex: 1; /* Expand and fill remaining space */
+}
+
+.button {
+  margin-right: 800px;
+}
+
+.button a {
+  cursor: pointer; /* Set cursor to pointer when over the link */
+  transition: box-shadow 0.3s ease; /* Add a smooth transition effect */
+}
+
+.button a:hover {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Apply shadow on hover */
+}
