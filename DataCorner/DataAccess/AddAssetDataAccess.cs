@@ -54,4 +54,26 @@ public class AddAssetDataAcess : IAddAssestDataAccess
             return false;
         }
     }
+    public async Task<bool> DeleteAssetAsync(string assetNo)
+    {
+        try
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                var cmd = new MySqlCommand("DeleteAssetDetails", connection); // Change to your actual delete stored procedure name
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_AssetNo", assetNo);
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions or log errors here.
+            return false;
+        }
+    }
 }

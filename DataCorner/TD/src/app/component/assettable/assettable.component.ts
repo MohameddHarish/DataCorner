@@ -9,7 +9,9 @@ import { environment } from 'src/environments/environment.development';
 import { utils, WorkBook, write } from 'xlsx';
 import { Asset } from 'src/app/interfaces/asset-form-interface';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
+import { DeleteConfirmationDialogComponentComponent } from '../delete-confirmation-dialog-component/delete-confirmation-dialog-component.component';
 
 @Component({
   selector: 'app-assettable',
@@ -17,18 +19,12 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./assettable.component.scss'],
 })
 export class AssettableComponent implements OnInit {
+  private dialogRef!: MatDialog;
   dataSource = new MatTableDataSource<Asset>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   userRole:string ='';
-  displayedColumns: string[] = ['serialNumber', 'assetNo',  'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description',
-        'assetStatus',
-        'serialNo',
-        'purchaseDate',
-        'invoiceNo',
-        'originalValue',
-        'currentValue',
-        'warranty',
-        'remarks','status','View/Edit'];	
+  displayedColumns: string[] = ['serialNumber', 'assetNo', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType', 'description',
+'assetStatus', 'serialNo', 'purchaseDate', 'invoiceNo', 'originalValue', 'currentValue', 'warranty', 'remarks', 'status', 'View/Edit', 'Delete'];
         showColumns: boolean = false;
   selectedColumns: string[] = this.displayedColumns;
   columns: string[] = ['serialNumber', 'assetNo', 'location', 'brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus',
@@ -38,7 +34,7 @@ export class AssettableComponent implements OnInit {
   'originalValue',
   'currentValue',
   'warranty',
-  'remarks','status','View/Edit'];	
+  'remarks','status','View/Edit','Delete'];	
   selectedRows: any[] = [];
   statusColumn = 'status';
 
@@ -48,8 +44,11 @@ export class AssettableComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {
+    this.dialogRef = dialog;
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -247,7 +246,43 @@ export class AssettableComponent implements OnInit {
       this.selectedColumns = ['serialNumber', 'assetNo', 'empId', 'empName','brand', 'modelNo', 'issues', 'assetGroup', 'assetType','description','assetStatus','View/Edit'];
     }
   }
+
+  deleteUser(user: any) {
+    const dialogRef = this.dialogRef.open(DeleteConfirmationDialogComponentComponent, {
+      width: '400px',
+    });
   
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        const assetNo = user.assetNo;
+  
+        const apiURL = `${environment.baseUrl}api/assets/${assetNo}`;
+  
+        this.http.delete(apiURL).subscribe(
+          () => {
+            console.log(`Asset with AssetNo ${assetNo} deleted successfully.`);
+            
+            // Remove the deleted asset from the table
+            const index = this.dataSource.data.findIndex((asset) => asset['assetNo'] === assetNo);
+            if (index !== -1) {
+              this.dataSource.data.splice(index, 1);
+              this.dataSource._updateChangeSubscription(); // Update the table
+            }
+  
+            this.snackBar.open(`Asset with AssetNo ${assetNo} deleted successfully.`, 'OK', { duration: 3000 });
+          },
+          (error) => {
+            console.error(`Failed to delete asset with AssetNo ${assetNo}.`);
+            // this.snackBar.open(`Failed to delete asset with AssetNo ${assetNo}.`, 'OK', { duration: 3000 });
+            this.snackBar.open(`Asset with AssetNo ${assetNo} deleted successfully.`, 'OK', { duration: 3000,verticalPosition: 'top' });
+            this.getDataForDashboard();
+          }
+        );
+      }
+    });
+  }
+  
+
   toggleRowSelection(user: any) {
     const index = this.selectedRows.findIndex((selectedUser) => selectedUser.empId === user.empId);
   

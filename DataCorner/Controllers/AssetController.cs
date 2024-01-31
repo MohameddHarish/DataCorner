@@ -43,4 +43,27 @@ public class AssetController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
+    [HttpDelete("{assetNo}")]
+    public async Task<IActionResult> DeleteAsset(string assetNo)
+    {
+        try
+        {
+            var result = await _assetService.DeleteAssetAsync(assetNo);
+
+            if (result)
+            {
+                return Ok($"Asset with AssetNo {assetNo} deleted successfully.");
+            }
+            else
+            {
+                return BadRequest($"Failed to delete asset with AssetNo {assetNo}.");
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log the exception here.
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
 }

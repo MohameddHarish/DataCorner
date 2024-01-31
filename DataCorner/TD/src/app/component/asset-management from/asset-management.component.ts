@@ -177,6 +177,9 @@
     
         // Convert the purchaseDate to the desired format (DD-MM-YYYY) for submission
         formData.purchaseDate = this.convertDateToCustomFormat(formData.purchaseDate);
+
+        formData.originalValue = formData.originalValue.toString();
+    formData.currentValue = formData.currentValue.toString();
     
         const apiURL = environment.baseUrl + 'api/assets';
     

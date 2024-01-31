@@ -45,6 +45,8 @@ import { AssetAllocateFormComponent } from './component/asset-allocate-form/asse
 import { AssetInfoPopupComponent } from './component/asset-info-popup/asset-info-popup.component';
 import { AssetReturnFormComponent } from './component/asset-return-form/asset-return-form.component';
 import { MatListModule } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmationDialogComponentComponent } from './component/delete-confirmation-dialog-component/delete-confirmation-dialog-component.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { MatListModule } from '@angular/material/list';
     AssettableComponent,
     AssetAllocateFormComponent,
     AssetInfoPopupComponent,
-    AssetReturnFormComponent
+    AssetReturnFormComponent,
+    DeleteConfirmationDialogComponentComponent
   ],
   imports: [
   

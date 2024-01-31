@@ -27,5 +27,19 @@ namespace DataCorner.Services
                 throw;
             }
         }
+        public async Task<bool> DeleteAssetAsync(string assetNo)
+        {
+            try
+            {
+                // You can add additional business logic here if needed.
+
+                return await _assetDataAccess.DeleteAssetAsync(assetNo);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions or log errors here.
+                throw;
+            }
+        }
     }
 }

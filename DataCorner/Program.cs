@@ -16,7 +16,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-var configuration = builder.Configuration;
+var configuration = builder.Configuration;  
 var connectionString = configuration.GetConnectionString("ttdconnection");
 
 builder.Services.AddControllers();
