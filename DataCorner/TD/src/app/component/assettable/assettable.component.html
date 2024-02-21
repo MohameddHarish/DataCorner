@@ -15,7 +15,7 @@
           <mat-label>Search</mat-label>
           <input matInput placeholder (keyup)="applyFilter($event)" #input />
           <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+        </mat-form-field> 
       </div>
 
       <div class="col-md-3">
@@ -111,5 +111,14 @@
     </div>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+    <input type="file" (change)="handleFileInput($event)" accept=".xlsx, .xls" style="display: none" #fileInput />
+<button class="ImportBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="fileInput.click()">
+  <div class="text">Import</div><mat-icon>upload</mat-icon>
+</button>
+<button class="UploadBtn" mat-raised-button color="primary" style="margin-left: 5px;" (click)="uploadData()">
+  <div class="text">Upload</div>
+</button>
+
   </mat-card-content>
 </mat-card>

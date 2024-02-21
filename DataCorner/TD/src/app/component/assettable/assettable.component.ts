@@ -12,6 +12,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { DeleteConfirmationDialogComponentComponent } from '../delete-confirmation-dialog-component/delete-confirmation-dialog-component.component';
+import * as XLSX from 'xlsx';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-assettable',
@@ -160,7 +162,7 @@ export class AssettableComponent implements OnInit {
     this.http.get<Asset[]>(apiURL).subscribe(
       (data: Asset[]) => {
         //const columnsToInclude = this.selectedColumns;
-        const columnsToExclude = ['select', 'serialNumber', 'View/Edit', 'submit','status'];
+        const columnsToExclude = ['select', 'serialNumber', 'View/Edit', 'submit','status','Delete'];
   
         // Use the selected columns excluding the ones to exclude
         const columnsToInclude = this.selectedColumns.filter(column => !columnsToExclude.includes(column));
@@ -333,6 +335,75 @@ export class AssettableComponent implements OnInit {
     // Your logic for the status button click
     console.log(`${row.allocationAction} button clicked for:`, row);
   }
+
+  handleFileInput(event: any): void {
+    const file = event.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        const data = e.target.result;
+        this.processExcelData(data);
+      };
+  
+      reader.readAsBinaryString(file);
+    }
+  }
+
+  processExcelData(data: string): void {
+    const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet: any = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+  
+    console.log('Processed Excel Data:', worksheet);
+  
+    // Mark each imported row as selected
+    this.selectedRows = [...this.selectedRows, ...worksheet];
+  
+    // Add the imported data to your table's data source
+    this.dataSource.data = [...this.dataSource.data, ...worksheet];
+    this['cdr'].detectChanges();
+  }
+  convertDateToCustomFormat(date: string): string {
+    const parts = date.split('-'); // Assuming date format is 'YYYY-MM-DD'
+    const day = parts[2];
+    const month = parts[1];
+    const year = parts[0];
+    return `${day}-${month}-${year}`;
+  }
+  
+  uploadData(): void {
+    for (const rowData of this.selectedRows) {
+      // Clone the row data to avoid modifying the original values
+      const formData = { ...rowData };
+
+      // Convert the purchaseDate to the desired format (DD-MM-YYYY) for submission
+      formData.purchaseDate = this.convertDateToCustomFormat(formData.purchaseDate);
+
+      // Convert numeric values to strings if required
+      formData.originalValue = formData.originalValue.toString();
+      formData.currentValue = formData.currentValue.toString();
+
+      const apiURL = environment.baseUrl + 'api/assets';
+
+      this.http.post(apiURL, formData).subscribe(
+        (response) => {
+          console.log('Row data submitted successfully:', response);
+          // Remove the updated row from selectedRows
+          const index = this.selectedRows.findIndex((selectedRow) => selectedRow.assetNo === formData.assetNo);
+          if (index !== -1) {
+            this.selectedRows.splice(index, 1);
+          }
+        },
+        (error) => {
+          console.error('Error submitting row data:', error);
+        }
+      );
+    }
+    // Show a message or perform any action after all rows are uploaded
+  }
+  
   
   
 }
