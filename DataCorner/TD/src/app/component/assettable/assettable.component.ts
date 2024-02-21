@@ -402,6 +402,11 @@ export class AssettableComponent implements OnInit {
       );
     }
     // Show a message or perform any action after all rows are uploaded
+    // Show snackbar after all rows have been processed
+    this.snackBar.open('File Imported', 'Close', {
+      duration: 3000, // Duration in milliseconds
+      verticalPosition: 'top', // Position the snackbar at the top of the viewport
+    });
   }
   
   
